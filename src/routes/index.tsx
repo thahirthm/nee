@@ -210,8 +210,8 @@ function FancyMirrors() {
         <div className="lg:col-span-5">
           <SectionHeader
             eyebrow="Visual Showcase"
-            title="Fancy Walking on Mirrors?"
-            intro="Drag the slider to see how worn, dull surfaces are transformed into mirror-finish masterpieces — a signature of NKE Floors restoration craftsmanship."
+            title="Reviving Surfaces. Renewing Spaces."
+            intro="Move the slider to experience the exceptional craftsmanship that brings worn floors back to their finest condition."
           />
           <ul className="mt-10 space-y-4">
             {[
