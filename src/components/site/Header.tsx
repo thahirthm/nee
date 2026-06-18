@@ -30,7 +30,7 @@ export function Header() {
         }`}
     >
       <div
-        className={`mx-auto max-w-7xl mt-5 px-6 lg:px-10 flex items-center justify-between transition-all duration-300 ${scrolled ? "h-16" : "h-20 lg:h-24"
+        className={`mx-auto max-w-7xl mt-5 px-6 lg:px-10 flex items-center justify-between transition-all duration-300 ${scrolled ? "h-24" : "h-20 lg:h-24"
           }`}
       >
         <a href="/" className="flex items-center gap-3 group ">
