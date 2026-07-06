@@ -28,16 +28,26 @@ import {
   Sun,
   BadgeCheck,
   Quote,
+  UploadCloud,
+  Heart,
+  TrendingUp,
+  BookOpen
 } from "lucide-react";
 import { useState } from "react";
 import { Header } from "@/components/site/Header";
 import { BeforeAfter } from "@/components/site/BeforeAfter";
+
 import heroImg from "@/assets/hero.jpg";
 import aboutImg from "@/assets/who.webp";
 import projectHotel from "@/assets/project-hotel.jpg";
 import projectVilla from "@/assets/project-villa.jpg";
 import projectOffice from "@/assets/project-office.jpg";
 import projectIndustrial from "@/assets/project-industrial.jpg";
+
+import beautifulRestoredFloor from "@/assets/beautiful_restored_floor.png";
+import wornFloorBefore from "@/assets/worn_floor_before.png";
+import founderPortrait from "@/assets/founder_portrait.png";
+import livedInSpace from "@/assets/lived_in_space.png";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -46,7 +56,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Over 25 years of excellence restoring marble, granite, terrazzo and concrete floors for hotels, villas and corporate spaces. Trusted by architects, builders and facility managers.",
+          "Helping You Make the Right Decision Before You Restore or Replace.",
       },
       {
         property: "og:title",
@@ -55,7 +65,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "Transforming natural stone into masterpieces — 25+ years, 10,000+ projects.",
+          "Helping You Make the Right Decision Before You Restore or Replace.",
       },
       { property: "og:url", content: "/" },
     ],
@@ -92,13 +102,13 @@ function SectionHeader({
   title,
   intro,
 }: {
-  eyebrow: string;
+  eyebrow?: string;
   title: string;
   intro?: string;
 }) {
   return (
     <div className="max-w-3xl">
-      <Eyebrow>{eyebrow}</Eyebrow>
+      {eyebrow && <Eyebrow>{eyebrow}</Eyebrow>}
       <h2 className="mt-4 font-serif text-4xl md:text-5xl text-primary leading-[1.1]">
         {title}
       </h2>
@@ -117,6 +127,8 @@ function Page() {
     <main className=" text-foreground">
       <Header />
       <Hero />
+      <DecisionSection />
+      {/* <UploadSection /> */}
       <FancyMirrors />
       <About />
       <Services />
@@ -126,7 +138,11 @@ function Page() {
       <Portfolio />
       <Process />
       <Testimonials />
+      <FloorStory />
       <Blog />
+      <FounderMessage />
+      <OurStory />
+      <FinalCTA />
       <ContactFooter />
     </main>
   );
@@ -141,7 +157,7 @@ function Hero() {
     >
       <div className="absolute inset-0 -z-10">
         <img
-          src={heroImg}
+          src={beautifulRestoredFloor}
           alt="Polished marble hotel lobby"
           className="h-full w-full object-cover"
           width={1920}
@@ -153,29 +169,27 @@ function Hero() {
 
       <div className="mx-auto max-w-7xl px-6 lg:px-10 py-20 w-full">
         <div className="max-w-3xl">
-          <Eyebrow>Est. 1999 · Premium Floor Restoration</Eyebrow>
+          <Eyebrow>Protecting the Floors That Matter</Eyebrow>
           <h1 className="mt-6 font-serif text-5xl md:text-7xl leading-[1.05] text-primary">
-            Transforming Natural Stone Into{" "}
-            <em className="text-gold not-italic">Masterpieces</em>
+            Every Great Restoration Begins With{" "}
+            <em className="text-gold not-italic">Understanding.</em>
           </h1>
           <p className="mt-7 text-lg md:text-xl text-muted-foreground max-w-2xl leading-relaxed">
-            Over 25 years of excellence in marble, granite, terrazzo and
-            concrete floor restoration — for hotels, villas, corporate offices
-            and heritage interiors.
+            Helping You Make the Right Decision Before You Restore or Replace.
           </p>
 
           <div className="mt-10 flex flex-wrap gap-4">
             <a
-              href="#contact"
+              href="#upload"
               className="inline-flex items-center gap-2 rounded-sm bg-primary px-7 py-4 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors shadow-soft"
             >
-              Get Free Consultation <ArrowRight className="h-4 w-4" />
+              Ask the Floor Expert <ArrowRight className="h-4 w-4" />
             </a>
             <a
               href="#projects"
               className="inline-flex items-center gap-2 rounded-sm border border-primary/20 bg-card px-7 py-4 text-sm font-medium text-primary hover:border-gold transition-colors"
             >
-              Explore Our Work
+              View Our Projects
             </a>
           </div>
 
@@ -202,7 +216,83 @@ function Hero() {
   );
 }
 
-/* ---------------- FANCY MIRRORS ---------------- */
+/* ---------------- DECISION SECTION ---------------- */
+function DecisionSection() {
+  return (
+    <section className="py-28 bg-card border-y border-border">
+      <div className="mx-auto max-w-7xl px-6 lg:px-10 grid lg:grid-cols-12 gap-16 items-center">
+        <div className="lg:col-span-6 relative">
+          <img
+            src={wornFloorBefore}
+            alt="Worn floor before restoration"
+            className="w-full h-[500px] object-cover rounded-sm shadow-elevated"
+          />
+        </div>
+        <div className="lg:col-span-6">
+          <SectionHeader
+            eyebrow="Before You Spend Money..."
+            title="Can This Floor Be Restored?"
+            intro="Many floors can be preserved with restoration. Replacing a floor is a massive undertaking—costly, messy, and time-consuming. We provide honest guidance on what can be restored and what actually needs replacing."
+          />
+          <div className="mt-10">
+            <a
+              href="#upload"
+              className="inline-flex items-center gap-2 text-sm font-medium text-primary border-b border-gold pb-1 hover:gap-3 transition-all"
+            >
+              Find out what your floor needs <ArrowRight className="h-4 w-4" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------- UPLOAD SECTION ---------------- */
+function UploadSection() {
+  return (
+    <section id="upload" className="py-28 bg-background">
+      <div className="mx-auto max-w-7xl px-6 lg:px-10">
+        <div className="grid lg:grid-cols-12 gap-16 items-center">
+          <div className="lg:col-span-6">
+            <SectionHeader
+              eyebrow="Ask the Floor Expert"
+              title="Unsure What Your Floor Needs?"
+              intro="Send us a photo of your floor, and we'll give you a clear, honest assessment. No pressure, no obligations."
+            />
+            <ul className="mt-10 space-y-4">
+              {[
+                "Professional Assessment",
+                "Honest Recommendation",
+                "Expected Improvement",
+                "Estimated Budget Range",
+              ].map((t) => (
+                <li key={t} className="flex items-start gap-3 text-muted-foreground">
+                  <CheckCircle2 className="h-5 w-5 text-gold mt-0.5 shrink-0" />
+                  <span>{t}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="lg:col-span-6">
+            <div className="border border-dashed border-border rounded-sm p-12 flex flex-col items-center justify-center text-center bg-card hover:bg-card/80 transition-colors cursor-pointer group shadow-elevated">
+              <div className="h-16 w-16 rounded-sm bg-primary/5 flex items-center justify-center group-hover:bg-gold/10 transition-colors">
+                <UploadCloud className="h-8 w-8 text-primary group-hover:text-gold transition-colors" />
+              </div>
+              <h3 className="mt-6 font-serif text-xl text-primary">Upload Photos</h3>
+              <p className="mt-2 text-sm text-muted-foreground">Drag and drop or click to browse</p>
+              <button className="mt-8 rounded-sm bg-primary px-6 py-3 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors">
+                Select Files
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------- FANCY MIRRORS (BEFORE/AFTER) ---------------- */
 function FancyMirrors() {
   return (
     <section className="py-28 bg-card border-y border-border">
@@ -210,30 +300,29 @@ function FancyMirrors() {
         <div className="lg:col-span-5">
           <SectionHeader
             eyebrow="Visual Showcase"
-            title="Reviving Surfaces. Renewing Spaces."
-            intro="Move the slider to experience the exceptional craftsmanship that brings worn floors back to their finest condition."
+            title="Experience the Difference"
+            intro="Move the slider to see how we tackle tough floor damage and bring out the original beauty."
           />
-          <ul className="mt-10 space-y-4">
-            {[
-              "Mirror-grade reflective finish",
-              "Dust-controlled restoration process",
-              "Long-lasting protective sealing",
-            ].map((t) => (
-              <li
-                key={t}
-                className="flex items-start gap-3 text-muted-foreground"
-              >
-                <CheckCircle2 className="h-5 w-5 text-gold mt-0.5 shrink-0" />
-                <span>{t}</span>
-              </li>
-            ))}
+          <ul className="mt-10 space-y-6">
+            <li className="flex flex-col gap-1">
+              <div className="flex items-center gap-2 font-serif text-lg text-primary">
+                <Shield className="h-4 w-4 text-gold" /> The Problem
+              </div>
+              <span className="text-muted-foreground text-sm pl-6">Deep scratches, dull finish, and lost shine due to heavy foot traffic.</span>
+            </li>
+            <li className="flex flex-col gap-1">
+              <div className="flex items-center gap-2 font-serif text-lg text-primary">
+                <Wrench className="h-4 w-4 text-gold" /> The Solution
+              </div>
+              <span className="text-muted-foreground text-sm pl-6">A disciplined grinding, honing, and mirror-grade polishing process.</span>
+            </li>
+            <li className="flex flex-col gap-1">
+              <div className="flex items-center gap-2 font-serif text-lg text-primary">
+                <Sparkles className="h-4 w-4 text-gold" /> The Result
+              </div>
+              <span className="text-muted-foreground text-sm pl-6">A flawlessly restored surface that looks brand new and is built to last.</span>
+            </li>
           </ul>
-          <a
-            href="#projects"
-            className="mt-10 inline-flex items-center gap-2 text-sm font-medium text-primary border-b border-gold pb-1 hover:gap-3 transition-all"
-          >
-            View More Transformations <ArrowRight className="h-4 w-4" />
-          </a>
         </div>
         <div className="lg:col-span-7">
           <BeforeAfter />
@@ -243,7 +332,7 @@ function FancyMirrors() {
   );
 }
 
-/* ---------------- ABOUT ---------------- */
+/* ---------------- ABOUT (INVESTMENT & PRIDE) ---------------- */
 function About() {
   return (
     <section id="about" className="py-28">
@@ -266,46 +355,20 @@ function About() {
         </div>
         <div className="lg:col-span-6">
           <SectionHeader
-            eyebrow="Who We Are"
-            title="A Quarter Century of Floor Restoration Mastery"
-            intro="NKE Floors is a trusted specialist in marble, granite, terrazzo and concrete restoration. Since 1999, we've helped property owners, hoteliers, architects and facility managers preserve and elevate the surfaces that define their spaces."
+            eyebrow="Section 4"
+            title="More Than a Floor. An Investment Worth Protecting."
+            intro="A premium floor is more than a construction material. It is an investment made to create a lasting experience."
           />
-          <div className="mt-10 grid sm:grid-cols-2 gap-6">
-            {[
-              {
-                i: Users,
-                t: "Skilled Workforce",
-                d: "Trained craftsmen with decades of combined site experience.",
-              },
-              {
-                i: Cpu,
-                t: "Advanced Equipment",
-                d: "Imported machinery for precision grinding and polishing.",
-              },
-              {
-                i: Shield,
-                t: "Commitment to Quality",
-                d: "Every project audited against rigorous quality benchmarks.",
-              },
-              {
-                i: BadgeCheck,
-                t: "Customer-Centric",
-                d: "Clear communication, on-time delivery, lasting results.",
-              },
-            ].map((f) => (
-              <div
-                key={f.t}
-                className="border border-border bg-card p-6 rounded-sm hover:border-gold transition-colors"
-              >
-                <f.i className="h-6 w-6 text-gold" />
-                <div className="mt-4 font-serif text-lg text-primary">
-                  {f.t}
-                </div>
-                <div className="mt-2 text-sm text-muted-foreground leading-relaxed">
-                  {f.d}
-                </div>
-              </div>
-            ))}
+          <div className="mt-8 space-y-6 text-lg text-muted-foreground leading-relaxed">
+            <p>
+              Whether it is a family home, a luxury hotel, a commercial building or an industrial facility, every floor reflects the care, celebration, standards and pride of the people who own and manage it.
+            </p>
+            <p>
+              Our role is to help you protect that investment through the right advice, the right restoration and the right maintenance—so every person who walks into your space experiences it at its best.
+            </p>
+            <p className="font-medium text-primary">
+              Because when a floor reflects quality, it becomes a source of pride for everyone connected with it.
+            </p>
           </div>
         </div>
       </div>
@@ -313,52 +376,22 @@ function About() {
   );
 }
 
-/* ---------------- SERVICES ---------------- */
+/* ---------------- SERVICES (EXPERTISE) ---------------- */
 const SERVICES = [
   {
     i: Gem,
-    t: "Marble Polishing",
-    d: "Mirror-grade polishing that restores natural luster and depth to marble surfaces.",
-  },
-  {
-    i: Mountain,
-    t: "Granite Polishing",
-    d: "Precision grinding and polishing for high-traffic granite floors and counters.",
-  },
-  {
-    i: Grid3x3,
-    t: "Terrazzo Restoration",
-    d: "Specialist restoration techniques that revive vintage and modern terrazzo.",
+    t: "Natural Stone",
+    d: "Marble Polishing & Honing, Granite Restoration, Terrazzo Refinishing.",
   },
   {
     i: Layers,
-    t: "Concrete Polishing",
-    d: "Diamond-polished concrete for sleek, durable industrial-grade surfaces.",
-  },
-  {
-    i: Sparkles,
-    t: "Mosaic Floor Restoration",
-    d: "Delicate craftsmanship to preserve intricate mosaic detailing and grout.",
-  },
-  {
-    i: Droplets,
-    t: "Stone Sealing",
-    d: "Premium impregnators and sealers that protect against stains and moisture.",
+    t: "Concrete",
+    d: "Industrial Polishing, Densification, Surface Levelling.",
   },
   {
     i: Wrench,
-    t: "Floor Restoration",
-    d: "Full-cycle restoration: repair, level, polish and protect — handled end to end.",
-  },
-  {
-    i: Sun,
-    t: "Surface Enhancement",
-    d: "Crystallisation and densification for enhanced gloss and longevity.",
-  },
-  {
-    i: Building2,
-    t: "Commercial Floor Maintenance",
-    d: "Scheduled maintenance programs for hotels, malls and corporate campuses.",
+    t: "Maintenance",
+    d: "Stain Protection Sealing, Routine Care Programs, Periodic Deep Cleaning.",
   },
 ];
 
@@ -368,12 +401,12 @@ function Services() {
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8">
           <SectionHeader
-            eyebrow="Our Services"
+            eyebrow="Our Areas of Expertise"
             title="Specialist Restoration & Polishing"
             intro="A complete suite of premium services for natural stone, terrazzo and concrete — delivered by certified specialists with decades of experience."
           />
         </div>
-        <div className="mt-16 grid md:grid-cols-2 lg:grid-cols-3 gap-px bg-border border border-border rounded-sm overflow-hidden">
+        <div className="mt-16 grid md:grid-cols-3 gap-px bg-border border border-border rounded-sm overflow-hidden">
           {SERVICES.map((s) => (
             <div
               key={s.t}
@@ -401,52 +434,27 @@ function Services() {
   );
 }
 
-/* ---------------- WHY US ---------------- */
+/* ---------------- WHY US (WHY RESTORATION) ---------------- */
 const WHY = [
   {
-    i: Award,
-    t: "25+ Years Experience",
-    d: "Decades of refined expertise across thousands of premium projects.",
+    i: Heart,
+    t: "Preserve",
+    d: "Maintain the original character and material value of your property.",
   },
   {
-    i: Cpu,
-    t: "Advanced Machinery",
-    d: "European-grade equipment for unmatched precision and finish.",
-  },
-  {
-    i: Users,
-    t: "Skilled Professionals",
-    d: "Trained, supervised craftsmen committed to excellence.",
-  },
-  {
-    i: Leaf,
-    t: "Dust-Free Process",
-    d: "Cleaner, safer, faster — minimal disruption to your space.",
-  },
-  {
-    i: Gem,
-    t: "Premium Materials",
-    d: "Only certified abrasives, sealers and chemistries.",
-  },
-  {
-    i: Building2,
-    t: "Commercial Expertise",
-    d: "Proven on large-scale hospitality and corporate projects.",
-  },
-  {
-    i: Clock,
-    t: "Timely Delivery",
-    d: "Predictable schedules backed by disciplined project management.",
+    i: TrendingUp,
+    t: "Save",
+    d: "Cost-effective alternative to complete extraction and replacement.",
   },
   {
     i: Shield,
-    t: "Quality Assurance",
-    d: "Multi-stage inspection on every square foot we deliver.",
+    t: "Protect",
+    d: "Enhance longevity and resistance against future wear and tear.",
   },
   {
-    i: BadgeCheck,
-    t: "Customer Satisfaction",
-    d: "A relationship-first approach earning repeat clients.",
+    i: Award,
+    t: "Perform",
+    d: "Ensure your surfaces meet aesthetic and functional standards.",
   },
 ];
 
@@ -455,11 +463,11 @@ function WhyUs() {
     <section className="py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <SectionHeader
-          eyebrow="Why Choose Us"
-          title="Why Clients Choose NKE Floors"
-          intro="Property owners, architects and facility managers across the region trust us to deliver consistent, premium-grade results — project after project."
+          eyebrow="The Benefits"
+          title="Why Property Owners Choose Restoration"
+          intro="Restoring your floor is not just about aesthetics; it's a strategic decision that protects your investment."
         />
-        <div className="mt-16 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="mt-16 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {WHY.map((w) => (
             <div
               key={w.t}
@@ -838,22 +846,46 @@ function Testimonials() {
   );
 }
 
-/* ---------------- BLOG ---------------- */
+/* ---------------- FLOOR STORY ---------------- */
+function FloorStory() {
+  return (
+    <section className="py-28 border-b border-border">
+      <div className="mx-auto max-w-7xl px-6 lg:px-10 grid lg:grid-cols-12 gap-16 items-center">
+        <div className="lg:col-span-6 relative">
+          <img
+            src={livedInSpace}
+            alt="Beautiful lived-in space"
+            className="w-full h-[640px] object-cover rounded-sm shadow-elevated"
+            loading="lazy"
+          />
+        </div>
+        <div className="lg:col-span-6">
+          <SectionHeader
+            title="Every Floor Has a Story"
+            intro="Floors are the silent witnesses to our lives. They carry the footsteps of growing families, the bustling energy of thriving businesses, and the quiet moments of pride when you look around a space you love. A well-maintained floor is not just about aesthetics; it's about preserving memories, extending longevity, and taking pride in the environments we build and inhabit."
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------- BLOG (KNOWLEDGE CENTRE TEASER) ---------------- */
 const POSTS = [
   {
-    t: "The Definitive Guide to Marble Care",
-    c: "Marble Care",
+    t: "Marble Care & Maintenance",
+    c: "Knowledge Centre",
     d: "Daily, weekly and seasonal practices to keep marble floors looking new for decades.",
   },
   {
-    t: "When to Restore vs. Replace Your Floor",
-    c: "Restoration",
-    d: "A practical decision framework for property managers and homeowners.",
+    t: "Concrete Polishing Tech",
+    c: "Knowledge Centre",
+    d: "Understanding industrial polishing, densification, and surface levelling techniques.",
   },
   {
-    t: "Inside a Hotel Ballroom Restoration",
-    c: "Case Studies",
-    d: "How we restored 12,000 sq ft of heritage marble in under three weeks.",
+    t: "Restoration vs Replacement",
+    c: "Knowledge Centre",
+    d: "A practical decision framework for property managers and homeowners.",
   },
   {
     t: "Polished Concrete: Industrial Meets Premium",
@@ -867,8 +899,8 @@ function Blog() {
     <section id="blog" className="py-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <SectionHeader
-          eyebrow="Insights"
-          title="Latest from the Journal"
+          eyebrow="Learn Before You Decide"
+          title="Knowledge Centre"
           intro="Practical guidance, restoration case studies and material insights from our craftsmen and project leads."
         />
         <div className="mt-16 grid lg:grid-cols-12 gap-8">
@@ -934,6 +966,117 @@ function Blog() {
   );
 }
 
+/* ---------------- FOUNDER'S MESSAGE ---------------- */
+function FounderMessage() {
+  return (
+    <section className="py-28 bg-card border-y border-border">
+      <div className="mx-auto max-w-7xl px-6 lg:px-10 grid lg:grid-cols-12 gap-16 items-center">
+        <div className="lg:col-span-5 relative">
+          <div className="aspect-[3/4] rounded-sm overflow-hidden border border-border shadow-elevated">
+            <img
+              src={founderPortrait}
+              alt="K. J. Dilip, Founder"
+              className="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+        <div className="lg:col-span-7">
+          <Eyebrow>A Message From Our Founder</Eyebrow>
+          <blockquote className="mt-6 font-serif text-3xl md:text-4xl text-primary leading-relaxed">
+            "For over four decades, I have learnt one simple lesson—every floor deserves to be understood before it is restored or replaced.
+            <br /><br />
+            Our responsibility is not simply to restore surfaces. It is to help people make the right decision, protect their investment and preserve what already has value.
+            <br /><br />
+            That principle has guided every project we have undertaken since 1999."
+          </blockquote>
+          <div className="mt-8">
+            <div className="font-serif text-xl text-primary">— K. J. Dilip</div>
+            <div className="text-sm text-muted-foreground uppercase tracking-widest mt-1">Founder, NKE Floorcare</div>
+          </div>
+          <div className="mt-10">
+            <a href="#our-story" className="inline-flex items-center gap-2 text-sm font-medium text-primary border-b border-gold pb-1 hover:gap-3 transition-all">
+              Read Our Story <ArrowRight className="h-4 w-4" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------- OUR STORY ---------------- */
+function OurStory() {
+  return (
+    <section id="our-story" className="py-28 border-b border-border">
+      <div className="mx-auto max-w-4xl px-6 lg:px-10">
+        <div className="text-center mb-16">
+          <SectionHeader title="Our Story" />
+        </div>
+        <div className="prose prose-lg dark:prose-invert max-w-none text-muted-foreground space-y-6">
+          <p>Every meaningful journey begins with a purpose.</p>
+          <p>Ours began long before NKE Floorcare was established. It began with a young man who entered the world of work at the age of seventeen, when family circumstances demanded responsibility before ambition. Those early years became a lifelong education—not only in materials and workmanship, but in people, perseverance and the value of honest work.</p>
+          <p>In 1999, that journey found its direction with the formation of NKE Floorcare.</p>
+          <p>Our purpose was simple: to help people protect the value of the floors they had invested in and to restore them with honesty, skill and respect.</p>
+          <p>Over the years, we have had the privilege of working in family homes, luxury hotels, commercial buildings and industrial facilities. Every project has strengthened one belief:</p>
+          <p className="font-serif text-3xl text-primary text-center my-12">A floor is never just a surface. It is an investment.</p>
+          <p>It is part of the identity of a home, the reputation of a hotel, the image of a business and the efficiency of an industry. When properly maintained, it continues to create experiences, inspire confidence and serve people for decades.</p>
+          <p>That is why our responsibility goes beyond restoration. We help our clients understand their options and make the right decision—whether that means restoration, maintenance or replacement. Our recommendations are guided not by what benefits us, but by what genuinely serves the long-term interests of the floor and the people who own it.</p>
+          <p>We believe true craftsmanship is not measured by how much work we undertake, but by how responsibly we guide those who place their trust in us.</p>
+          <p>Every project we complete is another opportunity to improve. We believe in becoming just one percent better every day—learning from every floor, every challenge and every client. It is this commitment to continuous improvement that has shaped our journey and will continue to shape our future.</p>
+          <p>But our journey does not end with us. We believe that knowledge has value only when it is shared.</p>
+          <p>This belief has inspired Shilpa Seva—our long-term commitment to developing skilled professionals, preserving traditional craftsmanship and creating opportunities for young people willing to learn, work with integrity and build meaningful careers.</p>
+          <p>Every client who places their trust in NKE becomes an important part of that larger vision. Your project enables us not only to restore valuable floors, but also to preserve specialised knowledge, develop future craftsmen and ensure that the skills accumulated over decades continue to benefit generations to come.</p>
+          
+          <div className="bg-card border border-border p-8 rounded-sm my-12 shadow-soft">
+            <h3 className="font-serif text-2xl text-primary mb-4">A Small Request</h3>
+            <p>If you know a young person of good character who is sincere, willing to learn and looking for an opportunity to build a dignified career through skilled craftsmanship, we would be grateful if you introduced them to us.</p>
+            <p className="mt-4">A recommendation from a teacher, employer, community leader or someone who genuinely knows the individual helps us identify those who may benefit most from the opportunities created through Shilpa Seva. One recommendation can open the door to a lifetime of opportunity.</p>
+          </div>
+          
+          <p>As we continue this journey, our promise remains unchanged.</p>
+          <ul className="list-disc pl-6 space-y-2 mt-4 text-primary">
+            <li>To serve every client with honesty.</li>
+            <li>To recommend only what is truly needed.</li>
+            <li>To continually improve our knowledge and workmanship.</li>
+            <li>To protect the value of every floor entrusted to us.</li>
+            <li>And to pass on what we have learnt, so that the journey continues long after us.</li>
+          </ul>
+          
+          <p className="mt-8 font-serif text-xl text-primary">Thank you for being part of our story. It would be our privilege to become a part of yours.</p>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* ---------------- FINAL CTA ---------------- */
+function FinalCTA() {
+  return (
+    <section className="py-28 text-center bg-card border-b border-border">
+      <div className="mx-auto max-w-3xl px-6 lg:px-10">
+        <h2 className="font-serif text-4xl md:text-5xl text-primary">Let’s Start With Your Floor</h2>
+        <p className="mt-6 text-lg text-muted-foreground">
+          Upload photos for a preliminary assessment, or schedule a visit for a detailed consultation.
+        </p>
+        <div className="mt-10 flex flex-wrap justify-center gap-4">
+          <a
+            href="#upload"
+            className="inline-flex items-center gap-2 rounded-sm bg-primary px-8 py-4 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
+          >
+            Upload Your Floor <ArrowRight className="h-4 w-4" />
+          </a>
+          <a
+            href="#contact"
+            className="inline-flex items-center gap-2 rounded-sm border border-border bg-background px-8 py-4 text-sm font-medium hover:border-gold hover:text-primary transition-colors"
+          >
+            Schedule a Site Visit
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ---------------- CONTACT + FOOTER ---------------- */
 function ContactFooter() {
   return (
@@ -941,7 +1084,7 @@ function ContactFooter() {
       <div className="mx-auto max-w-7xl px-6 lg:px-10 py-24">
         <div className="grid lg:grid-cols-12 gap-16">
           <div className="lg:col-span-5">
-            <div className="eyebrow">Get In Touch</div>
+            <div className="eyebrow text-gold/80">Get In Touch</div>
             <h2 className="mt-4 font-serif text-4xl md:text-5xl leading-tight">
               Let&rsquo;s restore your floors to{" "}
               <em className="text-gold not-italic">flawless</em>.
