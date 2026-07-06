@@ -128,7 +128,7 @@ function Page() {
       <Header />
       <Hero />
       <DecisionSection />
-      {/* <UploadSection /> */}
+      <UploadSection />
       <FancyMirrors />
       <About />
       <Services />
