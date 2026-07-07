@@ -141,7 +141,6 @@ function Page() {
       <FloorStory />
       <Blog />
       <FounderMessage />
-      <OurStory />
       <FinalCTA />
       <ContactFooter />
     </main>
@@ -355,7 +354,7 @@ function About() {
         </div>
         <div className="lg:col-span-6">
           <SectionHeader
-            eyebrow="Section 4"
+            eyebrow=""
             title="More Than a Floor. An Investment Worth Protecting."
             intro="A premium floor is more than a construction material. It is an investment made to create a lasting experience."
           />
@@ -982,7 +981,7 @@ function FounderMessage() {
         </div>
         <div className="lg:col-span-7">
           <Eyebrow>A Message From Our Founder</Eyebrow>
-          <blockquote className="mt-6 font-serif text-3xl md:text-4xl text-primary leading-relaxed">
+          <blockquote className="mt-6 font-serif text-2xl md:text-2xl text-primary leading-relaxed">
             "For over four decades, I have learnt one simple lesson—every floor deserves to be understood before it is restored or replaced.
             <br /><br />
             Our responsibility is not simply to restore surfaces. It is to help people make the right decision, protect their investment and preserve what already has value.
@@ -1004,50 +1003,7 @@ function FounderMessage() {
   );
 }
 
-/* ---------------- OUR STORY ---------------- */
-function OurStory() {
-  return (
-    <section id="our-story" className="py-28 border-b border-border">
-      <div className="mx-auto max-w-4xl px-6 lg:px-10">
-        <div className="text-center mb-16">
-          <SectionHeader title="Our Story" />
-        </div>
-        <div className="prose prose-lg dark:prose-invert max-w-none text-muted-foreground space-y-6">
-          <p>Every meaningful journey begins with a purpose.</p>
-          <p>Ours began long before NKE Floorcare was established. It began with a young man who entered the world of work at the age of seventeen, when family circumstances demanded responsibility before ambition. Those early years became a lifelong education—not only in materials and workmanship, but in people, perseverance and the value of honest work.</p>
-          <p>In 1999, that journey found its direction with the formation of NKE Floorcare.</p>
-          <p>Our purpose was simple: to help people protect the value of the floors they had invested in and to restore them with honesty, skill and respect.</p>
-          <p>Over the years, we have had the privilege of working in family homes, luxury hotels, commercial buildings and industrial facilities. Every project has strengthened one belief:</p>
-          <p className="font-serif text-3xl text-primary text-center my-12">A floor is never just a surface. It is an investment.</p>
-          <p>It is part of the identity of a home, the reputation of a hotel, the image of a business and the efficiency of an industry. When properly maintained, it continues to create experiences, inspire confidence and serve people for decades.</p>
-          <p>That is why our responsibility goes beyond restoration. We help our clients understand their options and make the right decision—whether that means restoration, maintenance or replacement. Our recommendations are guided not by what benefits us, but by what genuinely serves the long-term interests of the floor and the people who own it.</p>
-          <p>We believe true craftsmanship is not measured by how much work we undertake, but by how responsibly we guide those who place their trust in us.</p>
-          <p>Every project we complete is another opportunity to improve. We believe in becoming just one percent better every day—learning from every floor, every challenge and every client. It is this commitment to continuous improvement that has shaped our journey and will continue to shape our future.</p>
-          <p>But our journey does not end with us. We believe that knowledge has value only when it is shared.</p>
-          <p>This belief has inspired Shilpa Seva—our long-term commitment to developing skilled professionals, preserving traditional craftsmanship and creating opportunities for young people willing to learn, work with integrity and build meaningful careers.</p>
-          <p>Every client who places their trust in NKE becomes an important part of that larger vision. Your project enables us not only to restore valuable floors, but also to preserve specialised knowledge, develop future craftsmen and ensure that the skills accumulated over decades continue to benefit generations to come.</p>
-          
-          <div className="bg-card border border-border p-8 rounded-sm my-12 shadow-soft">
-            <h3 className="font-serif text-2xl text-primary mb-4">A Small Request</h3>
-            <p>If you know a young person of good character who is sincere, willing to learn and looking for an opportunity to build a dignified career through skilled craftsmanship, we would be grateful if you introduced them to us.</p>
-            <p className="mt-4">A recommendation from a teacher, employer, community leader or someone who genuinely knows the individual helps us identify those who may benefit most from the opportunities created through Shilpa Seva. One recommendation can open the door to a lifetime of opportunity.</p>
-          </div>
-          
-          <p>As we continue this journey, our promise remains unchanged.</p>
-          <ul className="list-disc pl-6 space-y-2 mt-4 text-primary">
-            <li>To serve every client with honesty.</li>
-            <li>To recommend only what is truly needed.</li>
-            <li>To continually improve our knowledge and workmanship.</li>
-            <li>To protect the value of every floor entrusted to us.</li>
-            <li>And to pass on what we have learnt, so that the journey continues long after us.</li>
-          </ul>
-          
-          <p className="mt-8 font-serif text-xl text-primary">Thank you for being part of our story. It would be our privilege to become a part of yours.</p>
-        </div>
-      </div>
-    </section>
-  );
-}
+
 
 /* ---------------- FINAL CTA ---------------- */
 function FinalCTA() {
