@@ -9,6 +9,7 @@ import heroImg from "@/assets/hero.jpg";
 import projectHotel from "@/assets/project-hotel.jpg";
 import projectVilla from "@/assets/project-villa.jpg";
 import projectOffice from "@/assets/project-office.jpg";
+import projectIndustrial from "@/assets/project-industrial.jpg";
 
 export const Route = createFileRoute("/blog/")({
   head: () => ({
@@ -36,106 +37,36 @@ export const Route = createFileRoute("/blog/")({
 
 export const BLOG_POSTS = [
   {
-    id: "marble-care-guide",
-    title: "The Definitive Guide to Marble Care",
+    id: "what-is-stone-restoration",
+    title: "What Is Stone Restoration?",
     excerpt:
-      "Daily, weekly and seasonal practices to keep marble floors looking new for decades.",
-    content: `Marble is one of the most beautiful and luxurious natural stones, but it requires proper care to maintain its elegance. This comprehensive guide covers everything you need to know about marble maintenance.
-
-## Daily Care
-Start with daily maintenance to prevent dust and debris accumulation. Use a soft, lint-free cloth to dust your marble surfaces daily. This simple step prevents scratches from particles that can dull the surface over time.
-
-## Weekly Maintenance
-Once a week, use a pH-neutral stone cleaner specifically designed for marble. Regular household cleaners can damage marble due to their acidic nature. Mix the cleaner with water according to manufacturer instructions and wipe surfaces with a soft cloth.
-
-## Monthly Care
-Monthly, apply a marble-specific sealer to maintain protection against stains and moisture. This is particularly important in areas with high moisture, such as bathrooms and kitchens.
-
-## Seasonal Protection
-Every three to six months, have professionals inspect your marble floors and apply protective treatments. This preventive care extends the life of your marble significantly.
-
-## What to Avoid
-Never use vinegar, lemon juice, or acidic cleaners on marble. Don't use abrasive scrubbers or harsh chemicals. Always wipe spills immediately, especially acidic liquids like wine or citrus juice.
-
-## Professional Restoration
-If your marble develops etching or begins to lose its shine, professional restoration is recommended. Our craftsmen can restore marble to its original brilliance safely and effectively.`,
-    category: "Maintenance",
+      "You walk on it every day — but have you ever seen marble breathe again? Discover the method behind the magic.",
+    content: `CUSTOM_RENDER`,
+    category: "Education",
     author: "NKE Floors Team",
     date: "March 15, 2026",
     image: projectHotel,
     featured: true,
   },
   {
-    id: "restore-vs-replace",
-    title: "When to Restore vs. Replace Your Floor",
+    id: "why-concrete-floors-crack",
+    title: "Why Concrete Floors Crack (And How to Fix It)",
     excerpt:
-      "A practical decision framework for property managers and homeowners facing damaged floors.",
-    content: `Deciding whether to restore or replace damaged flooring is one of the most important decisions a property manager or homeowner must make. Let's explore the key factors to consider.
-
-## Signs Your Floor Can Be Restored
-Most natural stone floors can be restored if the structural integrity is sound. Look for these indicators:
-- Surface damage like scratches, etching, or dull spots
-- Water stains or mineral deposits
-- Missing grout between tiles
-- Fading or discoloration
-- Minor chips or cracks
-
-## When Replacement is Necessary
-Complete replacement is needed when:
-- The substrate is compromised
-- Structural damage is extensive
-- Water damage has affected the foundation
-- The entire floor has lost its structural integrity
-
-## Cost Comparison
-Restoration is typically 30-50% less expensive than replacement. A 1,000 sq ft marble floor might cost $5,000-7,000 to restore versus $8,000-12,000 to replace. Additionally, restoration preserves the character and history of original flooring.
-
-## Environmental Benefits
-Choosing restoration over replacement is more sustainable. It preserves natural resources and reduces construction waste. This is an important consideration for eco-conscious property owners.
-
-## Timeline Considerations
-Restoration typically takes 2-4 weeks, while replacement can take 4-8 weeks including substrate preparation. For commercial properties, this can mean significant operational benefits.
-
-## Professional Assessment
-The best first step is to have professionals evaluate your floor condition. We provide free assessments to help you make the right decision.`,
-    category: "Decision Guide",
-    author: "Sarah Johnson",
+      "Most industrial floors don't crack because of poor concrete. They crack because of poor planning.",
+    content: `CUSTOM_RENDER_2`,
+    category: "Industrial",
+    author: "NKE Floors Team",
     date: "March 8, 2026",
-    image: projectVilla,
+    image: projectIndustrial,
   },
   {
-    id: "hotel-restoration-case-study",
-    title: "Inside a Hotel Ballroom Restoration: 12,000 Sq Ft in 3 Weeks",
+    id: "how-we-polish-concrete",
+    title: "How We Polish Concrete Floors to Mirror Finish",
     excerpt:
-      "How we restored heritage marble in a working hotel without disrupting operations.",
-    content: `One of our most challenging recent projects was the complete restoration of the Grand Heritage Hotel's 12,000 sq ft ballroom. Here's how we accomplished this feat while maintaining hotel operations.
-
-## Project Scope
-The ballroom featured 40-year-old marble flooring that had accumulated significant wear, stains, and etching. The main challenges were:
-- Minimizing disruption to hotel operations
-- Working within a tight 3-week timeline
-- Handling irregular traffic patterns
-- Preserving decorative inlays
-
-## Phase 1: Planning & Preparation
-We conducted detailed assessments and created a custom restoration plan. We coordinated with hotel management to schedule work during low-occupancy periods and set up dust containment systems.
-
-## Phase 2: Grinding & Honing
-Our team worked in sections, using advanced grinding equipment to remove the etched layers and restore flatness. Progressive honing stages refined the surface texture.
-
-## Phase 3: Polishing
-The final polishing phase brought back the mirror-like finish the marble originally had. Premium polishing compounds created a flawless, protective layer.
-
-## Phase 4: Sealing & Protection
-High-grade stone sealer was applied to protect against stains and moisture. This would ensure longevity and ease of future maintenance.
-
-## Results
-The ballroom was transformed into a pristine showcase space. The 40-year-old marble looked new again, and the hotel was able to resume full operations after just three weeks. The project received praise from both hotel management and guests.
-
-## Key Learnings
-This project demonstrated the importance of advanced planning, skilled team coordination, and professional-grade equipment in managing large-scale restoration projects. The hotel has since contracted us for ongoing quarterly maintenance.`,
-    category: "Case Studies",
-    author: "Kumar Desai",
+      "From dusty to glossy — here's how raw concrete becomes a mirror.",
+    content: `CUSTOM_RENDER_3`,
+    category: "Process",
+    author: "NKE Floors Team",
     date: "February 28, 2026",
     image: projectOffice,
   },

@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
@@ -18,6 +19,11 @@ import { Route as BlogIndexRouteImport } from './routes/blog/index'
 import { Route as ServicesServiceIdRouteImport } from './routes/services/$serviceId'
 import { Route as BlogPostIdRouteImport } from './routes/blog/$postId'
 
+const ProjectsRoute = ProjectsRouteImport.update({
+  id: '/projects',
+  path: '/projects',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GalleryRoute = GalleryRouteImport.update({
   id: '/gallery',
   path: '/gallery',
@@ -64,6 +70,7 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRoute
+  '/projects': typeof ProjectsRoute
   '/blog/$postId': typeof BlogPostIdRoute
   '/services/$serviceId': typeof ServicesServiceIdRoute
   '/blog/': typeof BlogIndexRoute
@@ -74,6 +81,7 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRoute
+  '/projects': typeof ProjectsRoute
   '/blog/$postId': typeof BlogPostIdRoute
   '/services/$serviceId': typeof ServicesServiceIdRoute
   '/blog': typeof BlogIndexRoute
@@ -85,6 +93,7 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
   '/gallery': typeof GalleryRoute
+  '/projects': typeof ProjectsRoute
   '/blog/$postId': typeof BlogPostIdRoute
   '/services/$serviceId': typeof ServicesServiceIdRoute
   '/blog/': typeof BlogIndexRoute
@@ -97,6 +106,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/contact'
     | '/gallery'
+    | '/projects'
     | '/blog/$postId'
     | '/services/$serviceId'
     | '/blog/'
@@ -107,6 +117,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/contact'
     | '/gallery'
+    | '/projects'
     | '/blog/$postId'
     | '/services/$serviceId'
     | '/blog'
@@ -117,6 +128,7 @@ export interface FileRouteTypes {
     | '/about'
     | '/contact'
     | '/gallery'
+    | '/projects'
     | '/blog/$postId'
     | '/services/$serviceId'
     | '/blog/'
@@ -128,6 +140,7 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
   GalleryRoute: typeof GalleryRoute
+  ProjectsRoute: typeof ProjectsRoute
   BlogPostIdRoute: typeof BlogPostIdRoute
   ServicesServiceIdRoute: typeof ServicesServiceIdRoute
   BlogIndexRoute: typeof BlogIndexRoute
@@ -136,6 +149,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/projects': {
+      id: '/projects'
+      path: '/projects'
+      fullPath: '/projects'
+      preLoaderRoute: typeof ProjectsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/gallery': {
       id: '/gallery'
       path: '/gallery'
@@ -200,6 +220,7 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
   GalleryRoute: GalleryRoute,
+  ProjectsRoute: ProjectsRoute,
   BlogPostIdRoute: BlogPostIdRoute,
   ServicesServiceIdRoute: ServicesServiceIdRoute,
   BlogIndexRoute: BlogIndexRoute,
