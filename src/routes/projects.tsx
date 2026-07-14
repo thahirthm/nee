@@ -7,6 +7,7 @@ import projectHotel from "@/assets/m-3.jpg";
 import projectVilla from "@/assets/m-4.jpg";
 import projectOffice from "@/assets/M-1.jpg";
 import projectIndustrial from "@/assets/m-2.jpg";
+import p1Img from "@/assets/p1.jpeg";
 
 export const Route = createFileRoute("/projects")({
   component: ProjectsPage,
@@ -15,10 +16,10 @@ export const Route = createFileRoute("/projects")({
 const ALL_PROJECTS = [
   {
     id: 1,
-    title: "Grand Heritage Hotel",
-    category: "Hospitality",
-    description: "Complete marble lobby restoration and polishing.",
-    image: projectHotel,
+    title: "Mrs. Priya Thomas",
+    category: "House",
+    description: "Complete floor restoration and polishing.",
+    image: p1Img,
   },
   {
     id: 2,
@@ -44,7 +45,7 @@ const ALL_PROJECTS = [
   {
     id: 5,
     title: "Royale Boutique Suites",
-    category: "Hospitality",
+    category: "House",
     description: "Heritage mosaic tile restoration across all guest corridors.",
     image: projectHotel,
   },
@@ -57,7 +58,7 @@ const ALL_PROJECTS = [
   },
 ];
 
-const CATEGORIES = ["All", "Hospitality", "Commercial", "Industrial", "Residential"];
+const CATEGORIES = ["All", "House", "Commercial", "Industrial", "Residential"];
 
 function ProjectsPage() {
   const [activeCategory, setActiveCategory] = useState("All");

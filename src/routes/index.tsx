@@ -26,7 +26,7 @@ import projectVilla from "@/assets/mm.jpg";
 import projectOffice from "@/assets/M-1.jpg";
 import projectIndustrial from "@/assets/m-2.jpg";
 import aboutImg from "@/assets/about.jpg";
-import c1Img from "@/assets/c1.jpg";
+import c1Img from "@/assets/c2.jpeg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -78,7 +78,7 @@ function Hero() {
           className="h-full w-full object-cover"
         />
         {/* Gradient overlay: solid on the left edge, fading to completely transparent by the middle */}
-        <div className="absolute inset-0 bg-white/60 sm:bg-white/70 md:bg-gradient-to-r md:from-white/50 md:via-transparent md:to-transparent"></div>
+        <div className="absolute inset-0 bg-white/40 sm:bg-white/50 md:bg-gradient-to-r md:from-white/40 md:via-transparent md:to-transparent"></div>
       </div>
 
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-16 md:py-20 mt-10 md:mt-0">
