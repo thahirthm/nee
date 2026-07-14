@@ -115,7 +115,7 @@ export function Header() {
         }`}
       >
         <Link to="/" className="flex items-center gap-3 group">
-          <img src={MainLogo} alt="Logo" className="h-16 w-16 md:h-30 md:w-[140px] object-contain" />
+          <img src={MainLogo} alt="Logo" className="h-20 w-30 md:h-30 md:w-[140px] object-contain" />
         </Link>
 
         <nav className="hidden lg:flex items-center gap-7">

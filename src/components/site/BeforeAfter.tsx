@@ -40,10 +40,10 @@ export function BeforeAfter() {
   const currentPair = PAIRS[currentIndex];
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-6 h-full">
       <div
         ref={ref}
-        className="relative w-full aspect-[16/10] overflow-hidden rounded-sm shadow-elevated select-none cursor-ew-resize"
+        className="relative w-full aspect-square sm:aspect-[16/10] lg:aspect-auto lg:h-full lg:min-h-full overflow-hidden rounded-sm shadow-elevated select-none cursor-ew-resize flex-grow"
         onMouseDown={(e) => {
           dragging.current = true;
           update(e.clientX);

@@ -22,7 +22,7 @@ import { BeforeAfter } from "@/components/site/BeforeAfter";
 import mainBanner from "@/assets/main-banner.jpg";
 import wornFloorBefore from "@/assets/m8.jpg";
 import projectHotel from "@/assets/m-3.jpg";
-import projectVilla from "@/assets/m-4.jpg";
+import projectVilla from "@/assets/mm.jpg";
 import projectOffice from "@/assets/M-1.jpg";
 import projectIndustrial from "@/assets/m-2.jpg";
 import aboutImg from "@/assets/about.jpg";
@@ -69,32 +69,49 @@ function Page() {
 /* ---------------- 1. HERO ---------------- */
 function Hero() {
   return (
-    <section className="bg-background relative overflow-hidden">
-      <div className="grid lg:grid-cols-2 min-h-[calc(100vh-6rem)]">
-        <div className="flex flex-col justify-center px-6 py-16 lg:px-16 xl:px-24">
-          <Eyebrow>SURFACE RESTORATION & FLOORING SPECIALISTS</Eyebrow>
-          <h1 className="mt-2 font-serif text-5xl md:text-6xl lg:text-7xl leading-[1.1] text-primary">
-            NKE Floorcare Pvt. Ltd.
+    <section className="relative min-h-[calc(100vh-6rem)] flex items-center bg-muted">
+      {/* Full Background Image */}
+      <div className="absolute inset-0 z-0">
+        <img
+          src={mainBanner}
+          alt="Polished marble hotel lobby"
+          className="h-full w-full object-cover"
+        />
+        {/* Gradient overlay: solid on the left edge, fading to completely transparent by the middle */}
+        <div className="absolute inset-0 bg-white/60 sm:bg-white/70 md:bg-gradient-to-r md:from-white/50 md:via-transparent md:to-transparent"></div>
+      </div>
+
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-16 md:py-20 mt-10 md:mt-0">
+        {/* Content directly on the overlay */}
+        <div className="max-w-3xl">
+          <div className="inline-block bg-white px-3 sm:px-4 py-2 mb-6 rounded-sm shadow-sm border border-border/50">
+            <span className="text-[10px] sm:text-xs font-semibold tracking-wider sm:tracking-widest text-muted-foreground uppercase">
+              SURFACE RESTORATION & FLOORING SPECIALISTS
+            </span>
+          </div>
+          
+          <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.1] text-primary">
+            NKE Floorcare<br/>Pvt. Ltd.
           </h1>
-          <p className="mt-6 text-lg md:text-xl text-muted-foreground max-w-lg leading-relaxed">
+          <p className="mt-6 text-lg md:text-xl text-primary/80 leading-relaxed font-medium">
             Protecting the Floors That Matter — Natural Stone, Concrete & Industrial Floors Across South India
           </p>
 
           <div className="mt-8 flex gap-4 items-center">
-            <div className="w-1 h-16 bg-primary"></div>
+            <div className="w-1 h-16 bg-primary shrink-0"></div>
             <p className="text-xl md:text-2xl text-primary font-medium">
               Polish with Purpose. Transform with Skill.
             </p>
           </div>
 
-          <div className="mt-12 grid grid-cols-2 gap-8 max-w-md">
+          <div className="mt-12 grid sm:grid-cols-2 gap-8 max-w-lg">
             <div>
-              <div className="font-serif text-2xl md:text-3xl text-primary">Since 1999</div>
-              <div className="mt-1 text-sm text-muted-foreground">25+ Years of Expertise</div>
+              <div className="font-serif text-2xl md:text-2xl text-primary">Since 1999</div>
+              <div className="mt-1 text-sm text-primary/80 font-medium">25+ Years of Expertise</div>
             </div>
             <div>
-              <div className="font-serif text-2xl md:text-3xl text-primary">Chennai & Bengaluru</div>
-              <div className="mt-1 text-sm text-muted-foreground">Serving South India</div>
+              <div className="font-serif text-2xl md:text-2xl text-primary">Chennai & Bengaluru</div>
+              <div className="mt-1 text-sm text-primary/80 font-medium">Serving South India</div>
             </div>
           </div>
           
@@ -107,14 +124,6 @@ function Hero() {
             </a>
           </div>
         </div>
-        
-        <div className="relative h-[50vh] lg:h-auto hidden md:block">
-          <img
-            src={mainBanner}
-            alt="Polished marble hotel lobby"
-            className="absolute inset-0 h-full w-full object-cover"
-          />
-        </div>
       </div>
     </section>
   );
@@ -123,17 +132,17 @@ function Hero() {
 /* ---------------- 2. EVERY GREAT RESTORATION ---------------- */
 function UnderstandingSection() {
   return (
-    <section className="py-24 bg-background border-t border-border">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10 grid lg:grid-cols-2 gap-16 items-center">
-        <div className="relative h-[400px] lg:h-[600px] overflow-hidden rounded-sm">
+    <section className="py-16 lg:py-24 bg-background border-t border-border">
+      <div className="mx-auto max-w-7xl px-6 lg:px-10 grid lg:grid-cols-2 gap-10 lg:gap-16 items-stretch">
+        <div className="relative h-[300px] sm:h-[400px] lg:h-auto w-full overflow-hidden rounded-sm">
           <img
             src={wornFloorBefore}
             alt="Room before restoration"
-            className="w-full h-full object-cover shadow-elevated"
+            className="absolute inset-0 w-full h-full object-cover shadow-elevated"
           />
         </div>
         <div>
-          <h2 className="font-serif text-4xl md:text-5xl text-primary leading-tight">
+          <h2 className="font-serif text-3xl lg:text-4xl text-primary leading-tight">
             Every Great Restoration Begins With Understanding.
           </h2>
           <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
@@ -141,7 +150,7 @@ function UnderstandingSection() {
           </p>
           
           <div className="mt-10 grid sm:grid-cols-2 gap-6">
-            <div className="bg-muted p-8 rounded-sm">
+            <div className="bg-muted p-6 sm:p-8 rounded-sm">
               <div className="h-12 w-12 rounded-full bg-primary flex items-center justify-center mb-6 text-primary-foreground">
                 <Camera className="h-5 w-5" />
               </div>
@@ -151,7 +160,7 @@ function UnderstandingSection() {
               </p>
             </div>
             
-            <div className="bg-muted p-8 rounded-sm">
+            <div className="bg-muted p-6 sm:p-8 rounded-sm">
               <div className="h-12 w-12 rounded-full bg-primary flex items-center justify-center mb-6 text-primary-foreground">
                 <MessageSquare className="h-5 w-5" />
               </div>
@@ -162,7 +171,7 @@ function UnderstandingSection() {
             </div>
           </div>
           
-          <div className="mt-6 bg-muted p-8 rounded-sm">
+          <div className="mt-6 bg-muted p-6 sm:p-8 rounded-sm">
             <div className="h-12 w-12 rounded-full bg-primary flex items-center justify-center mb-6 text-primary-foreground">
               <Search className="h-5 w-5" />
             </div>
@@ -180,11 +189,11 @@ function UnderstandingSection() {
 /* ---------------- 2.5. VISUAL SHOWCASE ---------------- */
 function VisualShowcase() {
   return (
-    <section className="py-24 bg-background border-t border-border">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10 grid lg:grid-cols-12 gap-16 items-center">
+    <section className="py-16 lg:py-24 bg-background border-t border-border">
+      <div className="mx-auto max-w-7xl px-6 lg:px-10 grid lg:grid-cols-12 gap-10 lg:gap-16 items-stretch">
         <div className="lg:col-span-5">
           <Eyebrow>VISUAL SHOWCASE</Eyebrow>
-          <h2 className="mt-2 font-serif text-4xl md:text-5xl text-primary leading-tight">
+          <h2 className="mt-2 font-serif text-3xl sm:text-4xl md:text-5xl text-primary leading-tight">
             Experience the Difference
           </h2>
           <div className="mt-6 h-px w-16 bg-gold" />
@@ -245,10 +254,10 @@ function InvestmentSection() {
   ];
 
   return (
-    <section className="py-24 bg-card border-t border-border">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10 grid lg:grid-cols-2 gap-16 items-center">
+    <section className="py-16 lg:py-24 bg-card border-t border-border">
+      <div className="mx-auto max-w-7xl px-6 lg:px-10 grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
         <div>
-          <h2 className="font-serif text-4xl md:text-5xl text-primary leading-tight">
+          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-primary leading-tight">
             More Than a Floor. An<br/>Investment Worth Protecting.
           </h2>
           <div className="mt-12 space-y-8">
@@ -263,7 +272,7 @@ function InvestmentSection() {
             ))}
           </div>
         </div>
-        <div className="relative h-[400px] lg:h-[700px] overflow-hidden rounded-sm">
+        <div className="relative h-[300px] sm:h-[400px] lg:h-[700px] overflow-hidden rounded-sm">
           <img
             src={projectVilla}
             alt="Beautifully restored floor"
@@ -301,16 +310,16 @@ function ExpertiseSection() {
   ];
 
   return (
-    <section className="py-24 bg-background border-t border-border">
+    <section className="py-16 lg:py-24 bg-background border-t border-border">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        <h2 className="font-serif text-4xl md:text-5xl text-primary">
+        <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-primary">
           Our Areas of Expertise
         </h2>
         <p className="mt-6 text-lg text-muted-foreground max-w-3xl leading-relaxed">
           With over 25 years of experience, NKE Floorcare serves natural stone, concrete, and industrial floors across four specialisms — working across residential, commercial, hospitality, and industrial properties.
         </p>
         
-        <div className="mt-16 grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="mt-10 lg:mt-16 grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
           {areas.map((a, idx) => (
             <div key={idx} className="flex flex-col">
               <div className="aspect-[4/3] rounded-sm overflow-hidden mb-6">
@@ -348,11 +357,11 @@ function CredibilityStrip() {
 /* ---------------- 6. COMPLEMENTARY CALLOUT ---------------- */
 function ComplementaryCallout() {
   return (
-    <section className="py-24 bg-card border-b border-border">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10 grid lg:grid-cols-2 gap-16 items-center">
+    <section className="py-16 lg:py-24 bg-card border-b border-border">
+      <div className="mx-auto max-w-7xl px-6 lg:px-10 grid lg:grid-cols-2 gap-10 lg:gap-16 items-stretch">
         <div>
           <Eyebrow>BEYOND THE CORE</Eyebrow>
-          <h2 className="mt-2 font-serif text-4xl md:text-5xl text-primary leading-tight">
+          <h2 className="mt-2 font-serif text-3xl sm:text-4xl md:text-5xl text-primary leading-tight">
             Complementary Flooring Services
           </h2>
           <div className="mt-6 h-px w-16 bg-gold" />
@@ -376,11 +385,11 @@ function ComplementaryCallout() {
             Explore All Services <ChevronRight className="h-4 w-4" />
           </Link>
         </div>
-        <div className="relative h-[400px] lg:h-[600px] overflow-hidden rounded-sm">
+        <div className="relative h-[300px] sm:h-[400px] lg:h-auto w-full overflow-hidden rounded-sm">
           <img
             src={c1Img}
             alt="Complementary flooring services"
-            className="w-full h-full object-cover shadow-elevated"
+            className="absolute inset-0 w-full h-full object-cover shadow-elevated"
           />
         </div>
       </div>
@@ -391,11 +400,11 @@ function ComplementaryCallout() {
 /* ---------------- 7. FEATURED CASE STUDY ---------------- */
 function FeaturedCaseStudy() {
   return (
-    <section className="py-24 bg-background">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10 grid lg:grid-cols-2 gap-16 items-center">
+    <section className="py-16 lg:py-24 bg-background">
+      <div className="mx-auto max-w-7xl px-6 lg:px-10 grid lg:grid-cols-2 gap-10 lg:gap-16 items-stretch">
         <div>
           <Eyebrow>Featured Case Study</Eyebrow>
-          <h2 className="mt-2 font-serif text-4xl text-primary leading-tight">
+          <h2 className="mt-2 font-serif text-3xl sm:text-4xl text-primary leading-tight">
             The 2,00,000 sq.ft. Residential Carpark Restoration
           </h2>
           <p className="mt-6 text-lg text-muted-foreground italic border-l-2 border-gold pl-4">
@@ -408,8 +417,8 @@ function FeaturedCaseStudy() {
             Read full case study <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
-        <div className="aspect-video rounded-sm overflow-hidden bg-muted">
-          <img src={projectIndustrial} alt="Carpark restoration" className="w-full h-full object-cover" />
+        <div className="relative h-[300px] sm:h-[400px] lg:h-auto w-full rounded-sm overflow-hidden bg-muted">
+          <img src={projectIndustrial} alt="Carpark restoration" className="absolute inset-0 w-full h-full object-cover" />
         </div>
       </div>
     </section>
@@ -440,12 +449,12 @@ function BlogSection() {
   ];
 
   return (
-    <section className="py-24 bg-card border-y border-border">
+    <section className="py-16 lg:py-24 bg-card border-y border-border">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 mb-12">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 sm:gap-8 mb-10 lg:mb-12">
           <div>
             <Eyebrow>Insights & Guides</Eyebrow>
-            <h2 className="mt-2 font-serif text-4xl text-primary">Latest From Our Blog</h2>
+            <h2 className="mt-2 font-serif text-3xl sm:text-4xl text-primary">Latest From Our Blog</h2>
           </div>
           <Link to="/blog" className="inline-flex items-center gap-2 rounded-sm bg-primary px-6 py-3 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors shrink-0">
              View All Articles <ArrowRight className="h-4 w-4" />
@@ -494,14 +503,14 @@ function CapabilityStatementCTA() {
 /* ---------------- 10. SHILPA SEVA TEASER ---------------- */
 function ShilpaSevaTeaser() {
   return (
-    <section className="py-24 bg-background">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10 grid lg:grid-cols-12 gap-16 items-center">
+    <section className="py-16 lg:py-24 bg-background">
+      <div className="mx-auto max-w-7xl px-6 lg:px-10 grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
         <div className="lg:col-span-5 aspect-[4/3] rounded-sm overflow-hidden bg-muted order-last lg:order-first">
            <img src={aboutImg} alt="Craftsman at work" className="w-full h-full object-cover" />
         </div>
         <div className="lg:col-span-7">
           <Eyebrow>Our Social Mission</Eyebrow>
-          <h2 className="mt-2 font-serif text-4xl text-primary">Craftsmen, Not Contractors.</h2>
+          <h2 className="mt-2 font-serif text-3xl sm:text-4xl text-primary">Craftsmen, Not Contractors.</h2>
           <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
             Every NKE project is built on a foundation of trained craftsmanship — through Shilpa Seva Foundation, our vocational training initiative for underprivileged individuals in surface restoration.
           </p>
@@ -518,8 +527,8 @@ function ShilpaSevaTeaser() {
 function ContactFooter() {
   return (
     <footer id="contact" className="bg-muted text-foreground border-t border-border">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10 py-20">
-        <div className="grid lg:grid-cols-4 gap-12">
+      <div className="mx-auto max-w-7xl px-6 lg:px-10 py-16 lg:py-20">
+        <div className="grid lg:grid-cols-4 gap-10 lg:gap-12">
           <div className="lg:col-span-2">
             <h2 className="font-serif text-3xl text-primary mb-6">NKE Floorcare</h2>
             <p className="text-muted-foreground leading-relaxed max-w-md">
