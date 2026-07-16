@@ -9,8 +9,12 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TermsAndConditionsRouteImport } from './routes/terms-and-conditions'
+import { Route as ShilpaSevaFoundationRouteImport } from './routes/shilpa-seva-foundation'
 import { Route as ProjectsRouteImport } from './routes/projects'
+import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as GalleryRouteImport } from './routes/gallery'
+import { Route as FounderRouteImport } from './routes/founder'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
@@ -19,14 +23,34 @@ import { Route as BlogIndexRouteImport } from './routes/blog/index'
 import { Route as ServicesServiceIdRouteImport } from './routes/services/$serviceId'
 import { Route as BlogPostIdRouteImport } from './routes/blog/$postId'
 
+const TermsAndConditionsRoute = TermsAndConditionsRouteImport.update({
+  id: '/terms-and-conditions',
+  path: '/terms-and-conditions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ShilpaSevaFoundationRoute = ShilpaSevaFoundationRouteImport.update({
+  id: '/shilpa-seva-foundation',
+  path: '/shilpa-seva-foundation',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProjectsRoute = ProjectsRouteImport.update({
   id: '/projects',
   path: '/projects',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
+  id: '/privacy-policy',
+  path: '/privacy-policy',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GalleryRoute = GalleryRouteImport.update({
   id: '/gallery',
   path: '/gallery',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FounderRoute = FounderRouteImport.update({
+  id: '/founder',
+  path: '/founder',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -69,8 +93,12 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
+  '/founder': typeof FounderRoute
   '/gallery': typeof GalleryRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/projects': typeof ProjectsRoute
+  '/shilpa-seva-foundation': typeof ShilpaSevaFoundationRoute
+  '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/blog/$postId': typeof BlogPostIdRoute
   '/services/$serviceId': typeof ServicesServiceIdRoute
   '/blog/': typeof BlogIndexRoute
@@ -80,8 +108,12 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
+  '/founder': typeof FounderRoute
   '/gallery': typeof GalleryRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/projects': typeof ProjectsRoute
+  '/shilpa-seva-foundation': typeof ShilpaSevaFoundationRoute
+  '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/blog/$postId': typeof BlogPostIdRoute
   '/services/$serviceId': typeof ServicesServiceIdRoute
   '/blog': typeof BlogIndexRoute
@@ -92,8 +124,12 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/contact': typeof ContactRoute
+  '/founder': typeof FounderRoute
   '/gallery': typeof GalleryRoute
+  '/privacy-policy': typeof PrivacyPolicyRoute
   '/projects': typeof ProjectsRoute
+  '/shilpa-seva-foundation': typeof ShilpaSevaFoundationRoute
+  '/terms-and-conditions': typeof TermsAndConditionsRoute
   '/blog/$postId': typeof BlogPostIdRoute
   '/services/$serviceId': typeof ServicesServiceIdRoute
   '/blog/': typeof BlogIndexRoute
@@ -105,8 +141,12 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/contact'
+    | '/founder'
     | '/gallery'
+    | '/privacy-policy'
     | '/projects'
+    | '/shilpa-seva-foundation'
+    | '/terms-and-conditions'
     | '/blog/$postId'
     | '/services/$serviceId'
     | '/blog/'
@@ -116,8 +156,12 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/contact'
+    | '/founder'
     | '/gallery'
+    | '/privacy-policy'
     | '/projects'
+    | '/shilpa-seva-foundation'
+    | '/terms-and-conditions'
     | '/blog/$postId'
     | '/services/$serviceId'
     | '/blog'
@@ -127,8 +171,12 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/contact'
+    | '/founder'
     | '/gallery'
+    | '/privacy-policy'
     | '/projects'
+    | '/shilpa-seva-foundation'
+    | '/terms-and-conditions'
     | '/blog/$postId'
     | '/services/$serviceId'
     | '/blog/'
@@ -139,8 +187,12 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   ContactRoute: typeof ContactRoute
+  FounderRoute: typeof FounderRoute
   GalleryRoute: typeof GalleryRoute
+  PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   ProjectsRoute: typeof ProjectsRoute
+  ShilpaSevaFoundationRoute: typeof ShilpaSevaFoundationRoute
+  TermsAndConditionsRoute: typeof TermsAndConditionsRoute
   BlogPostIdRoute: typeof BlogPostIdRoute
   ServicesServiceIdRoute: typeof ServicesServiceIdRoute
   BlogIndexRoute: typeof BlogIndexRoute
@@ -149,6 +201,20 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/terms-and-conditions': {
+      id: '/terms-and-conditions'
+      path: '/terms-and-conditions'
+      fullPath: '/terms-and-conditions'
+      preLoaderRoute: typeof TermsAndConditionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/shilpa-seva-foundation': {
+      id: '/shilpa-seva-foundation'
+      path: '/shilpa-seva-foundation'
+      fullPath: '/shilpa-seva-foundation'
+      preLoaderRoute: typeof ShilpaSevaFoundationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/projects': {
       id: '/projects'
       path: '/projects'
@@ -156,11 +222,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProjectsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/privacy-policy': {
+      id: '/privacy-policy'
+      path: '/privacy-policy'
+      fullPath: '/privacy-policy'
+      preLoaderRoute: typeof PrivacyPolicyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/gallery': {
       id: '/gallery'
       path: '/gallery'
       fullPath: '/gallery'
       preLoaderRoute: typeof GalleryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/founder': {
+      id: '/founder'
+      path: '/founder'
+      fullPath: '/founder'
+      preLoaderRoute: typeof FounderRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -219,8 +299,12 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   ContactRoute: ContactRoute,
+  FounderRoute: FounderRoute,
   GalleryRoute: GalleryRoute,
+  PrivacyPolicyRoute: PrivacyPolicyRoute,
   ProjectsRoute: ProjectsRoute,
+  ShilpaSevaFoundationRoute: ShilpaSevaFoundationRoute,
+  TermsAndConditionsRoute: TermsAndConditionsRoute,
   BlogPostIdRoute: BlogPostIdRoute,
   ServicesServiceIdRoute: ServicesServiceIdRoute,
   BlogIndexRoute: BlogIndexRoute,

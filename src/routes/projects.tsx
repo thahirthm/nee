@@ -8,12 +8,20 @@ import projectVilla from "@/assets/m-4.jpg";
 import projectOffice from "@/assets/M-1.jpg";
 import projectIndustrial from "@/assets/m-2.jpg";
 import p1Img from "@/assets/p1.jpeg";
+import iitImg from "@/assets/iit.jpeg";
 
 export const Route = createFileRoute("/projects")({
   component: ProjectsPage,
 });
 
 const ALL_PROJECTS = [
+  {
+    id: 7,
+    title: "IIT CAUVERY",
+    category: "Institutional",
+    description: "",
+    image: iitImg,
+  },
   {
     id: 1,
     title: "Mrs. Priya Thomas",
@@ -58,7 +66,7 @@ const ALL_PROJECTS = [
   },
 ];
 
-const CATEGORIES = ["All", "House", "Commercial", "Industrial", "Residential"];
+const CATEGORIES = ["All", "House", "Commercial", "Industrial", "Residential", "Institutional"];
 
 function ProjectsPage() {
   const [activeCategory, setActiveCategory] = useState("All");

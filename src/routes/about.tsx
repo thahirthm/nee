@@ -14,7 +14,7 @@ import {
 import { Header } from "@/components/site/Header";
 import { PageHero } from "@/components/shared/PageHero";
 import { SectionHeader } from "@/components/shared/SectionHeader";
-import heroImg from "@/assets/hero.jpg";
+import abtBanner from "@/assets/after3.png";
 import aboutImg from "@/assets/who.webp";
 
 export const Route = createFileRoute("/about")({
@@ -45,20 +45,49 @@ function Page() {
   return (
     <main className="bg-background text-foreground">
       <Header />
-      <PageHero
-        title="A Quarter Century of Excellence"
-        subtitle="Est. 1999"
-        description="NKE Floors is the trusted specialist in premium marble, granite, terrazzo and concrete restoration. Since our founding in 1999, we've partnered with property owners, architects, and facility managers to transform and preserve the surfaces that define their spaces."
-        backgroundImage={heroImg}
-        cta={{
-          text: "Get Free Consultation",
-          href: "#contact",
-        }}
-        secondaryCta={{
-          text: "View Our Portfolio",
-          href: "/services",
-        }}
-      />
+      {/* HERO */}
+      <section className="relative min-h-[90vh] flex items-center bg-muted">
+        <div className="absolute inset-0 z-0">
+          <img
+            src={abtBanner}
+            alt="About NKE Floors"
+            className="h-full w-full object-cover object-[center_30%] md:object-top"
+          />
+          <div className="absolute inset-0 bg-black/60 md:bg-black/50"></div>
+        </div>
+        <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 pt-32 pb-16">
+          <div className="max-w-3xl">
+            <div className="inline-block bg-white/10 backdrop-blur-md px-3 sm:px-4 py-2 mb-6 rounded-sm shadow-sm border border-white/20">
+              <span className="text-[10px] sm:text-xs font-semibold tracking-wider sm:tracking-widest text-white uppercase">
+                EST. 1999
+              </span>
+            </div>
+            
+            <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.1] text-white mb-6">
+              A Quarter Century of Excellence
+            </h1>
+            
+            <p className="text-lg md:text-xl text-white/90 max-w-2xl leading-relaxed mb-10">
+              NKE Floors is the trusted specialist in premium marble, granite, terrazzo and concrete restoration. Since our founding in 1999, we've partnered with property owners, architects, and facility managers to transform and preserve the surfaces that define their spaces.
+            </p>
+
+            <div className="flex flex-wrap gap-4">
+              <a
+                href="#contact"
+                className="inline-flex items-center gap-2 rounded-sm bg-gold px-7 py-4 text-sm font-medium text-white hover:bg-gold/90 transition-colors shadow-soft"
+              >
+                Get Free Consultation <ArrowRight className="h-4 w-4" />
+              </a>
+              <a
+                href="/services"
+                className="inline-flex items-center gap-2 rounded-sm border border-white/30 bg-white/10 backdrop-blur-sm px-7 py-4 text-sm font-medium text-white hover:border-gold transition-colors"
+              >
+                View Our Portfolio
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <CompanyIntro />
       <VisionMission />
@@ -75,18 +104,18 @@ function Page() {
 function CompanyIntro() {
   return (
     <section className="py-28">
-      <div className="mx-auto max-w-7xl px-6 lg:px-10 grid lg:grid-cols-12 gap-16 items-center">
-        <div className="lg:col-span-6 relative">
+      <div className="mx-auto max-w-7xl px-6 lg:px-10 grid lg:grid-cols-12 gap-16 items-stretch">
+        <div className="lg:col-span-6 relative h-full">
           <img
             src={aboutImg}
             alt="Craftsman at work"
-            className="w-full h-[640px] object-cover rounded-sm shadow-elevated"
+            className="w-full h-full min-h-[500px] object-cover rounded-sm shadow-elevated"
             loading="lazy"
             width={1400}
             height={1600}
           />
           <div className="absolute -bottom-8 -right-4 lg:-right-8 bg-card border border-border shadow-elevated p-8 max-w-xs hidden md:block">
-            <div className="font-serif text-5xl text-gold">10,000+</div>
+            <div className="font-serif text-5xl text-gold">5,000+</div>
             <div className="mt-2 text-sm text-muted-foreground uppercase tracking-widest">
               Projects Completed
             </div>
@@ -361,24 +390,28 @@ function TeamHighlights() {
 function Testimonials() {
   const testimonials = [
     {
-      n: "Rajiv Menon",
-      r: "General Manager, Grand Heritage Hotel",
-      q: "NKE Floors restored our 40-year-old marble lobby to better-than-new condition. The professionalism and care for our operations were exceptional.",
+      n: "ITC Park Sheraton",
+      r: "Towers Chennai",
+      title: "The Fruit of Labour",
+      q: "The gloss level in the hotel which was never below 100, was appreciated by all guests and management. This was achieved only because of their labour force who were technically sound with a very positive attitude.\n\nWithout any doubt, I can say, that they are the best service providers for marble polishing, as they are experts in handling all the challenges faced by them in hotels like less time due to VIP traffic movements, movement due to discotheques etc.",
     },
     {
-      n: "Sarah Whitman",
-      r: "Principal Architect, Whitman Studio",
-      q: "We specify NKE for every project demanding a true mirror finish. Their craftsmanship is consistent and reliable.",
+      n: "Ms. A. Aliamma GEORGE",
+      r: "Corporate Housekeeper - Projects (Retd.)",
+      title: "An early pioneer",
+      q: "Dilip is an early pioneer in restoring Marble to a fine luxurious finish of gloss level above 90.\n\nI discovered this special talent in him in 2001, at Bengaluru, when I was the Regional Housekeeper for ITC Hotels. After many unsuccessful trials to beautify the old marble lobby at ITC Windsor, the recommendation was for renovation involving a major plan and budget. Dilip entered at this juncture and was able to achieve the desired gloss level after various experiments and he continued to maintain marble in the hotel. We were able to postpone the renovation for a long time. I have worked with him ever since and he has been of immense service to the Housekeeping team while opening our new luxury hotels, ITC Gardenia, Bengaluru and ITC Grand Chola, Chennai.\n\nI also appreciate his professional knowledge, experimental nature, new products and his commitment to high quality. He can mobilise large resources on short notice. You can work with Dilip, it's worth it.",
     },
     {
-      n: "Anil Kapoor",
-      r: "Facility Director, Meridian Tower",
-      q: "Over six years and dozens of projects, NKE has never missed a deadline. They're the only restoration partner we trust.",
+      n: "Mr. Gopal Madhavan",
+      r: "Chennai",
+      title: "No disturbance",
+      q: "I am very happy to write to you and say how happy I am with your service, which we have used for a number of apartments belonging to us and our children.\n\nThe way-old, but good condition, mosaic flooring is rejuvenated to be really impressive. Marble also takes on a brilliant smoothness. Of particular interest is the way your staff removes and replaces all furniture before and after the polishing so that the occupants are not disturbed.\n\nI gather that some new, more long-lasting finishes are being introduced and hopefully we will be able to use them the next time we have some polishing to be done.",
     },
     {
-      n: "Elena Costa",
-      r: "Owner, Bayfront Residences",
-      q: "Dust-free, on-time, and the floors look extraordinary. They treated our home with genuine respect.",
+      n: "Dr S Ravichandran",
+      r: "Former MD of National Trust Housing Finance Limited",
+      title: "Masterly",
+      q: "At a time of my worrying on the quality of flooring done at my flat by some one with enough dirt patches and scratches, you have met me and gave me an assurance that it could be set right as well as ensured a quality job. Albeit I was aware that you have undertaken a difficult task, but at the end you have proved that you are capable of handling any work and done an excellent job to my satisfaction which I am sure that no one can do.",
     },
   ];
 
@@ -391,34 +424,31 @@ function Testimonials() {
           intro="Trusted by property owners, architects, and facility managers who know quality when they see it."
         />
 
-        <div className="mt-16 grid md:grid-cols-2 gap-6">
+        <div className="mt-16 grid lg:grid-cols-2 gap-8">
           {testimonials.map((t) => (
             <figure
               key={t.n}
-              className="border border-border bg-background p-10 rounded-sm"
+              className="border border-border bg-background p-10 rounded-sm flex flex-col"
             >
               <Quote className="h-8 w-8 text-gold" />
-              <blockquote className="mt-6 font-serif text-xl text-primary leading-snug">
+              <h3 className="mt-6 font-serif text-xl text-primary">{t.title}</h3>
+              <blockquote className="mt-4 font-serif text-base text-primary/90 leading-relaxed whitespace-pre-line flex-grow">
                 &ldquo;{t.q}&rdquo;
               </blockquote>
-              <div className="mt-8 flex items-center gap-4">
-                <div className="h-12 w-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-serif text-lg">
+              <div className="mt-8 flex items-center gap-4 pt-6 border-t border-border">
+                <div className="h-12 w-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-serif text-lg shrink-0">
                   {t.n
                     .split(" ")
-                    .map((x) => x[0])
+                    .slice(0, 2)
+                    .map((x) => x[0]?.toUpperCase())
                     .join("")}
                 </div>
                 <figcaption>
                   <div className="font-medium text-primary">{t.n}</div>
-                  <div className="text-xs uppercase tracking-widest text-muted-foreground mt-0.5">
+                  <div className="text-xs uppercase tracking-widest text-muted-foreground mt-1 leading-normal max-w-sm">
                     {t.r}
                   </div>
                 </figcaption>
-                <div className="ml-auto flex gap-0.5">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-gold text-gold" />
-                  ))}
-                </div>
               </div>
             </figure>
           ))}

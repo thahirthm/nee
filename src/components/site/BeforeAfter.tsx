@@ -1,19 +1,19 @@
 import { useRef, useState, useCallback } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import beforeImg1 from "@/assets/before1.jpg";
-import afterImg1 from "@/assets/aftet1.jpg";
-import beforeImg2 from "@/assets/before.jpg";
-import afterImg2 from "@/assets/after.jpg";
-import beforeImg3 from "@/assets/before-floor.png";
-import afterImg3 from "@/assets/restored-floor.png";
+import beforeImg1 from "@/assets/before1.png";
+import afterImg1 from "@/assets/after1.png";
+import beforeImg2 from "@/assets/before2.png";
+import afterImg2 from "@/assets/after2.png";
+import beforeImg3 from "@/assets/before3.png";
+import afterImg3 from "@/assets/after3.png";
 
 const PAIRS = [
+  { before: beforeImg3, after: afterImg3 },
   { before: beforeImg1, after: afterImg1 },
-  { before: beforeImg2, after: afterImg2 },
-  { before: beforeImg3, after: afterImg3 }
+  { before: beforeImg2, after: afterImg2 }
 ];
 
-export function BeforeAfter() {
+export function BeforeAfter({ onIndexChange }: { onIndexChange?: (index: number) => void }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [pos, setPos] = useState(50);
   const ref = useRef<HTMLDivElement>(null);
@@ -28,12 +28,20 @@ export function BeforeAfter() {
   }, []);
 
   const nextPair = () => {
-    setCurrentIndex(i => (i + 1) % PAIRS.length);
+    setCurrentIndex(i => {
+      const nextIdx = (i + 1) % PAIRS.length;
+      onIndexChange?.(nextIdx);
+      return nextIdx;
+    });
     setPos(50); // reset position on slide change
   };
   
   const prevPair = () => {
-    setCurrentIndex(i => (i - 1 + PAIRS.length) % PAIRS.length);
+    setCurrentIndex(i => {
+      const prevIdx = (i - 1 + PAIRS.length) % PAIRS.length;
+      onIndexChange?.(prevIdx);
+      return prevIdx;
+    });
     setPos(50);
   };
 

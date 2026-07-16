@@ -1,43 +1,49 @@
 import { useEffect, useState, useRef } from "react";
 import { Phone, Menu, X, ChevronDown } from "lucide-react";
-import { Link } from "@tanstack/react-router";
-import MainLogo from "@/assets/logo.png";
+import { Link, useLocation } from "@tanstack/react-router";
+import MainLogo from "@/assets/green-logo.png";
+import ScrolledLogo from "@/assets/logo.png";
 
 const NAV = [
   { label: "Home", href: "/" },
+  {
+    label: "About Us",
+    href: "/about",
+    dropdown: [
+      {
+        title: "Company",
+        items: [
+          { label: "About Us", href: "/about" },
+          { label: "Meet the Founder", href: "/founder" },
+        ],
+      }
+    ]
+  },
   {
     label: "Services",
     href: "/services",
     dropdown: [
       {
-        title: "Four Core Verticals",
+        title: "Our Service Domains",
         items: [
-          { label: "Natural Stone Restoration", href: "/services/natural-stone-restoration" },
-          { label: "Industrial Concrete Flooring & Restoration", href: "/services/industrial-concrete-flooring" },
-          { label: "Hotel Floorcare Programs", href: "/services/hotel-floorcare-programs" },
-          { label: "Decorative Concrete Systems", href: "/services/decorative-concrete-systems" },
+          { label: "Marble & Natural Stones", href: "/services#marble-natural-stones" },
+          { label: "New Concrete Polishing", href: "/services#new-concrete-polishing" },
+          { label: "Industrial Concrete Finishing", href: "/services#industrial-concrete-finishing" },
+          { label: "Industrial Floor Renewal", href: "/services#industrial-floor-renewal" },
+          { label: "Tiled Floors (Interior & Exterior)", href: "/services#tiled-floors" },
+          { label: "Epoxy & Vinyl Floors", href: "/services#epoxy-vinyl-floors" },
         ],
-      },
-      {
-        title: "Complementary Flooring Services",
-        items: [
-          { label: "Ceramic & Vitrified Floor Restoration", href: "/services/ceramic-vitrified-floor-restoration" },
-          { label: "Deep Cleaning & Grout Cleaning", href: "/services/deep-cleaning-grout-cleaning" },
-          { label: "Exterior Concrete Tile Enhancement", href: "/services/exterior-concrete-tile-enhancement" },
-          { label: "Slip-Resistant Coatings", href: "/services/slip-resistant-coatings" },
-        ],
-      },
+      }
     ],
   },
   // { label: "Knowledge Hub", href: "/knowledge-hub" },
   { label: "Projects ", href: "/projects" },
   // { label: "Capability Statement", href: "/capability-statement" },
   { label: "Shilpa Seva Foundation", href: "/shilpa-seva-foundation" },
-  { label: "About / Company", href: "/about" },
   { label: "Contact", href: "/contact" },
 ];
 
-function DesktopDropdown({ item }: { item: any }) {
+function DesktopDropdown({ item, isTransparentState }: { item: any, isTransparentState: boolean }) {
   const [isOpen, setIsOpen] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -56,12 +62,12 @@ function DesktopDropdown({ item }: { item: any }) {
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div className="flex items-center gap-1 cursor-pointer text-sm font-medium text-muted-foreground hover:text-primary transition-colors py-2">
+      <div className={`flex items-center gap-1 cursor-pointer text-sm font-medium transition-colors py-2 ${isTransparentState ? 'text-white hover:text-white/80' : 'text-black hover:text-primary'}`}>
         {item.label} <ChevronDown className="h-4 w-4" />
       </div>
       {isOpen && (
-        <div className="absolute left-0 top-full pt-2 w-[500px]">
-          <div className="bg-background border border-border rounded-sm shadow-elevated p-6 flex gap-8">
+        <div className={`absolute left-0 top-full pt-2 ${item.dropdown.length > 1 ? 'w-[500px]' : 'min-w-[320px]'}`}>
+          <div className={`bg-background border border-border rounded-sm shadow-elevated p-6 flex gap-8 ${item.dropdown.length === 1 ? 'flex-col' : ''}`}>
             {item.dropdown.map((section: any, idx: number) => (
               <div key={idx} className="flex-1">
                 <div className="text-xs font-semibold text-gold uppercase tracking-wider mb-3">
@@ -71,8 +77,9 @@ function DesktopDropdown({ item }: { item: any }) {
                   {section.items.map((subItem: any) => (
                     <li key={subItem.href}>
                       <Link
-                        to={subItem.href}
-                        className="text-sm text-muted-foreground hover:text-primary transition-colors block"
+                        to={subItem.href.split('#')[0]}
+                        hash={subItem.href.split('#')[1]}
+                        className="text-sm text-black hover:text-primary transition-colors block"
                         onClick={() => setIsOpen(false)}
                       >
                         {subItem.label}
@@ -94,6 +101,12 @@ export function Header() {
   const [open, setOpen] = useState(false);
   const [expandedMobile, setExpandedMobile] = useState<string | null>(null);
 
+  const location = useLocation();
+  const isHomePage = location.pathname === "/";
+  const isShilpaSeva = location.pathname === "/shilpa-seva-foundation";
+  const isAbout = location.pathname === "/about";
+  const isTransparentState = (isHomePage || isShilpaSeva || isAbout) && !scrolled;
+
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
     onScroll();
@@ -104,29 +117,29 @@ export function Header() {
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-background/95 backdrop-blur-md border-b border-border shadow-soft"
-          : "bg-background/80 backdrop-blur-md"
+        isTransparentState
+          ? "bg-transparent"
+          : "bg-background/95 backdrop-blur-md border-b border-border shadow-soft"
       }`}
     >
       <div
         className={`mx-auto max-w-7xl mt-2 px-6 lg:px-10 flex items-center justify-between transition-all duration-300 ${
-          scrolled ? "h-20" : "h-20 lg:h-24"
+          scrolled ? "h-20" : "h-20 lg:h-35"
         }`}
       >
         <Link to="/" className="flex items-center gap-3 group">
-          <img src={MainLogo} alt="Logo" className="h-20 w-30 md:h-30 md:w-[140px] object-contain" />
+          <img src={isTransparentState ? MainLogo : ScrolledLogo} alt="Logo" className="h-20 w-30 md:h-30 md:w-[140px] object-contain transition-all duration-300" />
         </Link>
 
         <nav className="hidden lg:flex items-center gap-7">
           {NAV.map((n) =>
             n.dropdown ? (
-              <DesktopDropdown key={n.label} item={n} />
+              <DesktopDropdown key={n.label} item={n} isTransparentState={isTransparentState} />
             ) : (
               <Link
                 key={n.href}
                 to={n.href}
-                className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors relative after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-gold hover:after:w-full after:transition-all"
+                className={`text-sm font-medium transition-colors relative after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-gold hover:after:w-full after:transition-all ${isTransparentState ? 'text-white hover:text-white/80' : 'text-black hover:text-primary'}`}
               >
                 {n.label}
               </Link>
@@ -136,14 +149,14 @@ export function Header() {
 
         <div className="hidden lg:flex items-center gap-4">
           <a
-            href="tel:+10000000000"
-            className="inline-flex items-center gap-2 text-sm font-medium text-primary hover:text-gold transition-colors"
+            href="tel:+919600040155"
+            className={`inline-flex items-center gap-2 text-sm font-medium transition-colors ${isTransparentState ? 'text-white hover:text-gold' : 'text-primary hover:text-gold'}`}
           >
             <Phone className="h-4 w-4" /> Call Now
           </a>
           <Link
             to="/contact"
-            className="inline-flex items-center rounded-sm bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
+            className="hidden md:inline-flex items-center gap-2 rounded-sm px-5 py-2.5 text-sm font-medium transition-colors bg-gold text-white hover:bg-gold/90"
           >
             Get Consultation
           </Link>
@@ -151,7 +164,7 @@ export function Header() {
 
         <button
           onClick={() => setOpen((o) => !o)}
-          className="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-sm text-primary"
+          className={`lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-sm ${isTransparentState ? 'text-white' : 'text-primary'}`}
           aria-label="Toggle menu"
         >
           {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -185,7 +198,8 @@ export function Header() {
                               {section.items.map((subItem) => (
                                 <Link
                                   key={subItem.href}
-                                  to={subItem.href}
+                                  to={subItem.href.split('#')[0]}
+                                  hash={subItem.href.split('#')[1]}
                                   onClick={() => setOpen(false)}
                                   className="text-sm text-muted-foreground"
                                 >

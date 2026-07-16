@@ -99,10 +99,10 @@ function ContactMain() {
               Speak directly with our team during business hours.
             </p>
             <a
-              href="tel:+10000000000"
+              href="tel:+919600040155"
               className="mt-4 block font-medium text-primary hover:text-gold transition-colors"
             >
-              +1 (000) 000-0000
+              9600040155<br/>9600047255
             </a>
             <p className="mt-2 text-xs text-muted-foreground">
               Mon - Fri: 9 AM - 6 PM
@@ -122,12 +122,11 @@ function ContactMain() {
             <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
               Send us an email and we'll respond within 24 hours.
             </p>
-            <a
-              href="mailto:hello@nkefloors.com"
-              className="mt-4 block font-medium text-primary hover:text-gold transition-colors break-all"
-            >
-              hello@nkefloors.com
-            </a>
+            <div className="mt-4 space-y-1 font-medium text-primary break-all">
+              <a href="mailto:mails@nkefloors.com" className="block hover:text-gold transition-colors">mails@nkefloors.com</a>
+              <a href="mailto:dilip@nkefloors.com" className="block hover:text-gold transition-colors">dilip@nkefloors.com</a>
+              <a href="mailto:Krish@nkefloors.com" className="block hover:text-gold transition-colors">Krish@nkefloors.com</a>
+            </div>
             <p className="mt-2 text-xs text-muted-foreground">
               Response time: Typically 24 hours or less
             </p>
@@ -142,15 +141,22 @@ function ContactMain() {
             <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
               Stop by our office for a consultation.
             </p>
-            <div className="mt-4 space-y-1">
-              <p className="font-medium text-primary text-sm">
-                Premium Business Park
-              </p>
-              <p className="text-sm text-muted-foreground">
-                Suite 100, Business District
-                <br />
-                City, Country 12345
-              </p>
+            <div className="mt-4 space-y-4">
+              <div>
+                <p className="font-medium text-primary text-sm">Reg: off:</p>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  M5, Sudarsan Gardens,<br />
+                  106, Velechery high road,<br />
+                  Guindy, Chennai 600032, India
+                </p>
+              </div>
+              <div>
+                <p className="font-medium text-primary text-sm">Studio</p>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  57, North Boag Road,<br />
+                  Tnager, Chennai 600017. India
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -214,7 +220,7 @@ function ContactMain() {
                 </label>
                 <input
                   type="tel"
-                  placeholder="+1 (000) 000-0000"
+                  placeholder="9600040155"
                   className="w-full rounded-sm border border-border bg-background px-4 py-3 text-base text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-gold transition-colors"
                 />
               </div>
@@ -265,7 +271,7 @@ function ContactMain() {
           <div className="space-y-6">
             {/* WhatsApp CTA */}
             <a
-              href="https://wa.me/10000000000"
+              href="https://wa.me/919600040155"
               className="block border-2 border-gold rounded-sm p-8 text-center group hover:bg-gold/5 transition-colors"
             >
               <div className="inline-flex h-12 w-12 items-center justify-center rounded-sm bg-gold/10 border border-gold/30 group-hover:bg-gold/20 transition-colors">
@@ -373,7 +379,7 @@ function ContactFAQ() {
   const faqs = [
     {
       q: "How quickly can you respond to inquiries?",
-      a: "We typically respond to all inquiries within 24 hours. For urgent matters, please call us directly at +1 (000) 000-0000.",
+      a: "We typically respond to all inquiries within 24 hours. For urgent matters, please call us directly at 9600040155.",
     },
     {
       q: "Do you offer free consultations?",
@@ -389,7 +395,7 @@ function ContactFAQ() {
     },
     {
       q: "Do you handle emergency restoration?",
-      a: "Yes, we offer emergency response services. Call us immediately at +1 (000) 000-0000 for urgent situations requiring immediate attention.",
+      a: "Yes, we offer emergency response services. Call us immediately at 9600040155 for urgent situations requiring immediate attention.",
     },
     {
       q: "What payment methods do you accept?",
