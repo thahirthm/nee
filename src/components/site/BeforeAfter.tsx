@@ -6,9 +6,11 @@ import beforeImg2 from "@/assets/before2.png";
 import afterImg2 from "@/assets/after2.png";
 import beforeImg3 from "@/assets/before3.png";
 import afterImg3 from "@/assets/after3.png";
+import beforeImg8 from "@/assets/before8.JPG";
+import afterImg8 from "@/assets/after8.jpg";
 
 const PAIRS = [
-  { before: beforeImg3, after: afterImg3 },
+  { before: beforeImg8, after: afterImg8 },
   { before: beforeImg1, after: afterImg1 },
   { before: beforeImg2, after: afterImg2 }
 ];

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight,
@@ -11,12 +11,15 @@ import {
   Search,
   Check,
   ChevronRight,
+  ChevronLeft,
   Download,
   BookOpen,
   Shield,
   Wrench,
   Sparkles,
-  Instagram
+  Instagram,
+  Linkedin,
+  Facebook
 } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { BeforeAfter } from "@/components/site/BeforeAfter";
@@ -30,9 +33,9 @@ import projectOffice from "@/assets/M-1.jpg";
 import projectIndustrial from "@/assets/m-2.jpg";
 import industrialImg from "@/assets/industrial.png";
 import hoteImg from "@/assets/hote.png";
-import aboutImg from "@/assets/about.jpg";
+import craftImg from "@/assets/craft.png";
 import kaipaneeImg from "@/assets/image.png";
-import c1Img from "@/assets/c2.jpeg";
+import btcImg from "@/assets/btc.png";
 import certiImg from "@/assets/certi.png";
 
 export const Route = createFileRoute("/")({
@@ -127,13 +130,21 @@ function Hero() {
           
           <div className="mt-12 flex flex-wrap gap-4">
             <a
-              href="#contact"
+              href="https://wa.me/919600040155"
+              target="_blank"
+              rel="noopener noreferrer"
               className="inline-flex items-center gap-2 rounded-sm bg-gold px-7 py-4 text-sm font-medium text-white hover:bg-gold/90 transition-colors shadow-soft"
             >
               Get a Free Assessment <ArrowRight className="h-4 w-4" />
             </a>
           </div>
         </div>
+      </div>
+
+      {/* Image Caption */}
+      <div className="absolute bottom-4 right-4 md:bottom-8 md:right-10 z-20 flex items-center gap-2 text-white/70 text-xs font-medium tracking-wide bg-black/20 backdrop-blur-sm px-3 py-1.5 rounded-sm border border-white/10">
+        <Camera className="h-3 w-3" />
+        City Center, Chennai
       </div>
     </section>
   );
@@ -160,36 +171,36 @@ function UnderstandingSection() {
           </p>
           
           <div className="mt-10 grid sm:grid-cols-2 gap-6">
-            <div className="bg-muted p-6 sm:p-8 rounded-sm">
-              <div className="h-12 w-12 rounded-full bg-primary flex items-center justify-center mb-6 text-primary-foreground">
+            <Link to="/contact" className="bg-muted p-6 sm:p-8 rounded-sm hover:bg-muted/80 transition-colors block cursor-pointer group">
+              <div className="h-12 w-12 rounded-full bg-primary flex items-center justify-center mb-6 text-primary-foreground group-hover:scale-105 transition-transform">
                 <Camera className="h-5 w-5" />
               </div>
-              <h3 className="text-xl font-serif text-primary">Upload Floor Photos</h3>
+              <h3 className="text-xl font-serif text-primary group-hover:text-gold transition-colors">Upload Floor Photos</h3>
               <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
                 Our specialists will review them and share honest observations — no obligation.
               </p>
-            </div>
+            </Link>
             
-            <div className="bg-muted p-6 sm:p-8 rounded-sm">
-              <div className="h-12 w-12 rounded-full bg-primary flex items-center justify-center mb-6 text-primary-foreground">
+            <a href="https://wa.me/919600040155" target="_blank" rel="noopener noreferrer" className="bg-muted p-6 sm:p-8 rounded-sm hover:bg-muted/80 transition-colors block cursor-pointer group">
+              <div className="h-12 w-12 rounded-full bg-primary flex items-center justify-center mb-6 text-primary-foreground group-hover:scale-105 transition-transform">
                 <MessageSquare className="h-5 w-5" />
               </div>
-              <h3 className="text-xl font-serif text-primary">Send on WhatsApp</h3>
+              <h3 className="text-xl font-serif text-primary group-hover:text-gold transition-colors">Send on WhatsApp</h3>
               <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
                 Get a quick, no-obligation response directly from our team on WhatsApp.
               </p>
-            </div>
+            </a>
           </div>
           
-          <div className="mt-6 bg-muted p-6 sm:p-8 rounded-sm">
-            <div className="h-12 w-12 rounded-full bg-primary flex items-center justify-center mb-6 text-primary-foreground">
+          <Link to="/gallery" className="mt-6 bg-muted p-6 sm:p-8 rounded-sm hover:bg-muted/80 transition-colors block cursor-pointer group">
+            <div className="h-12 w-12 rounded-full bg-primary flex items-center justify-center mb-6 text-primary-foreground group-hover:scale-105 transition-transform">
               <Search className="h-5 w-5" />
             </div>
-            <h3 className="text-xl font-serif text-primary">View Our Projects</h3>
+            <h3 className="text-xl font-serif text-primary group-hover:text-gold transition-colors">View Our Gallery</h3>
             <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
               See what restoration can truly achieve before you make any decision.
             </p>
-          </div>
+          </Link>
         </div>
       </div>
     </section>
@@ -384,7 +395,7 @@ function CredibilityStrip() {
           <span className="hidden sm:inline text-gold">•</span>
           <span>International Certifications: HTC Sweden, Klindex Italy, Korodur Germany, Hypergrinder USA, Guard France, Coval Technologies</span>
           <span className="hidden sm:inline text-gold">•</span>
-          <span>25-Year AMC Partnership with Park Sheraton</span>
+          <span>25 year with AMC partnership with leading hospitality</span>
         </div>
       </div>
     </section>
@@ -448,7 +459,7 @@ function ComplementaryCallout() {
         </div>
         <div className="relative h-[300px] sm:h-[400px] lg:h-auto w-full overflow-hidden rounded-sm">
           <img
-            src={c1Img}
+            src={btcImg}
             alt="Complementary flooring services"
             className="absolute inset-0 w-full h-full object-cover shadow-elevated"
           />
@@ -474,7 +485,7 @@ function FeaturedCaseStudy() {
           <p className="mt-6 text-muted-foreground leading-relaxed">
             A comprehensive restoration of a massive residential carpark, transforming a deteriorated, dusting concrete surface into a durable, safe, and clean environment without displacing residents.
           </p>
-          <Link to="/projects" className="mt-8 inline-flex items-center gap-2 text-primary font-medium hover:text-gold transition-colors">
+          <Link to="/gallery" className="mt-8 inline-flex items-center gap-2 text-primary font-medium hover:text-gold transition-colors">
             Read full case study <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
@@ -552,13 +563,13 @@ function CapabilityStatementCTA() {
   return (
     <section className="py-16 bg-primary text-primary-foreground">
       <div className="mx-auto max-w-7xl px-6 lg:px-10 flex flex-col md:flex-row items-center justify-between gap-8">
-        <div>
+        <div className="w-full">
           <h2 className="font-serif text-3xl">Download our Capability Statement</h2>
           <p className="mt-2 text-primary-foreground/80">Get the full PDF covering our credentials, processes, and marquee projects.</p>
         </div>
-        <form className="flex w-full md:w-auto gap-2" onSubmit={e => e.preventDefault()}>
-          <input type="email" placeholder="Your work email" className="px-4 py-3 rounded-sm bg-background/10 border border-border/30 text-primary-foreground placeholder:text-primary-foreground/50 focus:outline-none focus:border-gold flex-1 md:w-64" required />
-          <button type="submit" className="px-6 py-3 bg-gold text-gold-foreground rounded-sm font-medium hover:bg-gold/90 transition-colors shrink-0">
+        <form className="flex flex-col sm:flex-row w-full md:w-auto gap-3 shrink-0" onSubmit={e => e.preventDefault()}>
+          <input type="email" placeholder="Your work email" className="px-4 py-3 rounded-sm bg-background/10 border border-border/30 text-primary-foreground placeholder:text-primary-foreground/50 focus:outline-none focus:border-gold w-full sm:w-auto flex-1 md:w-64" required />
+          <button type="submit" className="px-6 py-3 bg-gold text-gold-foreground rounded-sm font-medium hover:bg-gold/90 transition-colors w-full sm:w-auto shrink-0">
             Get PDF
           </button>
         </form>
@@ -573,7 +584,7 @@ function ShilpaSevaTeaser() {
     <section className="py-16 lg:py-24 bg-background">
       <div className="mx-auto max-w-7xl px-6 lg:px-10 grid lg:grid-cols-12 gap-10 lg:gap-16 items-center">
         <div className="lg:col-span-5 aspect-[4/3] rounded-sm overflow-hidden bg-muted order-last lg:order-first">
-           <img src={aboutImg} alt="Craftsman at work" className="w-full h-full object-cover" />
+           <img src={craftImg} alt="Craftsman at work" className="w-full h-full object-cover object-top" />
         </div>
         <div className="lg:col-span-7">
           <Eyebrow>Our Social Mission</Eyebrow>
@@ -592,6 +603,18 @@ function ShilpaSevaTeaser() {
 
 /* ---------------- VIDEOS ---------------- */
 function VideoSection() {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  
+  const scroll = (direction: 'left' | 'right') => {
+    if (scrollContainerRef.current) {
+      const scrollAmount = scrollContainerRef.current.clientWidth;
+      scrollContainerRef.current.scrollBy({
+        left: direction === 'left' ? -scrollAmount : scrollAmount,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   const videos = [
     {
       id: "1",
@@ -613,17 +636,41 @@ function VideoSection() {
   return (
     <section className="py-16 lg:py-24 bg-background border-t border-border">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        <div className="text-center mb-12 lg:mb-16">
-          <Eyebrow>OUR PROCESS</Eyebrow>
-          <h2 className="mt-2 font-serif text-3xl sm:text-4xl text-primary">
-            See Us In Action
-          </h2>
+        <div className="flex flex-col md:flex-row justify-between items-center md:items-end gap-6 mb-12 lg:mb-16">
+          <div className="text-center md:text-left">
+            <Eyebrow>OUR PROCESS</Eyebrow>
+            <h2 className="mt-2 font-serif text-3xl sm:text-4xl text-primary">
+              See Us In Action
+            </h2>
+          </div>
+          
+          <div className="flex items-center gap-3">
+            <button 
+              onClick={() => scroll('left')}
+              className="p-3 rounded-full border border-border bg-background hover:bg-muted hover:text-primary transition-colors text-muted-foreground"
+              aria-label="Previous video"
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+            <button 
+              onClick={() => scroll('right')}
+              className="p-3 rounded-full border border-border bg-background hover:bg-muted hover:text-primary transition-colors text-muted-foreground"
+              aria-label="Next video"
+            >
+              <ChevronRight className="h-5 w-5" />
+            </button>
+          </div>
         </div>
-        <div className="grid md:grid-cols-3 gap-8">
+        
+        <div 
+          ref={scrollContainerRef}
+          className="flex overflow-x-auto snap-x snap-mandatory gap-6 pb-8 [&::-webkit-scrollbar]:hidden"
+          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+        >
           {videos.map((video) => (
             <div
               key={video.id}
-              className="relative block aspect-video rounded-sm overflow-hidden bg-black shadow-soft border border-border"
+              className="relative shrink-0 w-[85%] md:w-[60%] lg:w-[45%] snap-center aspect-video rounded-sm overflow-hidden bg-black shadow-soft border border-border"
             >
               <iframe 
                 src={video.embed} 
@@ -698,37 +745,41 @@ function ContactFooter() {
             <p className="text-muted-foreground leading-relaxed max-w-md">
               Headquartered in Chennai, serving India. Restoring, polishing, and maintaining floors for luxury hotels, industrial facilities, and architecturally significant buildings for over 25 years.
             </p>
-            <div className="mt-8 space-y-4">
-              <div className="flex items-start gap-3 text-muted-foreground">
-                <MapPin className="h-5 w-5 text-gold shrink-0 mt-0.5" />
-                <div className="text-sm">
-                  <strong className="block text-primary font-medium">Reg: off:</strong>
-                  M5, Sudarsan Gardens,<br/>
-                  106, Velechery high road,<br/>
-                  Guindy, Chennai 600032, India
+            <div className="mt-8 grid sm:grid-cols-2 gap-6">
+              <div className="space-y-6">
+                <div className="flex items-start gap-3 text-muted-foreground">
+                  <MapPin className="h-5 w-5 text-gold shrink-0 mt-0.5" />
+                  <div className="text-sm">
+                    <strong className="block text-primary font-medium">Reg: off:</strong>
+                    M5, Sudarsan Gardens,<br/>
+                    106, Velechery high road,<br/>
+                    Guindy, Chennai 600032, India
+                  </div>
+                </div>
+                <div className="flex items-start gap-3 text-muted-foreground">
+                  <MapPin className="h-5 w-5 text-gold shrink-0 mt-0.5" />
+                  <div className="text-sm">
+                    <strong className="block text-primary font-medium">Studio</strong>
+                    57, North Boag Road,<br/>
+                    Tnager, Chennai 600017. India
+                  </div>
                 </div>
               </div>
-              <div className="flex items-start gap-3 text-muted-foreground">
-                <MapPin className="h-5 w-5 text-gold shrink-0 mt-0.5" />
-                <div className="text-sm">
-                  <strong className="block text-primary font-medium">Studio</strong>
-                  57, North Boag Road,<br/>
-                  Tnager, Chennai 600017. India
+              <div className="space-y-6">
+                <a href="tel:+919600040155" className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
+                  <Phone className="h-5 w-5 text-gold shrink-0" /> 9600040155 / 9600047255
+                </a>
+                <div className="flex flex-col gap-3">
+                  <a href="mailto:mails@nkefloors.com" className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
+                    <Mail className="h-5 w-5 text-gold shrink-0" /> mails@nkefloors.com
+                  </a>
+                  <a href="mailto:dilip@nkefloors.com" className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
+                    <Mail className="h-5 w-5 text-gold shrink-0" /> dilip@nkefloors.com
+                  </a>
+                  <a href="mailto:Krish@nkefloors.com" className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
+                    <Mail className="h-5 w-5 text-gold shrink-0" /> Krish@nkefloors.com
+                  </a>
                 </div>
-              </div>
-              <a href="tel:+919600040155" className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
-                <Phone className="h-5 w-5 text-gold shrink-0" /> 9600040155 / 9600047255
-              </a>
-              <div className="flex flex-col gap-2">
-                <a href="mailto:mails@nkefloors.com" className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
-                  <Mail className="h-5 w-5 text-gold shrink-0" /> mails@nkefloors.com
-                </a>
-                <a href="mailto:dilip@nkefloors.com" className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
-                  <Mail className="h-5 w-5 text-gold shrink-0" /> dilip@nkefloors.com
-                </a>
-                <a href="mailto:Krish@nkefloors.com" className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
-                  <Mail className="h-5 w-5 text-gold shrink-0" /> Krish@nkefloors.com
-                </a>
               </div>
             </div>
           </div>
@@ -736,7 +787,7 @@ function ContactFooter() {
           <div>
             <h3 className="font-semibold uppercase tracking-wider text-sm mb-6">Quick Links</h3>
             <ul className="space-y-3">
-              {['Home', 'Knowledge Hub', 'Projects & Case Studies', 'Capability Statement', 'Shilpa Seva Foundation', 'About Us', 'Contact'].map(link => (
+              {['Home', 'Knowledge Hub', 'Gallery', 'Capability Statement', 'Shilpa Seva Foundation', 'About Us', 'Contact'].map(link => (
                 <li key={link}>
                   <a href="#" className="text-muted-foreground hover:text-primary transition-colors text-sm">{link}</a>
                 </li>
@@ -761,8 +812,21 @@ function ContactFooter() {
       </div>
       <div className="border-t border-border bg-background py-6">
         <div className="mx-auto max-w-7xl px-6 lg:px-10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
-          <div>© {new Date().getFullYear()} NKE Floorcare Pvt. Ltd. All Rights Reserved.</div>
-          <div className="flex gap-4">
+          <div className="order-3 sm:order-1">© {new Date().getFullYear()} NKE Floorcare Pvt. Ltd. All Rights Reserved.</div>
+          
+          <div className="flex gap-6 items-center order-1 sm:order-2">
+            <a href="https://www.linkedin.com/company/nke-floorcare/" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
+              <Linkedin className="h-5 w-5" />
+            </a>
+            <a href="https://www.instagram.com/nkefloors?igsh=MTB4MWtubzRhbHB6MQ==" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
+              <Instagram className="h-5 w-5" />
+            </a>
+            <a href="https://www.facebook.com/share/1BiPtWte6o/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
+              <Facebook className="h-5 w-5" />
+            </a>
+          </div>
+
+          <div className="flex gap-4 order-2 sm:order-3">
             <Link to="/privacy-policy" className="hover:text-primary transition-colors">Privacy Policy</Link>
             <Link to="/terms-and-conditions" className="hover:text-primary transition-colors">Terms & Conditions</Link>
           </div>

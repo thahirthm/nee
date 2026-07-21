@@ -37,7 +37,7 @@ const NAV = [
     ],
   },
   // { label: "Knowledge Hub", href: "/knowledge-hub" },
-  { label: "Projects ", href: "/projects" },
+  { label: "Gallery ", href: "/gallery" },
   // { label: "Capability Statement", href: "/capability-statement" },
   { label: "Shilpa Seva Foundation", href: "/shilpa-seva-foundation" },
   { label: "Contact", href: "/contact" },
@@ -98,6 +98,7 @@ function DesktopDropdown({ item, isTransparentState }: { item: any, isTransparen
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const [open, setOpen] = useState(false);
   const [expandedMobile, setExpandedMobile] = useState<string | null>(null);
 
@@ -108,7 +109,21 @@ export function Header() {
   const isTransparentState = (isHomePage || isShilpaSeva || isAbout) && !scrolled;
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    let lastScrollY = window.scrollY;
+
+    const onScroll = () => {
+      const currentScrollY = window.scrollY;
+      setScrolled(currentScrollY > 24);
+
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setIsVisible(false); // scrolling down
+      } else {
+        setIsVisible(true); // scrolling up
+      }
+      
+      lastScrollY = currentScrollY;
+    };
+
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -120,15 +135,15 @@ export function Header() {
         isTransparentState
           ? "bg-transparent"
           : "bg-background/95 backdrop-blur-md border-b border-border shadow-soft"
-      }`}
+      } ${!isVisible && !open ? "-translate-y-full" : "translate-y-0"}`}
     >
       <div
-        className={`mx-auto max-w-7xl mt-2 px-6 lg:px-10 flex items-center justify-between transition-all duration-300 ${
-          scrolled ? "h-20" : "h-20 lg:h-35"
+        className={`mx-auto max-w-7xl px-6 lg:px-10 flex items-center justify-between transition-all duration-300 ${
+          scrolled ? "h-20" : "h-[120px]"
         }`}
       >
-        <Link to="/" className="flex items-center gap-3 group">
-          <img src={isTransparentState ? MainLogo : ScrolledLogo} alt="Logo" className="h-20 w-30 md:h-30 md:w-[140px] object-contain transition-all duration-300" />
+        <Link to="/" className="flex items-center gap-3 group h-full py-2">
+          <img src={MainLogo} alt="Logo" className="h-full w-auto object-contain transition-all duration-300" />
         </Link>
 
         <nav className="hidden lg:flex items-center gap-7">
@@ -150,16 +165,10 @@ export function Header() {
         <div className="hidden lg:flex items-center gap-4">
           <a
             href="tel:+919600040155"
-            className={`inline-flex items-center gap-2 text-sm font-medium transition-colors ${isTransparentState ? 'text-white hover:text-gold' : 'text-primary hover:text-gold'}`}
+            className="inline-flex items-center gap-2 rounded-sm px-5 py-2.5 text-sm font-semibold transition-colors bg-gold hover:bg-gold/90 text-white"
           >
             <Phone className="h-4 w-4" /> Call Now
           </a>
-          <Link
-            to="/contact"
-            className="hidden md:inline-flex items-center gap-2 rounded-sm px-5 py-2.5 text-sm font-medium transition-colors bg-gold text-white hover:bg-gold/90"
-          >
-            Get Consultation
-          </Link>
         </div>
 
         <button
@@ -223,13 +232,7 @@ export function Header() {
                 )}
               </div>
             ))}
-            <Link
-              to="/contact"
-              onClick={() => setOpen(false)}
-              className="mt-4 inline-flex items-center justify-center rounded-sm bg-primary px-5 py-3 text-sm font-medium text-primary-foreground"
-            >
-              Get Consultation
-            </Link>
+
           </div>
         </div>
       )}
