@@ -537,7 +537,7 @@ function BlogSection() {
   const { data: apiPosts, isLoading } = useBlogsQuery();
 
   const posts = (apiPosts || []).slice(0, 3).map((item) => ({
-    id: item.slug || String(item.id),
+    id: String(item.id),
     title: item.title,
     excerpt: item.short_description || item.excerpt || "",
     date: item.formatted_date || item.date || "2025",
