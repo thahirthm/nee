@@ -115,7 +115,7 @@ function ContactMain() {
   };
 
   return (
-    <section className="py-28">
+    <section className="pt-40 pb-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <SectionHeader
           eyebrow="Let's Connect"

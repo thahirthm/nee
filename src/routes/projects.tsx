@@ -41,7 +41,7 @@ function ProjectsPage() {
       
 
       {/* Projects Grid */}
-      <section className="py-20">
+      <section className="pt-32 pb-20">
         <div className="mx-auto max-w-7xl px-6 lg:px-10">
           
           {/* Category Filter */}

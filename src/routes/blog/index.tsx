@@ -36,13 +36,11 @@ export const Route = createFileRoute("/blog/")({
   component: Page,
 });
 
-const CATEGORIES = ["All", "Maintenance", "Decision Guide", "Case Studies", "Industry Trends", "Material History"];
-
 function Page() {
   return (
     <main className="bg-background text-foreground">
       <Header />
-      <PageHero
+      {/* <PageHero
         title="Stone Restoration Blog"
         subtitle="Insights & Guides"
         description="Expert articles, maintenance tips, and industry insights from our restoration specialists. Learn how to care for your natural stone surfaces."
@@ -51,7 +49,7 @@ function Page() {
           text: "Subscribe to Updates",
           href: "#",
         }}
-      />
+      /> */}
 
       <BlogList />
     </main>
@@ -65,7 +63,7 @@ function BlogList() {
   const [searchTerm, setSearchTerm] = useState("");
 
   const postsToDisplay = (apiPosts || []).map((item) => ({
-    id: item.slug || String(item.id),
+    id: String(item.id),
     rawId: item.id,
     title: item.title,
     excerpt: item.short_description || item.excerpt || "",
@@ -76,6 +74,8 @@ function BlogList() {
     featured: item.sequence === 1,
   }));
 
+  const dynamicCategories = ["All", ...Array.from(new Set(postsToDisplay.map(item => item.category)))];
+
   const filteredPosts = postsToDisplay.filter((post) => {
     const categoryMatch =
       selectedCategory === "All" || post.category === selectedCategory;
@@ -85,11 +85,10 @@ function BlogList() {
     return categoryMatch && searchMatch;
   });
 
-  const featuredPost = postsToDisplay.find((p) => p.featured) || (postsToDisplay.length > 0 ? postsToDisplay[0] : null);
-  const otherPosts = filteredPosts.filter((p) => p !== featuredPost);
+
 
   return (
-    <section className="py-28">
+    <section className="pt-40 pb-28">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <SectionHeader
           eyebrow="Our Blog"
@@ -111,7 +110,7 @@ function BlogList() {
 
         {/* Category Filter */}
         <div className="mt-8 flex flex-wrap gap-2">
-          {CATEGORIES.map((cat) => (
+          {dynamicCategories.map((cat) => (
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
@@ -126,52 +125,9 @@ function BlogList() {
           ))}
         </div>
 
-        {/* Featured Post */}
-        {featuredPost && selectedCategory === "All" && !searchTerm && (
-          <Link
-            to={`/blog/${featuredPost.id}`}
-            className="mt-12 block group border border-border bg-card rounded-sm overflow-hidden hover:border-gold transition-all hover:shadow-elevated"
-          >
-            <div className="grid lg:grid-cols-2 gap-0">
-              <div className="aspect-[16/10] overflow-hidden lg:aspect-auto">
-                <img
-                  src={featuredPost.image}
-                  alt={featuredPost.title}
-                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  loading="lazy"
-                />
-              </div>
-              <div className="p-10 lg:p-12 flex flex-col justify-center">
-                <div className="text-[10px] uppercase tracking-widest text-gold">
-                  {featuredPost.category} · Featured
-                </div>
-                <h3 className="mt-3 font-serif text-3xl text-primary">
-                  {featuredPost.title}
-                </h3>
-                <p className="mt-4 text-muted-foreground leading-relaxed">
-                  {featuredPost.excerpt}
-                </p>
-                <div className="mt-6 flex items-center gap-6 text-xs text-muted-foreground">
-                  <span className="flex items-center gap-2">
-                    <Calendar className="h-4 w-4" />
-                    {featuredPost.date}
-                  </span>
-                  <span className="flex items-center gap-2">
-                    <User className="h-4 w-4" />
-                    {featuredPost.author}
-                  </span>
-                </div>
-                <span className="mt-8 inline-flex items-center gap-2 text-sm font-medium text-primary group-hover:text-gold transition-colors w-fit">
-                  Read Article <ArrowRight className="h-4 w-4" />
-                </span>
-              </div>
-            </div>
-          </Link>
-        )}
-
         {/* Posts Grid */}
         <div className="mt-16 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {otherPosts.map((post) => (
+          {filteredPosts.map((post) => (
             <Link
               key={post.id}
               to={`/blog/${post.id}`}
