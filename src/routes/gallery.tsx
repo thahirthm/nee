@@ -34,133 +34,45 @@ export const Route = createFileRoute("/gallery")({
   component: Page,
 });
 
-const GALLERY_ITEMS = [
-  {
-    id: 1,
-    img: projectHotel,
-    title: "Grand Hotel Ballroom",
-    category: "Hotels",
-    description: "40-year-old marble restoration to mirror finish",
-  },
-  {
-    id: 2,
-    img: projectVilla,
-    title: "Hillside Villa Foyer",
-    category: "Villas",
-    description: "Granite floor restoration with premium sealing",
-  },
-  {
-    id: 3,
-    img: projectOffice,
-    title: "Corporate Lobby",
-    category: "Corporate Offices",
-    description: "Terrazzo floor restoration and enhancement",
-  },
-  {
-    id: 4,
-    img: projectIndustrial,
-    title: "Factory Floor",
-    category: "Industrial",
-    description: "Large-scale polished concrete project",
-  },
-  {
-    id: 5,
-    img: projectHotel,
-    title: "Resort Dining Area",
-    category: "Hotels",
-    description: "Marble with mosaic accent restoration",
-  },
-  {
-    id: 6,
-    img: projectVilla,
-    title: "Private Residence",
-    category: "Residential",
-    description: "Living room granite and marble combination",
-  },
-  {
-    id: 7,
-    img: projectOffice,
-    title: "Tech Company HQ",
-    category: "Corporate Offices",
-    description: "Modern polished concrete aesthetic",
-  },
-  {
-    id: 8,
-    img: projectIndustrial,
-    title: "Logistics Facility",
-    category: "Industrial",
-    description: "Industrial terrazzo floor restoration",
-  },
-  {
-    id: 9,
-    img: projectHotel,
-    title: "Heritage Hotel",
-    category: "Hotels",
-    description: "Historic marble preservation project",
-  },
-  {
-    id: 10,
-    img: projectVilla,
-    title: "Luxury Penthouse",
-    category: "Residential",
-    description: "Premium marble installation and finish",
-  },
-  {
-    id: 11,
-    img: projectOffice,
-    title: "Shopping Mall",
-    category: "Commercial",
-    description: "High-traffic area concrete polishing",
-  },
-  {
-    id: 12,
-    img: projectIndustrial,
-    title: "Warehouse Complex",
-    category: "Industrial",
-    description: "Multi-space industrial restoration",
-  },
-];
-
-const CATEGORIES = [
-  "All",
-  "Hotels",
-  "Villas",
-  "Residential",
-  "Corporate Offices",
-  "Commercial",
-  "Industrial",
-];
 
 function Page() {
   return (
     <main className="bg-background text-foreground">
       <Header />
-      <PageHero
-        title="Project Gallery"
-        subtitle="Our Work"
-        description="Explore our portfolio of premium restoration projects. From hotel ballrooms to residential villas, see the quality and consistency of our work."
-        backgroundImage={heroImg}
-        cta={{
-          text: "Start Your Project",
-          href: "#contact",
-        }}
-      />
-
       <Gallery />
       <GalleryCTA />
     </main>
   );
 }
 
+import { useProjectsQuery } from "@/lib/api";
+
 /* ============ GALLERY ============ */
 function Gallery() {
   const [selectedCategory, setSelectedCategory] = useState("All");
-  const [selectedImage, setSelectedImage] = useState<(typeof GALLERY_ITEMS)[0] | null>(null);
+  const [selectedImage, setSelectedImage] = useState<any | null>(null);
+
+  // Fetch all projects
+  const { data: apiProjects, isLoading } = useProjectsQuery();
+
+  // Map API projects to gallery format
+  const galleryItems = (apiProjects || []).map((p) => ({
+    id: p.id,
+    img: p.image || undefined,
+    title: p.title,
+    category: typeof p.category === "object" && p.category ? p.category.name : (p.category || "Project"),
+    description: p.short_description || "",
+    audio: p.audio || null,
+    youtube_link: p.youtube_link || null,
+  }));
+
+  // Extract unique categories dynamically from the API data
+  const dynamicCategories = ["All", ...Array.from(new Set(galleryItems.map(item => item.category)))];
 
   const filteredItems =
     selectedCategory === "All"
-      ? GALLERY_ITEMS
-      : GALLERY_ITEMS.filter((item) => item.category === selectedCategory);
+      ? galleryItems
+      : galleryItems.filter((item) => item.category === selectedCategory);
 
   return (
     <section className="py-28">
@@ -173,7 +85,7 @@ function Gallery() {
 
         {/* Category Filter */}
         <div className="mt-12 flex flex-wrap gap-2">
-          {CATEGORIES.map((cat) => (
+          {dynamicCategories.map((cat) => (
             <button
               key={cat}
               onClick={() => setSelectedCategory(cat)}
@@ -190,45 +102,77 @@ function Gallery() {
 
         {/* Gallery Grid - Masonry Style */}
         <div className="mt-12 grid md:grid-cols-2 lg:grid-cols-3 gap-6 auto-rows-max">
-          {filteredItems.map((item) => (
-            <div
-              key={item.id}
-              onClick={() => setSelectedImage(item)}
-              className="group relative overflow-hidden rounded-sm bg-background border border-border cursor-pointer transition-all hover:border-gold hover:shadow-elevated"
-            >
-              <div className="aspect-[4/3] overflow-hidden">
-                <img
-                  src={item.img}
-                  alt={item.title}
-                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
-                  loading="lazy"
-                />
-              </div>
+          {isLoading ? (
+            <div className="col-span-full py-20 text-center text-muted-foreground">
+              Loading projects...
+            </div>
+          ) : filteredItems.length === 0 ? (
+            <div className="col-span-full py-20 text-center text-muted-foreground">
+              No projects found in this category.
+            </div>
+          ) : (
+            filteredItems.map((item) => (
+              <div
+                key={item.id}
+                onClick={() => setSelectedImage(item)}
+                className="group relative overflow-hidden rounded-sm bg-background border border-border cursor-pointer transition-all hover:border-gold hover:shadow-elevated"
+              >
+                <div className="aspect-[4/3] overflow-hidden bg-muted">
+                  <img
+                    src={item.img}
+                    alt={item.title}
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-110"
+                    loading="lazy"
+                  />
+                </div>
 
-              {/* Overlay on hover */}
-              <div className="absolute inset-0 bg-gradient-to-t from-primary via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end p-6">
-                <div className="text-primary-foreground">
-                  <div className="font-serif text-lg">{item.title}</div>
-                  <div className="text-xs uppercase tracking-widest text-primary-foreground/75 mt-1">
+                {/* Overlay on hover (removed title/category from here as it's below now) */}
+                <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none" />
+
+                {/* Info card */}
+                <div className="p-6 bg-background relative z-10 flex flex-col flex-grow">
+                  <div className="text-[10px] uppercase tracking-widest text-gold">
                     {item.category}
+                  </div>
+                  <h3 className="mt-2 font-serif text-lg text-primary">
+                    {item.title}
+                  </h3>
+                  
+                  {item.audio && (
+                    <div className="mt-4" onClick={(e) => e.stopPropagation()}>
+                      <audio controls controlsList="nodownload" src={item.audio} className="w-full h-8" />
+                    </div>
+                  )}
+                  
+                  {item.youtube_link && (
+                    <div className="mt-3">
+                      <a 
+                        href={item.youtube_link} 
+                        target="_blank" 
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-2 text-xs font-medium text-red-600 hover:text-red-700 transition-colors"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
+                          <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.5 12 3.5 12 3.5s-7.505 0-9.377.55a3.016 3.016 0 0 0-2.122 2.136C0 8.07 0 12 0 12s0 3.93.501 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.55 9.377.55 9.377.55s7.505 0 9.377-.55a3.016 3.016 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                        </svg>
+                        Watch Video
+                      </a>
+                    </div>
+                  )}
+
+                  {/* Description hidden by default, expands on hover */}
+                  <div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-[grid-template-rows] duration-300 ease-out">
+                    <div className="overflow-hidden">
+                      <p className="mt-4 text-xs text-muted-foreground line-clamp-3">
+                        {item.description}
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
-
-              {/* Info card */}
-              <div className="p-6">
-                <div className="text-[10px] uppercase tracking-widest text-gold">
-                  {item.category}
-                </div>
-                <h3 className="mt-2 font-serif text-lg text-primary">
-                  {item.title}
-                </h3>
-                <p className="mt-2 text-xs text-muted-foreground line-clamp-2">
-                  {item.description}
-                </p>
-              </div>
-            </div>
-          ))}
+            ))
+          )}
         </div>
       </div>
 
@@ -262,9 +206,9 @@ function Lightbox({
   onPrev,
   onNext,
 }: {
-  image: typeof GALLERY_ITEMS[0];
+  image: any;
   onClose: () => void;
-  allImages: (typeof GALLERY_ITEMS)[];
+  allImages: any[];
   currentIndex: number;
   onPrev: () => void;
   onNext: () => void;

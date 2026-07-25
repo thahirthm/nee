@@ -19,11 +19,14 @@ import {
   Sparkles,
   Instagram,
   Linkedin,
-  Facebook
+  Facebook,
+  Quote
 } from "lucide-react";
 import { Header } from "@/components/site/Header";
+import { SectionHeader } from "@/components/shared/SectionHeader";
 import { BeforeAfter } from "@/components/site/BeforeAfter";
 import { SERVICES } from "@/lib/services-data";
+import { useBlogsQuery, useTestimonialsQuery, useSubscribeMutation } from "@/lib/api";
 
 import mainBanner from "@/assets/new-ban.png";
 import wornFloorBefore from "@/assets/second.jpeg";
@@ -68,11 +71,11 @@ function Page() {
       <CredibilityStrip />
       <CertificatesSection />
       <ComplementaryCallout />
-      <FeaturedCaseStudy />
+      {/* <FeaturedCaseStudy /> */}
       <BlogSection />
       <CapabilityStatementCTA />
       <ShilpaSevaTeaser />
-      <VideoSection />
+      {/* <VideoSection /> */}
       <SisterBrandSection />
       <ContactFooter />
     </main>
@@ -171,7 +174,7 @@ function UnderstandingSection() {
           </p>
           
           <div className="mt-10 grid sm:grid-cols-2 gap-6">
-            <Link to="/contact" className="bg-muted p-6 sm:p-8 rounded-sm hover:bg-muted/80 transition-colors block cursor-pointer group">
+            <Link to="/contact" hash="contact-form" className="bg-muted p-6 sm:p-8 rounded-sm hover:bg-muted/80 transition-colors block cursor-pointer group">
               <div className="h-12 w-12 rounded-full bg-primary flex items-center justify-center mb-6 text-primary-foreground group-hover:scale-105 transition-transform">
                 <Camera className="h-5 w-5" />
               </div>
@@ -471,6 +474,10 @@ function ComplementaryCallout() {
 
 /* ---------------- 7. FEATURED CASE STUDY ---------------- */
 function FeaturedCaseStudy() {
+  const [playing, setPlaying] = useState(false);
+  const caseVideoId = "TqsbA26Qwo8";
+  const thumbUrl = `https://img.youtube.com/vi/${caseVideoId}/hqdefault.jpg`;
+
   return (
     <section className="py-16 lg:py-24 bg-background">
       <div className="mx-auto max-w-7xl px-6 lg:px-10 grid lg:grid-cols-2 gap-10 lg:gap-16 items-stretch">
@@ -490,13 +497,35 @@ function FeaturedCaseStudy() {
           </Link>
         </div>
         <div className="relative h-[300px] sm:h-[400px] lg:h-auto w-full rounded-sm overflow-hidden bg-black shadow-soft">
-          <iframe 
-            src="https://www.youtube.com/embed/TqsbA26Qwo8?si=QMuZNfkjnmDxerh6" 
-            title="YouTube video player" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-            allowFullScreen
-            className="absolute inset-0 w-full h-full border-0"
-          ></iframe>
+          {playing ? (
+            <iframe
+              src={`https://www.youtube.com/embed/${caseVideoId}?si=QMuZNfkjnmDxerh6&autoplay=1`}
+              title="2,00,000 sq.ft. Carpark Restoration"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              className="absolute inset-0 w-full h-full border-0"
+            />
+          ) : (
+            <button
+              onClick={() => setPlaying(true)}
+              className="absolute inset-0 w-full h-full group focus:outline-none"
+              aria-label="Play case study video"
+            >
+              <img
+                src={thumbUrl}
+                alt="Carpark restoration case study"
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors" />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="h-16 w-16 rounded-full bg-white/90 group-hover:bg-white group-hover:scale-110 transition-all duration-200 flex items-center justify-center shadow-lg">
+                  <svg className="h-7 w-7 text-primary ml-1" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+              </div>
+            </button>
+          )}
         </div>
       </div>
     </section>
@@ -505,26 +534,18 @@ function FeaturedCaseStudy() {
 
 /* ---------------- 8. BLOG SECTION ---------------- */
 function BlogSection() {
-  const posts = [
-    {
-      id: "what-is-stone-restoration",
-      title: "What Is Stone Restoration?",
-      excerpt: "You walk on it every day — but have you ever seen marble breathe again? Discover the method behind the magic.",
-      date: "March 15, 2026"
-    },
-    {
-      id: "why-concrete-floors-crack",
-      title: "Why Concrete Floors Crack (And How to Fix It)",
-      excerpt: "Most industrial floors don't crack because of poor concrete. They crack because of poor planning.",
-      date: "March 8, 2026"
-    },
-    {
-      id: "how-we-polish-concrete",
-      title: "How We Polish Concrete Floors to Mirror Finish",
-      excerpt: "From dusty to glossy — here's how raw concrete becomes a mirror.",
-      date: "February 28, 2026"
-    }
-  ];
+  const { data: apiPosts, isLoading } = useBlogsQuery();
+
+  const posts = (apiPosts || []).slice(0, 3).map((item) => ({
+    id: item.slug || String(item.id),
+    title: item.title,
+    excerpt: item.short_description || item.excerpt || "",
+    date: item.formatted_date || item.date || "2025",
+  }));
+
+  if (!isLoading && posts.length === 0) {
+    return null;
+  }
 
   return (
     <section className="py-16 lg:py-24 bg-card border-y border-border">
@@ -560,17 +581,74 @@ function BlogSection() {
 
 /* ---------------- 9. CAPABILITY STATEMENT ---------------- */
 function CapabilityStatementCTA() {
+  const [email, setEmail] = useState("");
+  const [successMsg, setSuccessMsg] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const subscribeMutation = useSubscribeMutation();
+
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) return;
+    setErrorMsg("");
+    setSuccessMsg("");
+    setIsSubmitting(true);
+
+    try {
+      const res = await subscribeMutation.mutateAsync({ email });
+      if (res.ok || res.status === 201) {
+        setSuccessMsg(
+          res.data?.message ||
+            "Subscribed successfully! Check your inbox for our official brochure."
+        );
+        setEmail("");
+      } else {
+        const msg =
+          res.data?.message ||
+          res.data?.errors?.email?.[0] ||
+          "Already subscribed or invalid email.";
+        setErrorMsg(msg);
+      }
+    } catch (err: any) {
+      setErrorMsg("Error submitting email. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <section className="py-16 bg-primary text-primary-foreground">
       <div className="mx-auto max-w-7xl px-6 lg:px-10 flex flex-col md:flex-row items-center justify-between gap-8">
         <div className="w-full">
           <h2 className="font-serif text-3xl">Download our Capability Statement</h2>
-          <p className="mt-2 text-primary-foreground/80">Get the full PDF covering our credentials, processes, and marquee projects.</p>
+          <p className="mt-2 text-primary-foreground/80">
+            Get the full PDF covering our credentials, processes, and marquee projects.
+          </p>
+          {successMsg && (
+            <p className="mt-3 text-sm text-gold font-medium">✓ {successMsg}</p>
+          )}
+          {errorMsg && (
+            <p className="mt-3 text-sm text-amber-300 font-medium">✕ {errorMsg}</p>
+          )}
         </div>
-        <form className="flex flex-col sm:flex-row w-full md:w-auto gap-3 shrink-0" onSubmit={e => e.preventDefault()}>
-          <input type="email" placeholder="Your work email" className="px-4 py-3 rounded-sm bg-background/10 border border-border/30 text-primary-foreground placeholder:text-primary-foreground/50 focus:outline-none focus:border-gold w-full sm:w-auto flex-1 md:w-64" required />
-          <button type="submit" className="px-6 py-3 bg-gold text-gold-foreground rounded-sm font-medium hover:bg-gold/90 transition-colors w-full sm:w-auto shrink-0">
-            Get PDF
+        <form
+          className="flex flex-col sm:flex-row w-full md:w-auto gap-3 shrink-0"
+          onSubmit={handleSubscribe}
+        >
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Your work email"
+            className="px-4 py-3 rounded-sm bg-background/10 border border-border/30 text-primary-foreground placeholder:text-primary-foreground/50 focus:outline-none focus:border-gold w-full sm:w-auto flex-1 md:w-64"
+            required
+          />
+          <button
+            type="submit"
+            disabled={isSubmitting}
+            className="px-6 py-3 bg-gold text-gold-foreground rounded-sm font-medium hover:bg-gold/90 transition-colors w-full sm:w-auto shrink-0 disabled:opacity-50"
+          >
+            {isSubmitting ? "Sending..." : "Get PDF"}
           </button>
         </form>
       </div>
@@ -668,22 +746,57 @@ function VideoSection() {
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
           {videos.map((video) => (
-            <div
-              key={video.id}
-              className="relative shrink-0 w-[85%] md:w-[60%] lg:w-[45%] snap-center aspect-video rounded-sm overflow-hidden bg-black shadow-soft border border-border"
-            >
-              <iframe 
-                src={video.embed} 
-                title={video.title} 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                allowFullScreen
-                className="absolute inset-0 w-full h-full border-0"
-              ></iframe>
-            </div>
+            <VideoCard key={video.id} video={video} />
           ))}
         </div>
       </div>
     </section>
+  );
+}
+
+function VideoCard({ video }: { video: { id: string; embed: string; title: string } }) {
+  const [playing, setPlaying] = useState(false);
+  // Extract YouTube video ID for thumbnail
+  const ytId = video.embed.match(/embed\/([^?]+)/)?.[1] ?? "";
+  const thumbUrl = `https://img.youtube.com/vi/${ytId}/hqdefault.jpg`;
+
+  return (
+    <div className="relative shrink-0 w-[85%] md:w-[60%] lg:w-[45%] snap-center aspect-video rounded-sm overflow-hidden bg-black shadow-soft border border-border">
+      {playing ? (
+        <iframe
+          src={`${video.embed}&autoplay=1`}
+          title={video.title}
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowFullScreen
+          className="absolute inset-0 w-full h-full border-0"
+        />
+      ) : (
+        <button
+          onClick={() => setPlaying(true)}
+          className="absolute inset-0 w-full h-full group focus:outline-none"
+          aria-label={`Play ${video.title}`}
+        >
+          <img
+            src={thumbUrl}
+            alt={video.title}
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          {/* Dark overlay */}
+          <div className="absolute inset-0 bg-black/30 group-hover:bg-black/40 transition-colors" />
+          {/* Play button */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="h-16 w-16 rounded-full bg-white/90 group-hover:bg-white group-hover:scale-110 transition-all duration-200 flex items-center justify-center shadow-lg">
+              <svg className="h-7 w-7 text-primary ml-1" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M8 5v14l11-7z" />
+              </svg>
+            </div>
+          </div>
+          <div className="absolute bottom-4 left-4 right-4 text-white text-sm font-medium text-left drop-shadow line-clamp-1">
+            {video.title}
+          </div>
+        </button>
+      )}
+    </div>
   );
 }
 

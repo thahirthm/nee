@@ -16,6 +16,7 @@ import { PageHero } from "@/components/shared/PageHero";
 import { SectionHeader } from "@/components/shared/SectionHeader";
 import abtBanner from "@/assets/after3.png";
 import aboutImg from "@/assets/who.webp";
+import { useTestimonialsQuery } from "@/lib/api";
 
 export const Route = createFileRoute("/about")({
   head: () => ({
@@ -388,32 +389,20 @@ function TeamHighlights() {
 
 /* ============ TESTIMONIALS ============ */
 function Testimonials() {
-  const testimonials = [
-    {
-      n: "ITC Park Sheraton",
-      r: "Towers Chennai",
-      title: "The Fruit of Labour",
-      q: "The gloss level in the hotel which was never below 100, was appreciated by all guests and management. This was achieved only because of their labour force who were technically sound with a very positive attitude.\n\nWithout any doubt, I can say, that they are the best service providers for marble polishing, as they are experts in handling all the challenges faced by them in hotels like less time due to VIP traffic movements, movement due to discotheques etc.",
-    },
-    {
-      n: "Ms. A. Aliamma GEORGE",
-      r: "Corporate Housekeeper - Projects (Retd.)",
-      title: "An early pioneer",
-      q: "Dilip is an early pioneer in restoring Marble to a fine luxurious finish of gloss level above 90.\n\nI discovered this special talent in him in 2001, at Bengaluru, when I was the Regional Housekeeper for ITC Hotels. After many unsuccessful trials to beautify the old marble lobby at ITC Windsor, the recommendation was for renovation involving a major plan and budget. Dilip entered at this juncture and was able to achieve the desired gloss level after various experiments and he continued to maintain marble in the hotel. We were able to postpone the renovation for a long time. I have worked with him ever since and he has been of immense service to the Housekeeping team while opening our new luxury hotels, ITC Gardenia, Bengaluru and ITC Grand Chola, Chennai.\n\nI also appreciate his professional knowledge, experimental nature, new products and his commitment to high quality. He can mobilise large resources on short notice. You can work with Dilip, it's worth it.",
-    },
-    {
-      n: "Mr. Gopal Madhavan",
-      r: "Chennai",
-      title: "No disturbance",
-      q: "I am very happy to write to you and say how happy I am with your service, which we have used for a number of apartments belonging to us and our children.\n\nThe way-old, but good condition, mosaic flooring is rejuvenated to be really impressive. Marble also takes on a brilliant smoothness. Of particular interest is the way your staff removes and replaces all furniture before and after the polishing so that the occupants are not disturbed.\n\nI gather that some new, more long-lasting finishes are being introduced and hopefully we will be able to use them the next time we have some polishing to be done.",
-    },
-    {
-      n: "Dr S Ravichandran",
-      r: "Former MD of National Trust Housing Finance Limited",
-      title: "Masterly",
-      q: "At a time of my worrying on the quality of flooring done at my flat by some one with enough dirt patches and scratches, you have met me and gave me an assurance that it could be set right as well as ensured a quality job. Albeit I was aware that you have undertaken a difficult task, but at the end you have proved that you are capable of handling any work and done an excellent job to my satisfaction which I am sure that no one can do.",
-    },
-  ];
+  const { data: apiTestimonials, isLoading } = useTestimonialsQuery();
+
+  const testimonials = (apiTestimonials || []).map((t) => ({
+    id: t.id,
+    n: t.name,
+    r: t.designation || "Valued Client",
+    title: t.name,
+    q: t.text,
+    image: t.image,
+  }));
+
+  if (!isLoading && testimonials.length === 0) {
+    return null;
+  }
 
   return (
     <section className="py-28 bg-card border-y border-border">
@@ -427,7 +416,7 @@ function Testimonials() {
         <div className="mt-16 grid lg:grid-cols-2 gap-8">
           {testimonials.map((t) => (
             <figure
-              key={t.n}
+              key={t.id}
               className="border border-border bg-background p-10 rounded-sm flex flex-col"
             >
               <Quote className="h-8 w-8 text-gold" />
@@ -436,13 +425,21 @@ function Testimonials() {
                 &ldquo;{t.q}&rdquo;
               </blockquote>
               <div className="mt-8 flex items-center gap-4 pt-6 border-t border-border">
-                <div className="h-12 w-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-serif text-lg shrink-0">
-                  {t.n
-                    .split(" ")
-                    .slice(0, 2)
-                    .map((x) => x[0]?.toUpperCase())
-                    .join("")}
-                </div>
+                {t.image ? (
+                  <img
+                    src={t.image}
+                    alt={t.n}
+                    className="h-12 w-12 rounded-full object-cover border border-gold/40 shrink-0"
+                  />
+                ) : (
+                  <div className="h-12 w-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-serif text-lg shrink-0">
+                    {t.n
+                      .split(" ")
+                      .slice(0, 2)
+                      .map((x) => x[0]?.toUpperCase())
+                      .join("")}
+                  </div>
+                )}
                 <figcaption>
                   <div className="font-medium text-primary">{t.n}</div>
                   <div className="text-xs uppercase tracking-widest text-muted-foreground mt-1 leading-normal max-w-sm">

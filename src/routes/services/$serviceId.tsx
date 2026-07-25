@@ -13,7 +13,7 @@ export const Route = createFileRoute("/services/$serviceId")({
     if (!service) throw new Error("Service not found");
     return { service };
   },
-  head: ({ context }) => ({
+  head: ({ context }: any) => ({
     meta: [
       { title: `${context.service.t} — NKE Floors` },
       {

@@ -10,90 +10,35 @@ import projectIndustrial from "@/assets/m-2.jpg";
 import p1Img from "@/assets/p1.jpeg";
 import iitImg from "@/assets/iit.jpeg";
 
+import { useProjectsQuery } from "@/lib/api";
+
 export const Route = createFileRoute("/projects")({
   component: ProjectsPage,
 });
 
-const ALL_PROJECTS = [
-  {
-    id: 7,
-    title: "IIT CAUVERY",
-    category: "Institutional",
-    description: "",
-    image: iitImg,
-  },
-  {
-    id: 1,
-    title: "Mrs. Priya Thomas",
-    category: "House",
-    description: "Complete floor restoration and polishing.",
-    image: p1Img,
-  },
-  {
-    id: 2,
-    title: "Meridian Corporate Tower",
-    category: "Commercial",
-    description: "Terrazzo flooring installation and finishing for the main reception.",
-    image: projectOffice,
-  },
-  {
-    id: 3,
-    title: "Northgate Logistics Hub",
-    category: "Industrial",
-    description: "40,000 sq.ft. of dust-proof polished concrete flooring.",
-    image: projectIndustrial,
-  },
-  {
-    id: 4,
-    title: "Hillside Private Villa",
-    category: "Residential",
-    description: "Decorative burnished concrete for high-end residential interior.",
-    image: projectVilla,
-  },
-  {
-    id: 5,
-    title: "Royale Boutique Suites",
-    category: "House",
-    description: "Heritage mosaic tile restoration across all guest corridors.",
-    image: projectHotel,
-  },
-  {
-    id: 6,
-    title: "Bayfront Residences",
-    category: "Residential",
-    description: "Natural stone honing and sealing for outdoor amenity spaces.",
-    image: projectVilla,
-  },
-];
 
-const CATEGORIES = ["All", "House", "Commercial", "Industrial", "Residential", "Institutional"];
 
 function ProjectsPage() {
   const [activeCategory, setActiveCategory] = useState("All");
+  const { data: apiProjects, isLoading } = useProjectsQuery(activeCategory);
 
-  const filteredProjects =
-    activeCategory === "All"
-      ? ALL_PROJECTS
-      : ALL_PROJECTS.filter((p) => p.category === activeCategory);
+  const projectsToDisplay = (apiProjects || []).map((p) => ({
+    id: p.id,
+    title: p.title,
+    category: typeof p.category === "object" && p.category ? p.category.name : (p.category || "Project"),
+    description: p.short_description || "",
+    image: p.image || projectHotel,
+    audio: p.audio || null,
+    youtube_link: p.youtube_link || null,
+  }));
+
+  // Extract unique categories dynamically from the API data
+  const dynamicCategories = ["All", ...Array.from(new Set(projectsToDisplay.map(item => item.category)))];
 
   return (
     <main className="bg-background text-foreground min-h-screen pt-24">
       <Header />
       
-      {/* Page Header */}
-      <section className="py-16 md:py-24 bg-muted border-b border-border">
-        <div className="mx-auto max-w-7xl px-6 lg:px-10 text-center">
-          <div className="text-sm font-semibold uppercase tracking-wider text-muted-foreground mb-4">
-            Our Work
-          </div>
-          <h1 className="font-serif text-5xl md:text-6xl text-primary mb-6">
-            Projects & Case Studies
-          </h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            A selection of our premium restorations and flooring installations across hotels, industrial facilities, and residential spaces.
-          </p>
-        </div>
-      </section>
 
       {/* Projects Grid */}
       <section className="py-20">
@@ -101,7 +46,7 @@ function ProjectsPage() {
           
           {/* Category Filter */}
           <div className="flex flex-wrap items-center justify-center gap-3 mb-16">
-            {CATEGORIES.map((cat) => (
+            {dynamicCategories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setActiveCategory(cat)}
@@ -118,7 +63,7 @@ function ProjectsPage() {
 
           {/* Grid */}
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProjects.map((project) => (
+            {projectsToDisplay.map((project) => (
               <div
                 key={project.id}
                 className="group relative overflow-hidden rounded-sm bg-card border border-border flex flex-col"
@@ -130,27 +75,56 @@ function ProjectsPage() {
                     className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
                 </div>
-                <div className="p-6 flex flex-col flex-grow">
+                <div className="p-6 bg-card relative z-10 flex flex-col flex-grow">
                   <div className="text-xs font-semibold uppercase tracking-widest text-gold mb-3">
                     {project.category}
                   </div>
                   <h3 className="font-serif text-2xl text-primary mb-3">
                     {project.title}
                   </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed mb-6">
-                    {project.description}
-                  </p>
-                  <div className="mt-auto">
-                    <button className="inline-flex items-center gap-2 text-sm font-medium text-primary group-hover:text-gold transition-colors">
-                      View Details <ArrowRight className="h-4 w-4" />
-                    </button>
+                  
+                  {project.audio && (
+                    <div className="mt-2" onClick={(e) => e.stopPropagation()}>
+                      <audio controls controlsList="nodownload" src={project.audio} className="w-full h-8" />
+                    </div>
+                  )}
+                  
+                  {project.youtube_link && (
+                    <div className="mt-3">
+                      <a 
+                        href={project.youtube_link} 
+                        target="_blank" 
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-2 text-sm font-medium text-red-600 hover:text-red-700 transition-colors"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        <svg viewBox="0 0 24 24" fill="currentColor" className="w-5 h-5">
+                          <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.5 12 3.5 12 3.5s-7.505 0-9.377.55a3.016 3.016 0 0 0-2.122 2.136C0 8.07 0 12 0 12s0 3.93.501 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.55 9.377.55 9.377.55s7.505 0 9.377-.55a3.016 3.016 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                        </svg>
+                        Watch Video
+                      </a>
+                    </div>
+                  )}
+
+                  {/* Description hidden by default, expands on hover */}
+                  <div className="grid grid-rows-[0fr] group-hover:grid-rows-[1fr] transition-[grid-template-rows] duration-300 ease-out">
+                    <div className="overflow-hidden">
+                      <p className="mt-4 text-sm text-muted-foreground leading-relaxed">
+                        {project.description}
+                      </p>
+                      <div className="mt-6 mb-2">
+                        <button className="inline-flex items-center gap-2 text-sm font-medium text-primary group-hover:text-gold transition-colors">
+                          View Details <ArrowRight className="h-4 w-4" />
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
             ))}
           </div>
           
-          {filteredProjects.length === 0 && (
+          {projectsToDisplay.length === 0 && (
             <div className="text-center py-20 text-muted-foreground">
               No projects found in this category.
             </div>

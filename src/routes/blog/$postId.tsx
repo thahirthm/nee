@@ -11,64 +11,98 @@ import {
 } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { SectionHeader } from "@/components/shared/SectionHeader";
-import { BLOG_POSTS } from "./index";
 import { Link } from "@tanstack/react-router";
+import { useBlogDetailQuery, useBlogsQuery, type BlogPost } from "@/lib/api";
 
 export const Route = createFileRoute("/blog/$postId")({
   beforeLoad: ({ params }) => {
-    const post = BLOG_POSTS.find((p) => p.id === params.postId);
-    if (!post) throw new Error("Post not found");
-    return { post };
+    return { postId: params.postId };
   },
-  head: ({ context }) => ({
+  head: ({ params }: any) => ({
     meta: [
-      { title: `${context.post.title} — NKE Floors Blog` },
-      {
-        name: "description",
-        content: context.post.excerpt,
-      },
-      {
-        property: "og:title",
-        content: `${context.post.title} — NKE Floors`,
-      },
-      {
-        property: "og:description",
-        content: context.post.excerpt,
-      },
-      {
-        property: "og:image",
-        content: context.post.image,
-      },
-      { property: "og:url", content: `/blog/${context.post.id}` },
-      {
-        property: "og:type",
-        content: "article",
-      },
+      { title: `Blog Article — NKE Floors` },
+      { name: "description", content: "Stone restoration insights and tips." },
     ],
-    links: [
-      { rel: "canonical", href: `/blog/${context.post.id}` },
-    ],
+    links: [{ rel: "canonical", href: `/blog/${params.postId}` }],
   }),
   component: Page,
 });
 
 function Page() {
-  const { post } = Route.useRouteContext();
+  const { postId } = Route.useRouteContext();
+  const { data: apiPost, isLoading } = useBlogDetailQuery(postId);
+  const { data: allBlogs } = useBlogsQuery();
+
+  if (isLoading) {
+    return (
+      <main className="bg-background text-foreground min-h-screen">
+        <Header />
+        <div className="py-32 text-center text-muted-foreground">
+          Loading article...
+        </div>
+      </main>
+    );
+  }
+
+  if (!apiPost) {
+    return (
+      <main className="bg-background text-foreground min-h-screen">
+        <Header />
+        <div className="py-32 text-center">
+          <h2 className="text-2xl font-serif text-primary">Article Not Found</h2>
+          <p className="mt-2 text-muted-foreground">The requested blog post could not be found.</p>
+          <div className="mt-6">
+            <Link to="/blog" className="text-sm font-medium text-gold hover:underline">
+              ← Back to All Articles
+            </Link>
+          </div>
+        </div>
+      </main>
+    );
+  }
+
+  const post = {
+    id: apiPost.slug || String(apiPost.id),
+    title: apiPost.title,
+    excerpt: apiPost.short_description || apiPost.excerpt || "",
+    content: apiPost.short_description || "",
+    category: apiPost.category || "Restoration",
+    author: apiPost.author || "NKE Floors Team",
+    date: apiPost.formatted_date || apiPost.date || "2025",
+    image: apiPost.image || "",
+    pdf_link: apiPost.pdf_link,
+  };
+
+  const otherPosts = (allBlogs || [])
+    .filter((b) => String(b.id) !== String(apiPost.id) && b.slug !== apiPost.slug)
+    .slice(0, 3);
 
   return (
     <main className="bg-background text-foreground">
       <Header />
-      <BlogArticle post={post} />
+      <BlogArticle post={post} recommendedPosts={otherPosts} />
     </main>
   );
 }
 
 /* ============ BLOG ARTICLE ============ */
-function BlogArticle({ post }: { post: typeof BLOG_POSTS[0] }) {
-  const relatedPosts = BLOG_POSTS.filter((p) => p.id !== post.id && p.category === post.category).slice(0, 3);
-  const otherPosts = BLOG_POSTS.filter((p) => p.id !== post.id).slice(0, 3);
-  const recommendedPosts = relatedPosts.length > 0 ? relatedPosts : otherPosts;
-
+function BlogArticle({
+  post,
+  recommendedPosts,
+}: {
+  post: {
+    id: string;
+    title: string;
+    excerpt: string;
+    content: string;
+    category: string;
+    author: string;
+    date: string;
+    image: string;
+    pdf_link?: string | null;
+  };
+  recommendedPosts: BlogPost[];
+}) {
   return (
     <article className="py-20">
       {/* Hero Section */}
@@ -228,7 +262,7 @@ function BlogArticle({ post }: { post: typeof BLOG_POSTS[0] }) {
               >
                 <div className="aspect-[4/3] overflow-hidden">
                   <img
-                    src={relatedPost.image}
+                    src={relatedPost.image || ""}
                     alt={relatedPost.title}
                     className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                     loading="lazy"

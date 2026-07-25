@@ -83,7 +83,7 @@
     border-color: var(--color-border);
   }
   html {
-    scroll-behavior: smooth;
+    /* scroll-behavior: smooth; removed – was freezing UI with TanStack scrollRestoration */
   }
   body {
     background-color: var(--color-background);

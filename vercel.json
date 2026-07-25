@@ -1,6 +1,14 @@
 {
   "rewrites": [
     {
+      "source": "/api/:path*",
+      "destination": "https://admin.nkefloor.com/api/:path*"
+    },
+    {
+      "source": "/media/:path*",
+      "destination": "https://admin.nkefloor.com/media/:path*"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }

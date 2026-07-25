@@ -18,6 +18,7 @@ import { Header } from "@/components/site/Header";
 import { PageHero } from "@/components/shared/PageHero";
 import { SectionHeader } from "@/components/shared/SectionHeader";
 import heroImg from "@/assets/hero.jpg";
+import { useSubmitContactMutation } from "@/lib/api";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -47,12 +48,12 @@ function Page() {
   return (
     <main className="bg-background text-foreground">
       <Header />
-      <PageHero
+      {/* <PageHero
         title="Get In Touch"
         subtitle="Contact Us"
         description="Have questions about our services? Ready to schedule a consultation? We'd love to hear from you. Reach out using any of the methods below."
         backgroundImage={heroImg}
-      />
+      /> */}
 
       <ContactMain />
       <GoogleMap />
@@ -63,20 +64,54 @@ function Page() {
 
 /* ============ CONTACT MAIN ============ */
 function ContactMain() {
+  const [formData, setFormData] = useState({
+    name: "",
+    mail: "",
+    number: "",
+    subject: "consultation",
+    message: "",
+    bot_check: "",
+  });
+  const [imageFile, setImageFile] = useState<File | null>(null);
   const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const submitContactMutation = useSubmitContactMutation();
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true);
+    setErrorMessage("");
+    setIsSubmitting(true);
 
-    // Simulate form submission
-    setTimeout(() => {
-      setLoading(false);
-      setSubmitted(true);
-      (e.target as HTMLFormElement).reset();
-      setTimeout(() => setSubmitted(false), 5000);
-    }, 1000);
+    try {
+      const res = await submitContactMutation.mutateAsync({
+        ...formData,
+        image_attachment: imageFile,
+      });
+
+      if (res.ok || res.status === 201) {
+        setSubmitted(true);
+        setFormData({
+          name: "",
+          mail: "",
+          number: "",
+          subject: "consultation",
+          message: "",
+          bot_check: "",
+        });
+        setImageFile(null);
+        setTimeout(() => setSubmitted(false), 6000);
+      } else {
+        const errorText =
+          res.data?.message ||
+          (res.data?.errors ? JSON.stringify(res.data.errors) : "Submission could not be completed.");
+        setErrorMessage(errorText);
+      }
+    } catch (err: any) {
+      setErrorMessage(err?.message || "Network error. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -164,7 +199,7 @@ function ContactMain() {
         {/* Contact Form & WhatsApp */}
         <div className="grid lg:grid-cols-2 gap-12 items-start">
           {/* Contact Form */}
-          <div className="border border-border bg-card rounded-sm p-8 lg:p-12">
+          <div id="contact-form" className="border border-border bg-card rounded-sm p-8 lg:p-12 scroll-mt-32">
             <h3 className="font-serif text-2xl text-primary">
               Send us a Message
             </h3>
@@ -180,13 +215,30 @@ function ContactMain() {
                     Message Sent!
                   </p>
                   <p className="text-xs text-muted-foreground mt-1">
-                    Thank you for contacting us. We'll respond within 24 hours.
+                    Thank you for contacting us. Your message has been received.
                   </p>
                 </div>
               </div>
             )}
 
+            {errorMessage && (
+              <div className="mt-6 p-4 bg-red-500/10 border border-red-500/30 text-red-600 rounded-sm text-sm">
+                {errorMessage}
+              </div>
+            )}
+
             <form onSubmit={handleSubmit} className="mt-6 space-y-5">
+              {/* Honeypot field for anti-bot protection */}
+              <input
+                type="text"
+                name="bot_check"
+                value={formData.bot_check}
+                onChange={(e) => setFormData({ ...formData, bot_check: e.target.value })}
+                className="hidden"
+                tabIndex={-1}
+                autoComplete="off"
+              />
+
               {/* Name */}
               <div>
                 <label className="block text-xs uppercase tracking-widest text-muted-foreground mb-2">
@@ -195,6 +247,8 @@ function ContactMain() {
                 <input
                   type="text"
                   required
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   placeholder="John Doe"
                   className="w-full rounded-sm border border-border bg-background px-4 py-3 text-base text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-gold transition-colors"
                 />
@@ -208,6 +262,8 @@ function ContactMain() {
                 <input
                   type="email"
                   required
+                  value={formData.mail}
+                  onChange={(e) => setFormData({ ...formData, mail: e.target.value })}
                   placeholder="john@example.com"
                   className="w-full rounded-sm border border-border bg-background px-4 py-3 text-base text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-gold transition-colors"
                 />
@@ -220,7 +276,9 @@ function ContactMain() {
                 </label>
                 <input
                   type="tel"
-                  placeholder="9600040155"
+                  value={formData.number}
+                  onChange={(e) => setFormData({ ...formData, number: e.target.value })}
+                  placeholder="+919876543210"
                   className="w-full rounded-sm border border-border bg-background px-4 py-3 text-base text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-gold transition-colors"
                 />
               </div>
@@ -232,13 +290,15 @@ function ContactMain() {
                 </label>
                 <select
                   required
+                  value={formData.subject}
+                  onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                   className="w-full rounded-sm border border-border bg-background px-4 py-3 text-base text-foreground focus:outline-none focus:border-gold transition-colors"
                 >
-                  <option value="">Select a subject</option>
-                  <option value="consultation">Free Consultation</option>
-                  <option value="quote">Project Quote</option>
-                  <option value="maintenance">Maintenance Program</option>
-                  <option value="other">Other Inquiry</option>
+                  <option value="Free Consultation">Free Consultation</option>
+                  <option value="Project Quote">Project Quote</option>
+                  <option value="Maintenance Program">Maintenance Program</option>
+                  <option value="Stone Restoration Enquiry">Stone Restoration Enquiry</option>
+                  <option value="Other Inquiry">Other Inquiry</option>
                 </select>
               </div>
 
@@ -250,18 +310,33 @@ function ContactMain() {
                 <textarea
                   required
                   rows={5}
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   placeholder="Tell us about your project, location, and timeline."
                   className="w-full rounded-sm border border-border bg-background px-4 py-3 text-base text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-gold transition-colors resize-none"
+                />
+              </div>
+
+              {/* Optional Image Attachment */}
+              <div>
+                <label className="block text-xs uppercase tracking-widest text-muted-foreground mb-2">
+                  Attachment (Optional JPG/PNG image)
+                </label>
+                <input
+                  type="file"
+                  accept="image/jpeg,image/png"
+                  onChange={(e) => setImageFile(e.target.files?.[0] || null)}
+                  className="w-full text-xs text-muted-foreground file:mr-4 file:py-2 file:px-4 file:rounded-sm file:border file:border-border file:bg-muted file:text-foreground hover:file:border-gold cursor-pointer"
                 />
               </div>
 
               {/* Submit */}
               <button
                 type="submit"
-                disabled={loading}
+                disabled={isSubmitting}
                 className="w-full inline-flex items-center justify-center gap-2 rounded-sm bg-primary px-6 py-3.5 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors disabled:opacity-75"
               >
-                {loading ? "Sending..." : "Send Message"}{" "}
+                {isSubmitting ? "Sending..." : "Send Message"}{" "}
                 <ArrowRight className="h-4 w-4" />
               </button>
             </form>
@@ -356,16 +431,32 @@ function ContactMain() {
 
 /* ============ GOOGLE MAP ============ */
 function GoogleMap() {
+  const [mapLoaded, setMapLoaded] = useState(false);
+
   return (
     <section className="border-y border-border">
       <div className="mx-auto max-w-7xl px-6 lg:px-10 py-12">
-        <div className="rounded-sm overflow-hidden border border-border h-96">
-          <iframe
-            title="NKE Floors office location"
-            src="https://www.openstreetmap.org/export/embed.html?bbox=-0.1%2C51.5%2C-0.08%2C51.51&layer=mapnik"
-            className="h-full w-full"
-            loading="lazy"
-          />
+        <div className="rounded-sm overflow-hidden border border-border h-96 relative bg-muted">
+          {mapLoaded ? (
+            <iframe
+              title="NKE Floors office location"
+              src="https://www.openstreetmap.org/export/embed.html?bbox=-0.1%2C51.5%2C-0.08%2C51.51&layer=mapnik"
+              className="h-full w-full"
+              loading="lazy"
+            />
+          ) : (
+            <button
+              onClick={() => setMapLoaded(true)}
+              className="absolute inset-0 w-full h-full flex flex-col items-center justify-center gap-3 group focus:outline-none bg-muted hover:bg-muted/80 transition-colors"
+              aria-label="Load map"
+            >
+              <div className="h-14 w-14 rounded-full bg-primary/10 group-hover:bg-primary/20 transition-colors flex items-center justify-center">
+                <MapPin className="h-7 w-7 text-primary" />
+              </div>
+              <div className="text-sm font-medium text-primary">Click to load map</div>
+              <div className="text-xs text-muted-foreground">NKE Floorcare office, Chennai</div>
+            </button>
+          )}
         </div>
       </div>
     </section>

@@ -4,12 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
-  HeadContent,
-  Scripts,
 } from "@tanstack/react-router";
-import { useEffect } from "react";
-
-import appCss from "../styles.css?url";
 
 function NotFoundComponent() {
   return (
@@ -73,83 +68,11 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   {
-    head: () => ({
-      meta: [
-        { charSet: "utf-8" },
-        { name: "viewport", content: "width=device-width, initial-scale=1" },
-        { title: "NKE Floors — Premium Marble, Granite & Floor Restoration" },
-        {
-          name: "description",
-          content:
-            "Over 25 years transforming marble, granite, terrazzo and concrete floors into mirror-like masterpieces for hotels, villas and corporate spaces.",
-        },
-        { name: "author", content: "NKE Floors" },
-        {
-          property: "og:title",
-          content: "NKE Floors — Premium Marble, Granite & Floor Restoration",
-        },
-        {
-          property: "og:description",
-          content:
-            "Over 25 years transforming marble, granite, terrazzo and concrete floors into mirror-like masterpieces for hotels, villas and corporate spaces.",
-        },
-        { property: "og:type", content: "website" },
-        { name: "twitter:card", content: "summary_large_image" },
-        {
-          name: "twitter:title",
-          content: "NKE Floors — Premium Marble, Granite & Floor Restoration",
-        },
-        {
-          name: "twitter:description",
-          content:
-            "Over 25 years transforming marble, granite, terrazzo and concrete floors into mirror-like masterpieces for hotels, villas and corporate spaces.",
-        },
-        {
-          property: "og:image",
-          content:
-            "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/1bd2099e-2172-46f0-aaef-24f1502b9166/id-preview-fec4e992--3c59c7e1-fc50-4c22-85c6-d0f67f943b58.lovable.app-1780549695448.png",
-        },
-        {
-          name: "twitter:image",
-          content:
-            "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/1bd2099e-2172-46f0-aaef-24f1502b9166/id-preview-fec4e992--3c59c7e1-fc50-4c22-85c6-d0f67f943b58.lovable.app-1780549695448.png",
-        },
-      ],
-      links: [
-        { rel: "preconnect", href: "https://fonts.googleapis.com" },
-        {
-          rel: "preconnect",
-          href: "https://fonts.gstatic.com",
-          crossOrigin: "anonymous",
-        },
-        {
-          rel: "stylesheet",
-          href: "https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap",
-        },
-        { rel: "stylesheet", href: appCss },
-      ],
-    }),
-
-    shellComponent: RootShell,
     component: RootComponent,
     notFoundComponent: NotFoundComponent,
     errorComponent: ErrorComponent,
   },
 );
-
-function RootShell({ children }: { children: ReactNode }) {
-  return (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  );
-}
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
