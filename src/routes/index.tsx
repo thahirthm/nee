@@ -71,11 +71,11 @@ function Page() {
       <CredibilityStrip />
       <CertificatesSection />
       <ComplementaryCallout />
-      {/* <FeaturedCaseStudy /> */}
+      <FeaturedCaseStudy />
       <BlogSection />
       <CapabilityStatementCTA />
       <ShilpaSevaTeaser />
-      {/* <VideoSection /> */}
+      <VideoSection />
       <SisterBrandSection />
       <ContactFooter />
     </main>
