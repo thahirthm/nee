@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   ArrowRight,
@@ -39,8 +39,10 @@ import hoteImg from "@/assets/hote.png";
 import craftImg from "@/assets/craft.png";
 import kaipaneeImg from "@/assets/image.png";
 import btcImg from "@/assets/btc.png";
-import certiImg from "@/assets/certi.png";
-
+import cer1 from "@/assets/cer1.png";
+import cer2 from "@/assets/cer2.png";
+import cer3 from "@/assets/cer3.png";
+import cer4 from "@/assets/cer4.png";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -370,9 +372,9 @@ function ExpertiseSection() {
           With over 25 years of experience, NKE Floorcare serves natural stone, concrete, and industrial floors across four specialisms — working across residential, commercial, hospitality, and industrial properties.
         </p>
         
-        <div className="mt-10 lg:mt-16 grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="mt-10 lg:mt-16 flex overflow-x-auto snap-x snap-mandatory sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 pb-6 -mx-6 px-6 lg:mx-0 lg:px-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
           {areas.map((a, idx) => (
-            <div key={idx} className="flex flex-col">
+            <div key={idx} className="flex flex-col w-[85vw] sm:w-auto shrink-0 snap-center sm:snap-align-none">
               <div className="aspect-[4/3] rounded-sm overflow-hidden mb-6">
                 <img src={a.img} alt={a.t} className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
               </div>
@@ -407,6 +409,8 @@ function CredibilityStrip() {
 
 /* ---------------- 5.5. CERTIFICATES & QUALIFICATIONS ---------------- */
 function CertificatesSection() {
+  const certs = [cer1, cer2, cer3, cer4];
+
   return (
     <section className="py-16 lg:py-24 bg-card border-b border-border">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
@@ -421,8 +425,19 @@ function CertificatesSection() {
           </p>
         </div>
         
-        <div className="max-w-5xl mx-auto flex justify-center">
-          <img src={certiImg} alt="Certificates and Qualifications" className="w-full h-auto object-contain drop-shadow-sm" />
+        <div className="max-w-6xl mx-auto flex overflow-x-auto snap-x snap-mandatory sm:grid sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 pb-6 -mx-6 px-6 lg:mx-0 lg:px-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+          {certs.map((cert, idx) => (
+            <div 
+              key={idx}
+              className="relative w-[75vw] sm:w-auto h-[350px] sm:h-[400px] md:h-[300px] lg:h-[400px] shrink-0 snap-center sm:snap-align-none flex justify-center items-center"
+            >
+              <img 
+                src={cert} 
+                alt={`Certificate ${idx + 1}`} 
+                className="w-full h-full object-contain drop-shadow-sm hover:scale-105 transition-transform duration-500" 
+              />
+            </div>
+          ))}
         </div>
       </div>
     </section>
@@ -560,9 +575,9 @@ function BlogSection() {
           </Link>
         </div>
         
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="flex overflow-x-auto snap-x snap-mandatory md:grid md:grid-cols-3 gap-6 sm:gap-8 pb-6 -mx-6 px-6 lg:mx-0 lg:px-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
           {posts.map((post) => (
-            <div key={post.id} className="bg-background border border-border p-8 rounded-sm hover:border-primary transition-all hover:shadow-elevated group flex flex-col">
+            <div key={post.id} className="w-[85vw] md:w-auto shrink-0 snap-center md:snap-align-none bg-background border border-border p-8 rounded-sm hover:border-primary transition-all hover:shadow-elevated group flex flex-col">
               <h3 className="font-serif text-2xl text-primary group-hover:text-gold transition-colors">{post.title}</h3>
               <p className="mt-4 text-muted-foreground line-clamp-3 leading-relaxed">{post.excerpt}</p>
               <div className="mt-8 flex items-center justify-between pt-6 border-t border-border mt-auto">
@@ -925,7 +940,11 @@ function ContactFooter() {
       </div>
       <div className="border-t border-border bg-background py-6">
         <div className="mx-auto max-w-7xl px-6 lg:px-10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
-          <div className="order-3 sm:order-1">© {new Date().getFullYear()} NKE Floorcare Pvt. Ltd. All Rights Reserved.</div>
+          <div className="order-3 sm:order-1 flex flex-col md:flex-row items-center md:gap-2">
+            <span>© {new Date().getFullYear()} NKE Floorcare Pvt. Ltd. All Rights Reserved.</span>
+            <span className="hidden md:inline">|</span>
+            <span className="mt-2 md:mt-0">Crafted by <a href="https://zuarak.com" target="_blank" rel="noreferrer" className="text-gold hover:underline">ZUARAK</a></span>
+          </div>
           
           <div className="flex gap-6 items-center order-1 sm:order-2">
             <a href="https://www.linkedin.com/company/nke-floorcare/" target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">

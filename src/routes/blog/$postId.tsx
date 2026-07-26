@@ -8,6 +8,7 @@ import {
   Twitter,
   Linkedin,
   Mail,
+  Download,
 } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { SectionHeader } from "@/components/shared/SectionHeader";
@@ -67,7 +68,7 @@ function Page() {
     excerpt: apiPost.short_description || apiPost.excerpt || "",
     content: apiPost.content || apiPost.long_description || apiPost.description || apiPost.short_description || "",
     category: apiPost.category || "Restoration",
-    author: apiPost.author || "NKE Floors Team",
+    author: apiPost.author || "NKE Floorcare Team",
     date: apiPost.formatted_date || apiPost.date || "2025",
     image: apiPost.image || "",
     pdf_link: apiPost.pdf_link,
@@ -125,69 +126,90 @@ function BlogArticle({
             <User className="h-4 w-4" />
             {post.author}
           </div>
-          <div className="flex items-center gap-2 ml-auto">
+          {/* <div className="flex items-center gap-2 ml-auto">
             <Share2 className="h-4 w-4" />
             <span>Share</span>
-          </div>
+          </div> */}
         </div>
       </div>
 
-      {/* Featured Image */}
-      <div className="mt-12 w-full">
-        <img
-          src={post.image}
-          alt={post.title}
-          className="w-full h-[500px] object-cover"
-          loading="lazy"
-        />
-      </div>
-
       {/* Content */}
-      <div className="mx-auto max-w-7xl px-6 lg:px-10 mt-16">
+      <div className="mx-auto max-w-7xl px-6 lg:px-10 mt-12">
         <div className="grid lg:grid-cols-12 gap-12">
           {/* Main Content */}
-          <div className="lg:col-span-8 prose prose-lg max-w-none">
-            {/<[a-z][\s\S]*>/i.test(post.content) ? (
-              <div dangerouslySetInnerHTML={{ __html: post.content }} />
-            ) : (
-              post.content.split("\n\n").map((paragraph, idx) => {
-                if (paragraph.startsWith("##")) {
-                  return (
-                    <h2
-                      key={idx}
-                      className="mt-8 mb-4 font-serif text-3xl text-primary"
+          <div className="lg:col-span-8">
+            <div className="">
+              {/* Left Side: Image */}
+              {post.image && (
+                <div className="w-full  shrink-0 mb-5">
+                  <img
+                    src={post.image}
+                    alt={post.title}
+                    className="w-full h-auto max-h-[500px] object-cover rounded-sm"
+                    loading="lazy"
+                  />
+                </div>
+              )}
+              
+              {/* Right Side: Content & Button */}
+              <div className="w-full md:flex-1 prose prose-lg max-w-none">
+                {/<[a-z][\s\S]*>/i.test(post.content) ? (
+                  <div dangerouslySetInnerHTML={{ __html: post.content }} />
+                ) : (
+                  post.content.split("\n\n").map((paragraph, idx) => {
+                    if (paragraph.startsWith("##")) {
+                      return (
+                        <h2
+                          key={idx}
+                          className="mt-8 mb-4 font-serif text-3xl text-primary first:mt-0"
+                        >
+                          {paragraph.replace("## ", "")}
+                        </h2>
+                      );
+                    }
+                    if (paragraph.startsWith("-")) {
+                      return (
+                        <ul key={idx} className="list-disc list-inside space-y-2 text-muted-foreground">
+                          {paragraph.split("\n").map((item, i) => (
+                            <li key={i} className="leading-relaxed">
+                              {item.replace("- ", "")}
+                            </li>
+                          ))}
+                        </ul>
+                      );
+                    }
+                    return (
+                      <p
+                        key={idx}
+                        className="text-muted-foreground leading-relaxed text-lg first:mt-0"
+                      >
+                        {paragraph}
+                      </p>
+                    );
+                  })
+                )}
+                
+                {post.pdf_link && (
+                  <div className="mt-8 pt-6 border-t border-border">
+                    <a
+                      href={post.pdf_link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 rounded-sm bg-gold px-7 py-4 text-sm font-medium text-white hover:bg-gold/90 transition-colors shadow-soft"
                     >
-                      {paragraph.replace("## ", "")}
-                    </h2>
-                  );
-                }
-                if (paragraph.startsWith("-")) {
-                  return (
-                    <ul key={idx} className="list-disc list-inside space-y-2 text-muted-foreground">
-                      {paragraph.split("\n").map((item, i) => (
-                        <li key={i} className="leading-relaxed">
-                          {item.replace("- ", "")}
-                        </li>
-                      ))}
-                    </ul>
-                  );
-                }
-                return (
-                  <p
-                    key={idx}
-                    className="text-muted-foreground leading-relaxed text-lg"
-                  >
-                    {paragraph}
-                  </p>
-                );
-              })
-            )}
+                      <Download className="h-4 w-4" />
+                      View PDF Guide
+                    </a>
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
 
           {/* Sidebar */}
           <div className="lg:col-span-4 sticky top-24 h-fit">
             {/* Share Section */}
-            <div className="border border-border bg-card rounded-sm p-8">
+            {/* <div className="border border-border bg-card rounded-sm p-8">
               <h3 className="font-serif text-xl text-primary mb-6">
                 Share This Article
               </h3>
@@ -208,7 +230,7 @@ function BlogArticle({
                   </a>
                 ))}
               </div>
-            </div>
+            </div> */}
 
             {/* Author Box */}
             <div className="mt-8 border border-border bg-card rounded-sm p-8">
