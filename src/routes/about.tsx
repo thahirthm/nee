@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import {
   Award,
   Shield,
@@ -73,18 +73,18 @@ function Page() {
             </p>
 
             <div className="flex flex-wrap gap-4">
-              <a
-                href="#contact"
+              <Link
+                to="/contact"
                 className="inline-flex items-center gap-2 rounded-sm bg-gold px-7 py-4 text-sm font-medium text-white hover:bg-gold/90 transition-colors shadow-soft"
               >
                 Get Free Consultation <ArrowRight className="h-4 w-4" />
-              </a>
-              <a
-                href="/services"
+              </Link>
+              <Link
+                to="/services"
                 className="inline-flex items-center gap-2 rounded-sm border border-white/30 bg-white/10 backdrop-blur-sm px-7 py-4 text-sm font-medium text-white hover:border-gold transition-colors"
               >
-                View Our Portfolio
-              </a>
+                Explore Services
+              </Link>
             </div>
           </div>
         </div>
@@ -467,18 +467,18 @@ function ContactCTA() {
           Schedule a complimentary consultation with our specialists to discuss your project needs and goals.
         </p>
         <div className="mt-10 flex flex-wrap justify-center gap-4">
-          <a
-            href="#"
+          <Link
+            to="/contact"
             className="inline-flex items-center gap-2 rounded-sm bg-gold px-8 py-4 text-sm font-medium text-gold-foreground hover:bg-gold/90 transition-colors"
           >
             Get Free Consultation <ArrowRight className="h-4 w-4" />
-          </a>
-          <a
-            href="/services"
+          </Link>
+          <Link
+            to="/services"
             className="inline-flex items-center gap-2 rounded-sm border border-primary-foreground/30 px-8 py-4 text-sm font-medium hover:border-gold hover:text-gold transition-colors"
           >
             View Our Services
-          </a>
+          </Link>
         </div>
       </div>
     </section>

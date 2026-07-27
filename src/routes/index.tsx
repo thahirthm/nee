@@ -43,6 +43,12 @@ import cer1 from "@/assets/cer1.png";
 import cer2 from "@/assets/cer2.png";
 import cer3 from "@/assets/cer3.png";
 import cer4 from "@/assets/cer4.png";
+import partnerRamco from "@/assets/the_ramco_cements_limited_logo.jpeg";
+import partnerThumbnail from "@/assets/thumbnail_c4ca4238a0b923820dcc509a6f75849b496.png";
+import partnerImg from "@/assets/img.jpeg";
+import partnerG from "@/assets/g.jpeg";
+import partnerCo from "@/assets/co.jpeg";
+import partnerChannel from "@/assets/channels4_profile.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -973,12 +979,12 @@ function ContactFooter() {
 /* ---------------- 15. PARTNER BRANDS ---------------- */
 function PartnerBrandsSection() {
   const logos = [
-    "https://placehold.co/200x80/f8f9fa/334155?text=Brand+1",
-    "https://placehold.co/200x80/f8f9fa/334155?text=Brand+2",
-    "https://placehold.co/200x80/f8f9fa/334155?text=Brand+3",
-    "https://placehold.co/200x80/f8f9fa/334155?text=Brand+4",
-    "https://placehold.co/200x80/f8f9fa/334155?text=Brand+5",
-    "https://placehold.co/200x80/f8f9fa/334155?text=Brand+6",
+    partnerRamco,
+    partnerThumbnail,
+    partnerImg,
+    partnerG,
+    partnerCo,
+    partnerChannel,
   ];
 
   return (

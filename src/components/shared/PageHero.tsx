@@ -26,7 +26,7 @@ export function PageHero({
   return (
     <section
       id="hero"
-      className="relative min-h-[500px] md:min-h-screen flex items-center pt-24"
+      className="relative min-h-[500px] md:min-h-screen flex items-center pt-40"
     >
       {backgroundImage && (
         <div className="absolute inset-0 -z-10">

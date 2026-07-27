@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { X, ArrowRight } from "lucide-react";
 import { Header } from "@/components/site/Header";
@@ -286,18 +286,18 @@ function GalleryCTA() {
           Ready to transform your floors? Let's discuss your project and create a custom restoration plan.
         </p>
         <div className="mt-10 flex flex-wrap justify-center gap-4">
-          <a
-            href="#"
+          <Link
+            to="/contact"
             className="inline-flex items-center gap-2 rounded-sm bg-primary px-8 py-4 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
           >
             Get Free Consultation <ArrowRight className="h-4 w-4" />
-          </a>
-          <a
-            href="/services"
+          </Link>
+          <Link
+            to="/services"
             className="inline-flex items-center gap-2 rounded-sm border border-primary/20 px-8 py-4 text-sm font-medium text-primary hover:border-gold transition-colors"
           >
             View Services
-          </a>
+          </Link>
         </div>
       </div>
     </section>

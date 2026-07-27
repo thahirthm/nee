@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Header } from "@/components/site/Header";
 import { ArrowRight } from "lucide-react";
@@ -136,12 +136,12 @@ function ProjectsPage() {
       <footer className="border-t border-border bg-muted py-12">
         <div className="mx-auto max-w-7xl px-6 lg:px-10 text-center">
           <h2 className="font-serif text-3xl text-primary mb-6">Ready to discuss your project?</h2>
-          <a
-            href="/contact"
+          <Link
+            to="/contact"
             className="inline-flex items-center justify-center rounded-sm bg-primary px-8 py-4 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
           >
             Get a Free Consultation
-          </a>
+          </Link>
         </div>
       </footer>
     </main>

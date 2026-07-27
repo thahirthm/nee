@@ -139,13 +139,7 @@ function ContactMain() {
             >
               9600040155<br/>9600047255
             </a>
-            <p className="mt-2 text-xs text-muted-foreground">
-              Mon - Fri: 9 AM - 6 PM
-              <br />
-              Sat: 10 AM - 4 PM
-              <br />
-              Sun: Closed
-            </p>
+        
           </div>
 
           {/* Email */}
@@ -162,9 +156,7 @@ function ContactMain() {
               <a href="mailto:dilip@nkefloors.com" className="block hover:text-gold transition-colors">dilip@nkefloors.com</a>
               <a href="mailto:Krish@nkefloors.com" className="block hover:text-gold transition-colors">Krish@nkefloors.com</a>
             </div>
-            <p className="mt-2 text-xs text-muted-foreground">
-              Response time: Typically 24 hours or less
-            </p>
+           
           </div>
 
           {/* Office Location */}
@@ -440,9 +432,11 @@ function GoogleMap() {
           {mapLoaded ? (
             <iframe
               title="NKE Floors office location"
-              src="https://www.openstreetmap.org/export/embed.html?bbox=-0.1%2C51.5%2C-0.08%2C51.51&layer=mapnik"
-              className="h-full w-full"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.919825769857!2d80.24413916530737!3d13.04077514078001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a52664de5d3f3e3%3A0x527c5f618221a2bd!2s57%2F25%2C%20N%20Boag%20Rd%2C%20Drivers%20Colony%2C%20T.%20Nagar%2C%20Chennai%2C%20Greater%20Chennai%2C%20Tamil%20Nadu%20600017!5e0!3m2!1sen!2sin!4v1785133512101!5m2!1sen!2sin"
+              className="h-full w-full border-0"
+              allowFullScreen
               loading="lazy"
+              referrerPolicy="strict-origin-when-cross-origin"
             />
           ) : (
             <button

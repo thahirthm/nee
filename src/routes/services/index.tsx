@@ -15,16 +15,6 @@ function Page() {
   return (
     <main className="bg-background text-foreground">
       <Header />
-      <PageHero
-        title="Specialist Restoration & Polishing"
-        subtitle="Our Services"
-        description="A complete suite of premium services for natural stone, terrazzo and concrete — delivered by certified specialists with two decades of experience."
-        backgroundImage={heroImg}
-        cta={{
-          text: "Schedule Consultation",
-          href: "#contact",
-        }}
-      />
 
       <ServicesList />
       <ServiceProcess />
@@ -36,7 +26,7 @@ function Page() {
 /* ============ SERVICES LIST ============ */
 function ServicesList() {
   return (
-    <div className="py-28 bg-card">
+    <div className="pt-40 pb-28 bg-card">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <SectionHeader
           eyebrow="Our Service Domains"

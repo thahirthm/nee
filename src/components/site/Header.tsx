@@ -44,6 +44,8 @@ const NAV = [
 ];
 
 function DesktopDropdown({ item, isTransparentState }: { item: any, isTransparentState: boolean }) {
+  const location = useLocation();
+  const isActive = item.href === "/" ? location.pathname === "/" : location.pathname.startsWith(item.href);
   const [isOpen, setIsOpen] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -62,7 +64,7 @@ function DesktopDropdown({ item, isTransparentState }: { item: any, isTransparen
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div className={`flex items-center gap-1 cursor-pointer text-sm font-medium transition-colors py-2 ${isTransparentState ? 'text-white hover:text-white/80' : 'text-black hover:text-primary'}`}>
+      <div className={`flex items-center gap-1 cursor-pointer text-sm font-medium transition-colors py-2 relative after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:bg-gold hover:after:w-full after:transition-all ${isActive ? 'after:w-full' : 'after:w-0'} ${isTransparentState ? 'text-white hover:text-white/80' : 'text-black hover:text-primary'}`}>
         {item.label} <ChevronDown className="h-4 w-4" />
       </div>
       {isOpen && (
@@ -79,7 +81,7 @@ function DesktopDropdown({ item, isTransparentState }: { item: any, isTransparen
                       <Link
                         to={subItem.href.split('#')[0]}
                         hash={subItem.href.split('#')[1]}
-                        className="text-sm text-black hover:text-primary transition-colors block"
+                        className={`text-sm transition-colors block ${(subItem.href === "/" ? location.pathname === "/" : location.pathname.startsWith(subItem.href)) ? "text-gold" : "text-black hover:text-primary"}`}
                         onClick={() => setIsOpen(false)}
                       >
                         {subItem.label}
@@ -147,19 +149,20 @@ export function Header() {
         </Link>
 
         <nav className="hidden lg:flex items-center gap-7">
-          {NAV.map((n) =>
-            n.dropdown ? (
+          {NAV.map((n) => {
+            const isActive = n.href === "/" ? location.pathname === "/" : location.pathname.startsWith(n.href);
+            return n.dropdown ? (
               <DesktopDropdown key={n.label} item={n} isTransparentState={isTransparentState} />
             ) : (
               <Link
                 key={n.href}
                 to={n.href}
-                className={`text-sm font-medium transition-colors relative after:absolute after:left-0 after:-bottom-1 after:h-px after:w-0 after:bg-gold hover:after:w-full after:transition-all ${isTransparentState ? 'text-white hover:text-white/80' : 'text-black hover:text-primary'}`}
+                className={`text-sm font-medium transition-colors relative after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:bg-gold hover:after:w-full after:transition-all ${isActive ? 'after:w-full' : 'after:w-0'} ${isTransparentState ? 'text-white hover:text-white/80' : 'text-black hover:text-primary'}`}
               >
                 {n.label}
               </Link>
             )
-          )}
+          })}
         </nav>
 
         <div className="hidden lg:flex items-center gap-4">
@@ -210,7 +213,7 @@ export function Header() {
                                   to={subItem.href.split('#')[0]}
                                   hash={subItem.href.split('#')[1]}
                                   onClick={() => setOpen(false)}
-                                  className="text-sm text-muted-foreground"
+                                  className={`text-sm ${(subItem.href === "/" ? location.pathname === "/" : location.pathname.startsWith(subItem.href)) ? "text-gold" : "text-muted-foreground hover:text-primary"}`}
                                 >
                                   {subItem.label}
                                 </Link>
@@ -225,7 +228,7 @@ export function Header() {
                   <Link
                     to={n.href}
                     onClick={() => setOpen(false)}
-                    className="py-2 block text-base font-medium text-primary"
+                    className={`py-2 block text-base font-medium transition-colors ${(n.href === "/" ? location.pathname === "/" : location.pathname.startsWith(n.href)) ? "text-gold" : "text-primary hover:text-gold"}`}
                   >
                     {n.label}
                   </Link>

@@ -142,12 +142,12 @@ function ServiceDetails({ service }: { service: typeof SERVICES[0] }) {
               <p className="mt-3 text-sm text-muted-foreground">
                 Schedule a free consultation with our specialists to discuss your project.
               </p>
-              <a
-                href="#contact"
+              <Link
+                to="/contact"
                 className="mt-6 block w-full text-center rounded-sm bg-primary px-6 py-3 text-sm font-medium text-primary-foreground hover:bg-primary/90 transition-colors"
               >
                 Get Free Consultation
-              </a>
+              </Link>
             </div>
           </div>
         </div>
