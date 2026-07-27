@@ -154,7 +154,7 @@ function BlogArticle({
               {/* Right Side: Content & Button */}
               <div className="w-full md:flex-1 prose prose-lg max-w-none">
                 {/<[a-z][\s\S]*>/i.test(post.content) ? (
-                  <div dangerouslySetInnerHTML={{ __html: post.content }} />
+                  <div className="summernote-content text-lg text-muted-foreground" dangerouslySetInnerHTML={{ __html: post.content }} />
                 ) : (
                   post.content.split("\n\n").map((paragraph, idx) => {
                     if (paragraph.startsWith("##")) {

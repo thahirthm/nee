@@ -128,3 +128,31 @@
   color: var(--gold);
   font-weight: 600;
 }
+
+@utility summernote-content {
+  & p { margin-bottom: 1em; line-height: 1.6; }
+  & h1, & h2, & h3, & h4, & h5, & h6 { font-weight: 600; margin-bottom: 0.5em; margin-top: 1.5em; color: var(--color-primary); font-family: var(--font-serif); }
+  & h1 { font-size: 2.25rem; }
+  & h2 { font-size: 1.875rem; }
+  & h3 { font-size: 1.5rem; }
+  & h4 { font-size: 1.25rem; }
+  & ul { list-style-type: disc; padding-left: 2rem; margin-bottom: 1em; }
+  & ol { list-style-type: decimal; padding-left: 2rem; margin-bottom: 1em; }
+  & li { margin-bottom: 0.25em; }
+  & a { text-decoration: underline; color: var(--color-primary); }
+  & b, & strong { font-weight: 700; }
+  & i, & em { font-style: italic; }
+  & u { text-decoration: underline; }
+  & blockquote { border-left: 4px solid var(--color-gold); padding-left: 1rem; font-style: italic; color: var(--color-muted-foreground); margin: 1.5em 0; }
+  & img { max-width: 100%; height: auto; border-radius: var(--radius-sm); margin: 1.5em 0; }
+  & iframe { max-width: 100%; }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+@utility animate-marquee {
+  animation: marquee 30s linear infinite;
+}

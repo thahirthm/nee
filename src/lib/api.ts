@@ -150,6 +150,17 @@ export async function getTestimonials(): Promise<Testimonial[]> {
   }
 }
 
+export async function getProjectCategories(): Promise<ProjectCategory[]> {
+  try {
+    const res = await apiFetch("categories/");
+    if (!res.ok) return [];
+    const data = await res.json();
+    return Array.isArray(data) ? data : [];
+  } catch {
+    return [];
+  }
+}
+
 export async function getProjects(category?: string | number): Promise<Project[]> {
   try {
     let path = "projects/";
@@ -262,6 +273,15 @@ export function useProjectsQuery(category?: string | number) {
   return useQuery({
     queryKey: ["projects", category],
     queryFn: () => getProjects(category),
+    staleTime: 1000 * 60 * 5,
+    retry: 1,
+  });
+}
+
+export function useProjectCategoriesQuery() {
+  return useQuery({
+    queryKey: ["project_categories"],
+    queryFn: getProjectCategories,
     staleTime: 1000 * 60 * 5,
     retry: 1,
   });

@@ -45,15 +45,18 @@ function Page() {
   );
 }
 
-import { useProjectsQuery } from "@/lib/api";
+import { useProjectsQuery, useProjectCategoriesQuery } from "@/lib/api";
 
 /* ============ GALLERY ============ */
 function Gallery() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [selectedImage, setSelectedImage] = useState<any | null>(null);
 
-  // Fetch all projects
-  const { data: apiProjects, isLoading } = useProjectsQuery();
+  // Fetch categories
+  const { data: apiCategories } = useProjectCategoriesQuery();
+  
+  // Fetch projects (pass the category slug if not 'All')
+  const { data: apiProjects, isLoading } = useProjectsQuery(selectedCategory === "All" ? undefined : selectedCategory);
 
   // Map API projects to gallery format
   const galleryItems = (apiProjects || []).map((p) => ({
@@ -66,13 +69,14 @@ function Gallery() {
     youtube_link: p.youtube_link || null,
   }));
 
-  // Extract unique categories dynamically from the API data
-  const dynamicCategories = ["All", ...Array.from(new Set(galleryItems.map(item => item.category)))];
+  const filters = [{ name: "All", slug: "All" }];
+  if (apiCategories) {
+    apiCategories.forEach((cat) => {
+      filters.push({ name: cat.name, slug: cat.slug });
+    });
+  }
 
-  const filteredItems =
-    selectedCategory === "All"
-      ? galleryItems
-      : galleryItems.filter((item) => item.category === selectedCategory);
+  const filteredItems = galleryItems;
 
   return (
     <section className="pt-40 pb-28">
@@ -85,17 +89,17 @@ function Gallery() {
 
         {/* Category Filter */}
         <div className="mt-12 flex flex-wrap gap-2">
-          {dynamicCategories.map((cat) => (
+          {filters.map((cat) => (
             <button
-              key={cat}
-              onClick={() => setSelectedCategory(cat)}
+              key={cat.slug}
+              onClick={() => setSelectedCategory(cat.slug)}
               className={`px-5 py-2.5 text-xs uppercase tracking-widest rounded-sm border transition-colors ${
-                selectedCategory === cat
+                selectedCategory === cat.slug
                   ? "bg-primary text-primary-foreground border-primary"
                   : "bg-background text-muted-foreground border-border hover:border-gold hover:text-primary"
               }`}
             >
-              {cat}
+              {cat.name}
             </button>
           ))}
         </div>

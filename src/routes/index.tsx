@@ -66,6 +66,7 @@ function Page() {
     <main className="text-foreground pt-0">
       <Header />
       <Hero />
+     
       <UnderstandingSection />
       <VisualShowcase />
       <InvestmentSection />
@@ -76,6 +77,7 @@ function Page() {
       <FeaturedCaseStudy />
       <BlogSection />
       <CapabilityStatementCTA />
+       <PartnerBrandsSection />
       <ShilpaSevaTeaser />
       <VideoSection />
       <SisterBrandSection />
@@ -965,5 +967,51 @@ function ContactFooter() {
         </div>
       </div>
     </footer>
+  );
+}
+
+/* ---------------- 15. PARTNER BRANDS ---------------- */
+function PartnerBrandsSection() {
+  const logos = [
+    "https://placehold.co/200x80/f8f9fa/334155?text=Brand+1",
+    "https://placehold.co/200x80/f8f9fa/334155?text=Brand+2",
+    "https://placehold.co/200x80/f8f9fa/334155?text=Brand+3",
+    "https://placehold.co/200x80/f8f9fa/334155?text=Brand+4",
+    "https://placehold.co/200x80/f8f9fa/334155?text=Brand+5",
+    "https://placehold.co/200x80/f8f9fa/334155?text=Brand+6",
+  ];
+
+  return (
+    <section className="py-12 bg-white border-y border-border overflow-hidden">
+      <div className="mx-auto max-w-7xl px-6 lg:px-10 mb-8 text-center">
+        <h2 className="text-xl md:text-2xl font-serif text-primary">
+          Our Collaboration & Partnership Brands
+        </h2>
+      </div>
+      
+      {/* Marquee Container */}
+      <div className="relative flex overflow-x-hidden group">
+        <div className="py-4 animate-marquee whitespace-nowrap flex items-center">
+          {/* First set of logos */}
+          {logos.map((logo, idx) => (
+            <img 
+              key={`logo-1-${idx}`}
+              src={logo} 
+              alt={`Partner Brand ${idx + 1}`} 
+              className="mx-8 h-12 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" 
+            />
+          ))}
+          {/* Duplicate set for seamless loop */}
+          {logos.map((logo, idx) => (
+            <img 
+              key={`logo-2-${idx}`}
+              src={logo} 
+              alt={`Partner Brand ${idx + 1} clone`} 
+              className="mx-8 h-12 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" 
+            />
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
