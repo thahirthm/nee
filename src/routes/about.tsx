@@ -421,9 +421,10 @@ function Testimonials() {
             >
               <Quote className="h-8 w-8 text-gold" />
               <h3 className="mt-6 font-serif text-xl text-primary">{t.title}</h3>
-              <blockquote className="mt-4 font-serif text-base text-primary/90 leading-relaxed whitespace-pre-line flex-grow">
-                &ldquo;{t.q}&rdquo;
-              </blockquote>
+              <div 
+                className="mt-4 font-serif text-base text-primary/90 leading-relaxed flex-grow prose prose-sm max-w-none [&>p]:mb-0"
+                dangerouslySetInnerHTML={{ __html: t.q }}
+              />
               <div className="mt-8 flex items-center gap-4 pt-6 border-t border-border">
                 {t.image ? (
                   <img

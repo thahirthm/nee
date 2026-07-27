@@ -293,9 +293,10 @@ function BlogArticle({
                   <h3 className="mt-3 font-serif text-lg text-primary line-clamp-2">
                     {relatedPost.title}
                   </h3>
-                  <p className="mt-3 text-sm text-muted-foreground line-clamp-2">
-                    {relatedPost.excerpt}
-                  </p>
+                  <div 
+                    className="mt-3 text-sm text-muted-foreground line-clamp-2 prose prose-sm max-w-none [&>p]:mb-0"
+                    dangerouslySetInnerHTML={{ __html: relatedPost.excerpt }}
+                  />
                   <span className="mt-6 inline-flex items-center gap-2 text-xs font-medium text-primary group-hover:text-gold transition-colors">
                     Read More <ArrowRight className="h-3 w-3" />
                   </span>

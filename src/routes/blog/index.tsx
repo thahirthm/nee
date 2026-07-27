@@ -148,9 +148,10 @@ function BlogList() {
                 <h3 className="mt-3 font-serif text-lg text-primary line-clamp-2">
                   {post.title}
                 </h3>
-                <p className="mt-3 text-sm text-muted-foreground line-clamp-2">
-                  {post.excerpt}
-                </p>
+                <div 
+                  className="mt-3 text-sm text-muted-foreground line-clamp-2 prose prose-sm max-w-none [&>p]:mb-0"
+                  dangerouslySetInnerHTML={{ __html: post.excerpt }}
+                />
                 <div className="mt-6 flex items-center gap-4 text-[10px] text-muted-foreground">
                   <span className="flex items-center gap-1">
                     <Calendar className="h-3 w-3" />

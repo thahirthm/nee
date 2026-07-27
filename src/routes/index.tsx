@@ -245,9 +245,9 @@ const SHOWCASE_CONTENT = [
   {
     title: "Indian Marble Restoration",
     description: "This is an sit out with white and green marble heavily worn out and stained with use. We cleaned the floor with suitable deep cleaner and resurfaced and polished.",
-    problem: "Stained and discolored outdoor tiles exposed to harsh weather conditions.",
-    solution: "Deep chemical cleaning followed by advanced sealing techniques.",
-    result: "Vibrant, protected tiles that resist future weathering and staining."
+    problem: "A modern kitchen floor, deteriorated with time and contamination of oil vapor from cooking.",
+    solution: "Deep cleaning with degreaser, resurfacing, polishing and application of water and oil resistant sealer.",
+    result: "A stunning floor a Owner's pride."
   }
 ];
 
@@ -618,7 +618,10 @@ function BlogSection() {
           {posts.map((post) => (
             <div key={post.id} className="w-[85vw] md:w-auto shrink-0 snap-center md:snap-align-none bg-background border border-border p-8 rounded-sm hover:border-primary transition-all hover:shadow-elevated group flex flex-col">
               <h3 className="font-serif text-2xl text-primary group-hover:text-gold transition-colors">{post.title}</h3>
-              <p className="mt-4 text-muted-foreground line-clamp-3 leading-relaxed">{post.excerpt}</p>
+              <div 
+                className="mt-4 text-muted-foreground line-clamp-3 leading-relaxed text-sm [&>p]:mb-0 prose max-w-none"
+                dangerouslySetInnerHTML={{ __html: post.excerpt }}
+              />
               <div className="mt-8 flex items-center justify-between pt-6 border-t border-border mt-auto">
                 <span className="text-xs text-muted-foreground uppercase tracking-widest">{post.date}</span>
                 <Link to={`/blog/${post.id}`} className="flex items-center gap-2 text-sm font-medium text-primary group-hover:text-gold transition-colors">
