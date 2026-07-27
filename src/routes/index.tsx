@@ -27,7 +27,11 @@ import { SectionHeader } from "@/components/shared/SectionHeader";
 import { BeforeAfter } from "@/components/site/BeforeAfter";
 import { SERVICES } from "@/lib/services-data";
 import { useBlogsQuery, useTestimonialsQuery, useSubscribeMutation } from "@/lib/api";
-
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination, Navigation } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
 import mainBanner from "@/assets/new-ban.png";
 import wornFloorBefore from "@/assets/second.jpeg";
 import projectHotel from "@/assets/m-3.jpg";
@@ -43,6 +47,8 @@ import cer1 from "@/assets/cer1.png";
 import cer2 from "@/assets/cer2.png";
 import cer3 from "@/assets/cer3.png";
 import cer4 from "@/assets/cer4.png";
+import cert from "@/assets/cert.jpeg";
+import cert3img from "@/assets/cert3.jpeg";
 import partnerRamco from "@/assets/the_ramco_cements_limited_logo.jpeg";
 import partnerThumbnail from "@/assets/thumbnail_c4ca4238a0b923820dcc509a6f75849b496.png";
 import partnerImg from "@/assets/img.jpeg";
@@ -238,7 +244,7 @@ const SHOWCASE_CONTENT = [
   },
   {
     title: "Indian Marble Restoration",
-    description: "Watch how we transform weathered and stained exterior surfaces into vibrant, protected areas.",
+    description: "This is an sit out with white and green marble heavily worn out and stained with use. We cleaned the floor with suitable deep cleaner and resurfaced and polished.",
     problem: "Stained and discolored outdoor tiles exposed to harsh weather conditions.",
     solution: "Deep chemical cleaning followed by advanced sealing techniques.",
     result: "Vibrant, protected tiles that resist future weathering and staining."
@@ -415,37 +421,62 @@ function CredibilityStrip() {
   );
 }
 
-/* ---------------- 5.5. CERTIFICATES & QUALIFICATIONS ---------------- */
 function CertificatesSection() {
-  const certs = [cer1, cer2, cer3, cer4];
+  const certs = [cer1, cer2, cer3, cer4, cert, cert3img];
 
   return (
     <section className="py-16 lg:py-24 bg-card border-b border-border">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        <div className="text-center max-w-3xl mx-auto mb-12 lg:mb-16">
-          <Eyebrow>Global Credentials</Eyebrow>
-          <h2 className="mt-2 font-serif text-3xl sm:text-4xl text-primary leading-tight">
-            Certificates & Qualifications
-          </h2>
-          <div className="mt-6 h-px w-16 bg-gold mx-auto" />
-          <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
-            We are trained and certified by the world's leading manufacturers of restoration equipment and chemicals. Our global certifications ensure that every project is executed using internationally approved processes and standards.
-          </p>
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 lg:mb-16 gap-6 relative">
+          <div className="max-w-2xl">
+            <Eyebrow>Global Credentials</Eyebrow>
+            <h2 className="mt-2 font-serif text-3xl sm:text-4xl text-primary leading-tight">
+              Certificates & Qualifications
+            </h2>
+            <div className="mt-6 h-px w-16 bg-gold" />
+            <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
+              We are trained and certified by the world's leading manufacturers of restoration equipment and chemicals. Our global certifications ensure that every project is executed using internationally approved processes and standards.
+            </p>
+          </div>
+          
+          <div className="flex gap-2 shrink-0 self-start md:self-end">
+            <button className="cert-prev h-12 w-12 flex items-center justify-center rounded-sm border border-border bg-background hover:border-gold hover:text-gold transition-colors shadow-sm">
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+            <button className="cert-next h-12 w-12 flex items-center justify-center rounded-sm border border-border bg-background hover:border-gold hover:text-gold transition-colors shadow-sm">
+              <ChevronRight className="h-5 w-5" />
+            </button>
+          </div>
         </div>
         
-        <div className="max-w-6xl mx-auto flex overflow-x-auto snap-x snap-mandatory sm:grid sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 pb-6 -mx-6 px-6 lg:mx-0 lg:px-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-          {certs.map((cert, idx) => (
-            <div 
-              key={idx}
-              className="relative w-[75vw] sm:w-auto h-[350px] sm:h-[400px] md:h-[300px] lg:h-[400px] shrink-0 snap-center sm:snap-align-none flex justify-center items-center"
-            >
-              <img 
-                src={cert} 
-                alt={`Certificate ${idx + 1}`} 
-                className="w-full h-full object-contain drop-shadow-sm hover:scale-105 transition-transform duration-500" 
-              />
-            </div>
-          ))}
+        <div className="max-w-6xl mx-auto px-6 lg:px-0">
+          <Swiper
+            modules={[Autoplay, Navigation]}
+            spaceBetween={30}
+            slidesPerView={1}
+            loop={true}
+            breakpoints={{
+              640: { slidesPerView: 2 },
+              768: { slidesPerView: 3 },
+              1024: { slidesPerView: 4 },
+            }}
+            autoplay={{ delay: 3000, disableOnInteraction: false }}
+            navigation={{
+              prevEl: '.cert-prev',
+              nextEl: '.cert-next',
+            }}
+            className="pb-4"
+          >
+            {certs.map((cert, idx) => (
+              <SwiperSlide key={idx} className="flex justify-center items-center h-[350px] sm:h-[400px] md:h-[300px] lg:h-[400px]">
+                <img 
+                  src={cert} 
+                  alt={`Certificate ${idx + 1}`} 
+                  className="w-full h-full object-contain drop-shadow-sm hover:scale-105 transition-transform duration-500" 
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
       </div>
     </section>
