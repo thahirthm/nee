@@ -40,8 +40,8 @@ function ShilpaSevaPage() {
                 </span>
               </div>
               
-              <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.1] text-white">
-                Building Skills.<br/>Building Character.<br/>Building Futures.
+              <h1 className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl leading-[1.2] text-white">
+                "Every floor you give us the opportunity to polish, helps us polish a life."
               </h1>
             </div>
           </div>
@@ -85,7 +85,7 @@ function ShilpaSevaPage() {
             <h3 className="font-serif text-3xl md:text-4xl text-primary mb-8">Our Vision</h3>
             <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
               <p>
-                Our vision is simple. To create opportunities for thousands of young people to develop specialised skills in floor restoration, surface care, and related trades while also helping them become responsible professionals, dependable family members, and confident individuals.
+                A future where every floor creates a memorable first impression, welcomes new beginnings, and brings cherished memories back to life — while every craftsman builds a life of dignity.
               </p>
               <p>
                 We want every trainee to leave with more than a skill. We want them to leave with confidence. With dignity. With the ability to support their family. With the desire to help someone else in return.
@@ -242,6 +242,14 @@ function ShilpaSevaPage() {
             >
               Get in Touch <ArrowRight className="h-4 w-4" />
             </a>
+          </div>
+        </section>
+
+        <section className="py-20 lg:py-28 bg-muted/30 border-t border-border text-center">
+          <div className="mx-auto max-w-4xl px-6 lg:px-10">
+            <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-primary leading-tight italic">
+              "Every floor you give us the opportunity to polish, helps us polish a life."
+            </h2>
           </div>
         </section>
 

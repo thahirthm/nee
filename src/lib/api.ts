@@ -5,6 +5,13 @@ export const API_BASE_URL = "https://admin.nkefloor.com/api";
 
 /* ==================== INTERFACES ==================== */
 
+export interface BlogCategory {
+  id: number;
+  name: string;
+  slug: string;
+  sequence: number;
+}
+
 export interface BlogPost {
   id: number | string;
   title: string;
@@ -17,7 +24,7 @@ export interface BlogPost {
   sequence?: number;
   created_at?: string;
   excerpt?: string;
-  category?: string;
+  category?: BlogCategory | string | null;
   author?: string;
   content?: string;
   featured?: boolean;
@@ -106,16 +113,31 @@ async function safeJson(res: Response): Promise<any> {
 
 /* ==================== API FUNCTIONS ==================== */
 
-export async function getBlogs(): Promise<BlogPost[]> {
+export async function getBlogCategories(): Promise<BlogCategory[]> {
   try {
-    const res = await apiFetch("blogs/");
+    const res = await apiFetch("blog-categories/");
+    if (!res.ok) return [];
+    const data = await res.json();
+    return Array.isArray(data) ? data : [];
+  } catch {
+    return [];
+  }
+}
+
+export async function getBlogs(category?: string | number): Promise<BlogPost[]> {
+  try {
+    let path = "blogs/";
+    if (category && category !== "All") {
+      path += `?category=${encodeURIComponent(category)}`;
+    }
+    const res = await apiFetch(path);
     if (!res.ok) return [];
     const data = await res.json();
     if (!Array.isArray(data)) return [];
     return data.map((item: any) => ({
       ...item,
       excerpt: item.short_description || "",
-      category: item.category || "Restoration",
+      category: item.category || null,
       author: item.author || "NKE Floorcare Team",
     }));
   } catch {
@@ -131,7 +153,7 @@ export async function getBlogById(idOrSlug: string | number): Promise<BlogPost |
     return {
       ...data,
       excerpt: data.short_description || "",
-      category: data.category || "Restoration",
+      category: data.category || null,
       author: data.author || "NKE Floorcare Team",
     };
   } catch {
@@ -242,10 +264,19 @@ export async function postSubscribe(payload: SubscribePayload) {
 
 /* ==================== REACT QUERY HOOKS ==================== */
 
-export function useBlogsQuery() {
+export function useBlogCategoriesQuery() {
   return useQuery({
-    queryKey: ["blogs"],
-    queryFn: getBlogs,
+    queryKey: ["blog_categories"],
+    queryFn: getBlogCategories,
+    staleTime: 1000 * 60 * 5,
+    retry: 1,
+  });
+}
+
+export function useBlogsQuery(category?: string | number) {
+  return useQuery({
+    queryKey: ["blogs", category],
+    queryFn: () => getBlogs(category),
     staleTime: 1000 * 60 * 5,
     retry: 1,
   });

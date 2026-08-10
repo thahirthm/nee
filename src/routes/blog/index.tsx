@@ -10,7 +10,7 @@ import projectHotel from "@/assets/project-hotel.jpg";
 import projectVilla from "@/assets/project-villa.jpg";
 import projectOffice from "@/assets/project-office.jpg";
 import projectIndustrial from "@/assets/project-industrial.jpg";
-import { useBlogsQuery } from "@/lib/api";
+import { useBlogsQuery, useBlogCategoriesQuery } from "@/lib/api";
 
 export const Route = createFileRoute("/blog/")({
   head: () => ({
@@ -58,31 +58,35 @@ function Page() {
 
 /* ============ BLOG LIST ============ */
 function BlogList() {
-  const { data: apiPosts, isLoading, isError } = useBlogsQuery();
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchTerm, setSearchTerm] = useState("");
+
+  const { data: apiCategories, isLoading: isCategoriesLoading } = useBlogCategoriesQuery();
+  const { data: apiPosts, isLoading, isError } = useBlogsQuery(selectedCategory === "All" ? undefined : selectedCategory);
 
   const postsToDisplay = (apiPosts || []).map((item) => ({
     id: String(item.id),
     rawId: item.id,
     title: item.title,
     excerpt: item.short_description || item.excerpt || "",
-    category: item.category || "Education",
+    category: item.category ? (typeof item.category === 'object' ? item.category.name : item.category) : "Education",
     author: item.author || "NKE Floors Team",
     date: item.formatted_date || item.date || "2025",
     image: item.image || projectHotel,
     featured: item.sequence === 1,
   }));
 
-  const dynamicCategories = ["All", ...Array.from(new Set(postsToDisplay.map(item => item.category)))];
+  const dynamicCategories = ["All", ...(apiCategories || []).map(cat => cat.slug)];
+  const categoryNames: Record<string, string> = { "All": "All Categories" };
+  (apiCategories || []).forEach(cat => {
+    categoryNames[cat.slug] = cat.name;
+  });
 
   const filteredPosts = postsToDisplay.filter((post) => {
-    const categoryMatch =
-      selectedCategory === "All" || post.category === selectedCategory;
     const searchMatch =
       post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
       post.excerpt.toLowerCase().includes(searchTerm.toLowerCase());
-    return categoryMatch && searchMatch;
+    return searchMatch;
   });
 
 
@@ -120,7 +124,7 @@ function BlogList() {
                   : "bg-background text-muted-foreground border-border hover:border-gold hover:text-primary"
               }`}
             >
-              {cat}
+              {categoryNames[cat] || cat}
             </button>
           ))}
         </div>

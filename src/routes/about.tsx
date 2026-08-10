@@ -92,7 +92,7 @@ function Page() {
 
       <CompanyIntro />
       <VisionMission />
-      <Achievements />
+      {/* <Achievements /> */}
       <WhyChoose />
       <TeamHighlights />
       <Testimonials />
@@ -115,19 +115,13 @@ function CompanyIntro() {
             width={1400}
             height={1600}
           />
-          <div className="absolute -bottom-8 -right-4 lg:-right-8 bg-card border border-border shadow-elevated p-8 max-w-xs hidden md:block">
-            <div className="font-serif text-5xl text-gold">5,000+</div>
-            <div className="mt-2 text-sm text-muted-foreground uppercase tracking-widest">
-              Projects Completed
-            </div>
-          </div>
         </div>
 
         <div className="lg:col-span-6">
           <SectionHeader
             eyebrow="Our Story"
             title="From Vision to Industry Leadership"
-            intro="Founded in 1999, NKE Floors began with a simple mission: to restore natural stone surfaces to their original brilliance. Over two decades later, we've become the trusted restoration partner for premium properties across the region."
+            intro="Founded in 1999, NKE Floors began with a simple mission: to create and restore floors that consistently exceed expectations, make memorable first impressions, welcome new beginnings, and revive cherished memories — while developing craftsmen of trust and building livelihoods of dignity. Over two decades later, we've become the trusted restoration partner for premium properties across the region."
           />
           <div className="mt-8 space-y-4 text-muted-foreground leading-relaxed">
             <p>
@@ -191,30 +185,18 @@ function VisionMission() {
           title="Vision & Mission"
         />
 
-        <div className="mt-16 grid lg:grid-cols-2 gap-12">
-          <div className="p-8 bg-background border border-border rounded-sm">
+        <div className="mt-16 grid lg:grid-cols-3 gap-8">
+          <div className="p-8 bg-background border border-border rounded-sm hover:border-gold transition-colors">
             <div className="inline-flex h-12 w-12 items-center justify-center rounded-sm bg-gold/10 border border-gold/30">
               <Award className="h-6 w-6 text-gold" />
             </div>
             <h3 className="mt-6 font-serif text-2xl text-primary">Our Vision</h3>
             <p className="mt-4 text-muted-foreground leading-relaxed">
-              To be the globally recognized leader in natural stone restoration, setting the benchmark for excellence, innovation, and sustainability in the industry.
+              A future where every floor creates a memorable first impression, welcomes new beginnings, and brings cherished memories back to life — while every craftsman builds a life of dignity.
             </p>
-            <ul className="mt-6 space-y-3">
-              {[
-                "Premium quality on every project",
-                "Continuous innovation in restoration techniques",
-                "Trusted partner for discerning clients",
-              ].map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm">
-                  <ArrowRight className="h-4 w-4 text-gold mt-0.5 shrink-0" />
-                  <span className="text-muted-foreground">{item}</span>
-                </li>
-              ))}
-            </ul>
           </div>
 
-          <div className="p-8 bg-background border border-border rounded-sm">
+          <div className="p-8 bg-background border border-border rounded-sm hover:border-gold transition-colors">
             <div className="inline-flex h-12 w-12 items-center justify-center rounded-sm bg-gold/10 border border-gold/30">
               <Shield className="h-6 w-6 text-gold" />
             </div>
@@ -222,20 +204,20 @@ function VisionMission() {
               Our Mission
             </h3>
             <p className="mt-4 text-muted-foreground leading-relaxed">
-              To deliver exceptional stone restoration services that preserve natural beauty, enhance property value, and exceed client expectations through expertise, integrity, and dedication.
+              To Create and restore floors that consistently exceed expectations make memorable first impressions, welcome new beginnings, and revive cherished memories — while developing craftsmen of trust and building livelihoods of dignity.
             </p>
-            <ul className="mt-6 space-y-3">
-              {[
-                "Restore surfaces to perfection",
-                "Provide outstanding customer service",
-                "Maintain the highest safety standards",
-              ].map((item) => (
-                <li key={item} className="flex items-start gap-3 text-sm">
-                  <ArrowRight className="h-4 w-4 text-gold mt-0.5 shrink-0" />
-                  <span className="text-muted-foreground">{item}</span>
-                </li>
-              ))}
-            </ul>
+          </div>
+
+          <div className="p-8 bg-background border border-border rounded-sm hover:border-gold transition-colors">
+            <div className="inline-flex h-12 w-12 items-center justify-center rounded-sm bg-gold/10 border border-gold/30">
+              <Users className="h-6 w-6 text-gold" />
+            </div>
+            <h3 className="mt-6 font-serif text-2xl text-primary">
+              Shared Promise
+            </h3>
+            <p className="mt-4 text-muted-foreground leading-relaxed">
+              Floors that impress, welcome, and bring cherished memories back to life. Craftsmen who earn trust and build dignity.
+            </p>
           </div>
         </div>
       </div>
@@ -248,8 +230,6 @@ function Achievements() {
   const milestones = [
     { year: 1999, title: "Founded NKE Floors", desc: "Started with a vision to restore natural stone." },
     { year: 2005, title: "Regional Recognition", desc: "Became the preferred partner for premium hospitality." },
-    { year: 2010, title: "10,000 Projects", desc: "Completed restoration of over 10,000 projects." },
-    { year: 2015, title: "Certifications", desc: "Achieved ISO 9001:2015 Quality Management Certification." },
     { year: 2020, title: "Expansion", desc: "Expanded team and equipment for large-scale projects." },
     { year: 2026, title: "Industry Leader", desc: "Recognized as the leading restoration specialists." },
   ];
@@ -355,8 +335,6 @@ function WhyChoose() {
 function TeamHighlights() {
   const stats = [
     { label: "Years of Experience", value: "25+" },
-    { label: "Projects Completed", value: "10,000+" },
-    { label: "Team Members", value: "50+" },
     { label: "Client Satisfaction", value: "98%" },
   ];
 
@@ -369,7 +347,7 @@ function TeamHighlights() {
           intro="A dedicated team of specialists committed to delivering excellence on every project — measured by the satisfaction and success of our clients."
         />
 
-        <div className="mt-16 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="mt-16 grid sm:grid-cols-2 gap-6">
           {stats.map((s) => (
             <div
               key={s.label}

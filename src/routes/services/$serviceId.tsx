@@ -4,6 +4,7 @@ import { Header } from "@/components/site/Header";
 import { PageHero } from "@/components/shared/PageHero";
 import { SectionHeader } from "@/components/shared/SectionHeader";
 import { SERVICES } from "@/lib/services-data";
+import { Link } from "@tanstack/react-router";
 import heroImg from "@/assets/hero.jpg";
 import projectHotel from "@/assets/project-hotel.jpg";
 
@@ -57,8 +58,9 @@ function Page() {
       <ServiceDetails service={service} />
       <ServiceBenefits service={service} />
       <ServiceGallery />
-      <RelatedServices currentService={service} />
       <ServiceInquiry service={service} />
+      <RelatedServices currentService={service} />
+      <ServiceTagline />
     </main>
   );
 }
@@ -321,6 +323,19 @@ function ServiceInquiry({ service }: { service: typeof SERVICES[0] }) {
             <LinkIcon className="h-4 w-4" /> Call Now
           </a>
         </div>
+      </div>
+    </section>
+  );
+}
+
+/* ============ SERVICE TAGLINE ============ */
+function ServiceTagline() {
+  return (
+    <section className="py-20 lg:py-28 bg-muted/30 border-t border-border text-center">
+      <div className="mx-auto max-w-4xl px-6 lg:px-10">
+        <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-primary leading-tight italic">
+          "Every floor you give us the opportunity to polish, helps us polish a life."
+        </h2>
       </div>
     </section>
   );

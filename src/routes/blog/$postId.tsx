@@ -66,8 +66,8 @@ function Page() {
     id: String(apiPost.id),
     title: apiPost.title,
     excerpt: apiPost.short_description || apiPost.excerpt || "",
-    content: apiPost.content || apiPost.long_description || apiPost.description || apiPost.short_description || "",
-    category: apiPost.category || "Restoration",
+    content: (apiPost as any).text || apiPost.content || apiPost.short_description || "",
+    category: apiPost.category ? (typeof apiPost.category === 'object' ? apiPost.category.name : apiPost.category) : "Restoration",
     author: apiPost.author || "NKE Floorcare Team",
     date: apiPost.formatted_date || apiPost.date || "2025",
     image: apiPost.image || "",
@@ -288,14 +288,14 @@ function BlogArticle({
                 </div>
                 <div className="p-6">
                   <div className="text-[10px] uppercase tracking-widest text-gold">
-                    {relatedPost.category}
+                    {relatedPost.category ? (typeof relatedPost.category === 'object' ? relatedPost.category.name : relatedPost.category) : "Restoration"}
                   </div>
                   <h3 className="mt-3 font-serif text-lg text-primary line-clamp-2">
                     {relatedPost.title}
                   </h3>
                   <div 
                     className="mt-3 text-sm text-muted-foreground line-clamp-2 prose prose-sm max-w-none [&>p]:mb-0"
-                    dangerouslySetInnerHTML={{ __html: relatedPost.excerpt }}
+                    dangerouslySetInnerHTML={{ __html: relatedPost.excerpt || "" }}
                   />
                   <span className="mt-6 inline-flex items-center gap-2 text-xs font-medium text-primary group-hover:text-gold transition-colors">
                     Read More <ArrowRight className="h-3 w-3" />

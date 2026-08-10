@@ -26,12 +26,10 @@ const NAV = [
       {
         title: "Our Service Domains",
         items: [
-          { label: "Marble & Natural Stones", href: "/services#marble-natural-stones" },
-          { label: "New Concrete Polishing", href: "/services#new-concrete-polishing" },
-          { label: "Industrial Concrete Finishing", href: "/services#industrial-concrete-finishing" },
-          { label: "Industrial Floor Renewal", href: "/services#industrial-floor-renewal" },
-          { label: "Tiled Floors (Interior & Exterior)", href: "/services#tiled-floors" },
-          { label: "Epoxy & Vinyl Floors", href: "/services#epoxy-vinyl-floors" },
+          { label: "Natural Stone Restoration", href: "/services#natural-stone" },
+          { label: "Industrial Concrete Flooring & Restoration", href: "/services#industrial-concrete" },
+          { label: "Hotel Floorcare Programs", href: "/services#hotel-floorcare" },
+          { label: "Decorative Concrete Systems", href: "/services#decorative-concrete" },
         ],
       }
     ],

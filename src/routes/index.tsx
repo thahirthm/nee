@@ -26,7 +26,7 @@ import { Header } from "@/components/site/Header";
 import { SectionHeader } from "@/components/shared/SectionHeader";
 import { BeforeAfter } from "@/components/site/BeforeAfter";
 import { SERVICES } from "@/lib/services-data";
-import { useBlogsQuery, useTestimonialsQuery, useSubscribeMutation } from "@/lib/api";
+import { useBlogsQuery, useTestimonialsQuery, useSubscribeMutation, useBlogCategoriesQuery } from "@/lib/api";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import "swiper/css";
@@ -49,12 +49,14 @@ import cer3 from "@/assets/cer3.png";
 import cer4 from "@/assets/cer4.png";
 import cert from "@/assets/cert.jpeg";
 import cert3img from "@/assets/cert3.jpeg";
+import newCer from "@/assets/new-cer.png";
 import partnerRamco from "@/assets/the_ramco_cements_limited_logo.jpeg";
 import partnerThumbnail from "@/assets/thumbnail_c4ca4238a0b923820dcc509a6f75849b496.png";
 import partnerImg from "@/assets/img.jpeg";
 import partnerG from "@/assets/g.jpeg";
-import partnerCo from "@/assets/co.jpeg";
+import partnerCo from "@/assets/coval-logo.png";
 import partnerChannel from "@/assets/channels4_profile.jpg";
+import nnImg from "@/assets/nn.png";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -230,10 +232,10 @@ function UnderstandingSection() {
 const SHOWCASE_CONTENT = [
   {
     title: "Italian Marble Restoration",
-    description: "See the transformation of a rugged industrial floor into a seamless, high-performance surface.",
-    problem: "Uneven, dusty concrete floor in an industrial facility.",
+    description: "See the transformation of worn Italian marble into a flawless, mirror-like masterpiece.",
+    problem: "Dull, scratched, and stained Italian marble surface.",
     solution: "Heavy-duty concrete grinding and application of dust-proof densifiers.",
-    result: "A seamless, high-gloss industrial floor that is easy to maintain."
+    result: "Experience the remarkable transformation of Italian marble with our premium restoration process."
   },
   {
     title: "Granite Restoration",
@@ -355,7 +357,7 @@ function InvestmentSection() {
 function ExpertiseSection() {
   const areas = [
     {
-      img: projectHotel,
+      img: projectVilla,
       t: "Natural Stone\nRestoration",
       d: "Italian Marble, Indian Marble, Granite, Kota, Jaisalmer, Mosaic, Terrazzo & Engineered Stone. Floors, walls, façades, and table tops."
     },
@@ -370,7 +372,7 @@ function ExpertiseSection() {
       d: "Keeping public areas guest-ready every day. Periodic restoration combined with scheduled Annual Maintenance Contracts for 5-star hotels."
     },
     {
-      img: projectVilla,
+      img: nnImg,
       t: "Decorative Concrete\nSystems",
       d: "Polished, burnished, and coloured concrete — the architectural flooring choice for homes, offices, and feature spaces."
     }
@@ -408,13 +410,13 @@ function CredibilityStrip() {
     <section className="py-12 bg-primary text-primary-foreground overflow-hidden">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 text-sm font-medium tracking-wide text-center">
-          <span>25+ Years of Experience</span>
+          {/* <span>25+ Years of Experience</span> */}
           <span className="hidden sm:inline text-gold">•</span>
           <span>Trusted by Leading Hospitality Brands</span>
           <span className="hidden sm:inline text-gold">•</span>
           <span>International Certifications: HTC Sweden, Klindex Italy, Korodur Germany, Hypergrinder USA, Guard France, Coval Technologies</span>
           <span className="hidden sm:inline text-gold">•</span>
-          <span>25 year with AMC partnership with leading hospitality</span>
+          {/* <span>25 year with AMC partnership with leading hospitality</span> */}
         </div>
       </div>
     </section>
@@ -422,7 +424,7 @@ function CredibilityStrip() {
 }
 
 function CertificatesSection() {
-  const certs = [cer1, cer2, cer3, cer4, cert, cert3img];
+  const certs = [cer1, cer2, cer3, cer4, cert, cert3img, newCer];
 
   return (
     <section className="py-16 lg:py-24 bg-card border-b border-border">
@@ -588,16 +590,25 @@ function FeaturedCaseStudy() {
 
 /* ---------------- 8. BLOG SECTION ---------------- */
 function BlogSection() {
-  const { data: apiPosts, isLoading } = useBlogsQuery();
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const { data: apiCategories } = useBlogCategoriesQuery();
+  const { data: apiPosts, isLoading } = useBlogsQuery(selectedCategory === "All" ? undefined : selectedCategory);
 
   const posts = (apiPosts || []).slice(0, 3).map((item) => ({
     id: String(item.id),
     title: item.title,
     excerpt: item.short_description || item.excerpt || "",
     date: item.formatted_date || item.date || "2025",
+    category: item.category ? (typeof item.category === 'object' ? item.category.name : item.category) : "Insights",
   }));
 
-  if (!isLoading && posts.length === 0) {
+  const dynamicCategories = ["All", ...(apiCategories || []).map(cat => cat.slug)];
+  const categoryNames: Record<string, string> = { "All": "All Categories" };
+  (apiCategories || []).forEach(cat => {
+    categoryNames[cat.slug] = cat.name;
+  });
+
+  if (!isLoading && posts.length === 0 && selectedCategory === "All") {
     return null;
   }
 
@@ -613,23 +624,49 @@ function BlogSection() {
              View All Articles <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
+
+        {/* Category Filter */}
+        <div className="mb-10 flex flex-wrap gap-2">
+          {dynamicCategories.map((cat) => (
+            <button
+              key={cat}
+              onClick={() => setSelectedCategory(cat)}
+              className={`px-5 py-2.5 text-xs uppercase tracking-widest rounded-sm border transition-colors ${
+                selectedCategory === cat
+                  ? "bg-primary text-primary-foreground border-primary"
+                  : "bg-background text-muted-foreground border-border hover:border-gold hover:text-primary"
+              }`}
+            >
+              {categoryNames[cat] || cat}
+            </button>
+          ))}
+        </div>
         
         <div className="flex overflow-x-auto snap-x snap-mandatory md:grid md:grid-cols-3 gap-6 sm:gap-8 pb-6 -mx-6 px-6 lg:mx-0 lg:px-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-          {posts.map((post) => (
-            <div key={post.id} className="w-[85vw] md:w-auto shrink-0 snap-center md:snap-align-none bg-background border border-border p-8 rounded-sm hover:border-primary transition-all hover:shadow-elevated group flex flex-col">
-              <h3 className="font-serif text-2xl text-primary group-hover:text-gold transition-colors">{post.title}</h3>
-              <div 
-                className="mt-4 text-muted-foreground line-clamp-3 leading-relaxed text-sm [&>p]:mb-0 prose max-w-none"
-                dangerouslySetInnerHTML={{ __html: post.excerpt }}
-              />
-              <div className="mt-8 flex items-center justify-between pt-6 border-t border-border mt-auto">
-                <span className="text-xs text-muted-foreground uppercase tracking-widest">{post.date}</span>
-                <Link to={`/blog/${post.id}`} className="flex items-center gap-2 text-sm font-medium text-primary group-hover:text-gold transition-colors">
-                  Read More <ArrowRight className="h-4 w-4" />
-                </Link>
+          {posts.length > 0 ? (
+            posts.map((post) => (
+              <div key={post.id} className="w-[85vw] md:w-auto shrink-0 snap-center md:snap-align-none bg-background border border-border p-8 rounded-sm hover:border-primary transition-all hover:shadow-elevated group flex flex-col">
+                <div className="text-[10px] uppercase tracking-widest text-gold mb-3">
+                  {post.category}
+                </div>
+                <h3 className="font-serif text-2xl text-primary group-hover:text-gold transition-colors">{post.title}</h3>
+                <div 
+                  className="mt-4 text-muted-foreground line-clamp-3 leading-relaxed text-sm [&>p]:mb-0 prose max-w-none"
+                  dangerouslySetInnerHTML={{ __html: post.excerpt }}
+                />
+                <div className="mt-8 flex items-center justify-between pt-6 border-t border-border mt-auto">
+                  <span className="text-xs text-muted-foreground uppercase tracking-widest">{post.date}</span>
+                  <Link to={`/blog/${post.id}`} className="flex items-center gap-2 text-sm font-medium text-primary group-hover:text-gold transition-colors">
+                    Read More <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </div>
               </div>
+            ))
+          ) : (
+            <div className="col-span-3 text-center py-12 text-muted-foreground">
+              No posts found for this category.
             </div>
-          ))}
+          )}
         </div>
       </div>
     </section>
@@ -968,13 +1005,26 @@ function ContactFooter() {
           <div>
             <h3 className="font-semibold uppercase tracking-wider text-sm mb-6">Our Services</h3>
             <ul className="space-y-3">
-              {SERVICES.map(service => (
-                <li key={service.id}>
-                  <Link to="/services" hash={service.id} className="text-muted-foreground hover:text-primary transition-colors text-sm block">
-                    {service.t}
-                  </Link>
-                </li>
-              ))}
+              <li>
+                <Link to="/services" hash="natural-stone" className="text-muted-foreground hover:text-primary transition-colors text-sm block">
+                  Natural Stone Restoration
+                </Link>
+              </li>
+              <li>
+                <Link to="/services" hash="industrial-concrete" className="text-muted-foreground hover:text-primary transition-colors text-sm block">
+                  Industrial Concrete Flooring & Restoration
+                </Link>
+              </li>
+              <li>
+                <Link to="/services" hash="hotel-floorcare" className="text-muted-foreground hover:text-primary transition-colors text-sm block">
+                  Hotel Floorcare Programs
+                </Link>
+              </li>
+              <li>
+                <Link to="/services" hash="decorative-concrete" className="text-muted-foreground hover:text-primary transition-colors text-sm block">
+                  Decorative Concrete Systems
+                </Link>
+              </li>
             </ul>
           
           </div>
