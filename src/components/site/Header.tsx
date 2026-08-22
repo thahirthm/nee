@@ -34,6 +34,19 @@ const NAV = [
       }
     ],
   },
+  {
+    label: "Testimonials",
+    href: "/about#testimonials",
+    dropdown: [
+      {
+        title: "Our Testimonials",
+        items: [
+          { label: "Testimonials", href: "/about#testimonials" },
+          { label: "Video Testimonials", href: "/gallery" },
+        ],
+      }
+    ]
+  },
   // { label: "Knowledge Hub", href: "/knowledge-hub" },
   { label: "Gallery ", href: "/gallery" },
   // { label: "Capability Statement", href: "/capability-statement" },
@@ -43,7 +56,7 @@ const NAV = [
 
 function DesktopDropdown({ item, isTransparentState }: { item: any, isTransparentState: boolean }) {
   const location = useLocation();
-  const isActive = item.href === "/" ? location.pathname === "/" : location.pathname.startsWith(item.href);
+  const isActive = item.href === "/" ? location.pathname === "/" : location.pathname.startsWith(item.href.split('#')[0]);
   const [isOpen, setIsOpen] = useState(false);
   const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
@@ -62,9 +75,13 @@ function DesktopDropdown({ item, isTransparentState }: { item: any, isTransparen
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
     >
-      <div className={`flex items-center gap-1 cursor-pointer text-sm font-medium transition-colors py-2 relative after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:bg-gold hover:after:w-full after:transition-all ${isActive ? 'after:w-full' : 'after:w-0'} ${isTransparentState ? 'text-white hover:text-white/80' : 'text-black hover:text-primary'}`}>
+      <Link 
+        to={item.href.split('#')[0]}
+        hash={item.href.split('#')[1]}
+        className={`flex items-center gap-1 cursor-pointer text-sm font-medium transition-colors py-2 relative after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:bg-gold hover:after:w-full after:transition-all ${isActive ? 'after:w-full' : 'after:w-0'} ${isTransparentState ? 'text-white hover:text-white/80' : 'text-black hover:text-primary'}`}
+      >
         {item.label} <ChevronDown className="h-4 w-4" />
-      </div>
+      </Link>
       {isOpen && (
         <div className={`absolute left-0 top-full pt-2 ${item.dropdown.length > 1 ? 'w-[500px]' : 'min-w-[320px]'}`}>
           <div className={`bg-background border border-border rounded-sm shadow-elevated p-6 flex gap-8 ${item.dropdown.length === 1 ? 'flex-col' : ''}`}>

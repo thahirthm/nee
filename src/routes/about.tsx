@@ -383,7 +383,7 @@ function Testimonials() {
   }
 
   return (
-    <section className="py-28 bg-card border-y border-border">
+    <section id="testimonials" className="py-28 bg-card border-y border-border">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <SectionHeader
           eyebrow="Testimonials"
