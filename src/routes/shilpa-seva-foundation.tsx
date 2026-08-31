@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
-import { ArrowRight, BookOpen, HandHeart, Users, GraduationCap, CheckCircle2 } from "lucide-react";
+import { ArrowRight, BookOpen, HandHeart, Users, GraduationCap, CheckCircle2, Eye, Target, Shield } from "lucide-react";
 import heroImage from "@/assets/shilpa-seva.png"; 
 import sevaBanner from "@/assets/seva-banner.png";
 import projectImage from "@/assets/m-3.jpg";
@@ -79,20 +79,64 @@ function ShilpaSevaPage() {
           </div>
         </section>
 
-        {/* OUR VISION */}
-        <section className="py-20 lg:py-20 bg-muted/30 border-b border-border text-center">
-          <div className="mx-auto max-w-4xl px-6 lg:px-10">
-            <h3 className="font-serif text-3xl md:text-4xl text-primary mb-8">Our Vision</h3>
-            <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
-              <p>
-                A future where every floor creates a memorable first impression, welcomes new beginnings, and brings cherished memories back to life — while every craftsman builds a life of dignity.
-              </p>
-              <p>
-                We want every trainee to leave with more than a skill. We want them to leave with confidence. With dignity. With the ability to support their family. With the desire to help someone else in return.
-              </p>
-              <p className="font-medium text-primary text-xl md:text-2xl mt-8 italic">
-                "Knowledge should never stop with one person. It should be passed forward."
-              </p>
+        {/* VISION, MISSION, PROMISE */}
+        <section className="py-20 lg:py-28 bg-muted/30 border-b border-border">
+          <div className="mx-auto max-w-7xl px-6 lg:px-10">
+            <div className="flex flex-col gap-8 lg:gap-12">
+              
+              {/* Vision (Full Width Highlight) */}
+              <div className="relative overflow-hidden bg-primary text-primary-foreground p-10 md:p-16 lg:p-20 rounded-sm shadow-xl">
+                <Eye className="absolute -right-10 -bottom-10 w-64 h-64 text-white/5 rotate-12" />
+                <div className="relative z-10 max-w-4xl">
+                  <div className="flex items-center gap-4 mb-8">
+                    <div className="h-12 w-12 rounded-full bg-gold/20 flex items-center justify-center">
+                      <Eye className="h-6 w-6 text-gold" />
+                    </div>
+                    <h3 className="font-serif text-3xl md:text-4xl text-gold">Our Vision</h3>
+                  </div>
+                  <div className="space-y-6 text-lg md:text-xl text-primary-foreground/90 leading-relaxed">
+                    <p>
+                      A future where every floor creates a memorable first impression, welcomes new beginnings, and brings cherished memories back to life — while every craftsman builds a life of dignity.
+                    </p>
+                    <p>
+                      We want every trainee to leave with more than a skill. We want them to leave with confidence. With dignity. With the ability to support their family. With the desire to help someone else in return.
+                    </p>
+                    <div className="pt-6 border-t border-white/10 mt-8">
+                      <p className="font-medium text-gold italic text-xl md:text-2xl">
+                        "Knowledge should never stop with one person. It should be passed forward."
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Mission and Promise (2 Column Split) */}
+              <div className="grid md:grid-cols-2 gap-8 lg:gap-12">
+                <div className="bg-background border-t-4 border-gold p-8 md:p-12 rounded-b-sm shadow-soft hover:shadow-elevated transition-shadow">
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="h-10 w-10 rounded-sm bg-muted flex items-center justify-center">
+                      <Target className="h-5 w-5 text-gold" />
+                    </div>
+                    <h3 className="font-serif text-2xl md:text-3xl text-primary">Our Mission</h3>
+                  </div>
+                  <p className="text-muted-foreground text-lg leading-relaxed">
+                    We create and restore floors that make memorable first impressions, welcome new beginnings, and revive cherished memories — while developing craftsmen of trust and building livelihoods of dignity.
+                  </p>
+                </div>
+
+                <div className="bg-background border-t-4 border-gold p-8 md:p-12 rounded-b-sm shadow-soft hover:shadow-elevated transition-shadow">
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="h-10 w-10 rounded-sm bg-muted flex items-center justify-center">
+                      <Shield className="h-5 w-5 text-gold" />
+                    </div>
+                    <h3 className="font-serif text-2xl md:text-3xl text-primary">Our Promise</h3>
+                  </div>
+                  <p className="text-muted-foreground text-lg leading-relaxed">
+                    Floors that impress, welcome, and bring cherished memories back to life. Craftsmen who earn trust and build dignity.
+                  </p>
+                </div>
+              </div>
+
             </div>
           </div>
         </section>
