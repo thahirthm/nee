@@ -42,7 +42,7 @@ const NAV = [
         title: "Our Testimonials",
         items: [
           { label: "Testimonials", href: "/about#testimonials" },
-          { label: "Video Testimonials", href: "/gallery" },
+          { label: "Video Testimonials", href: "/gallery?category=video-testimonial" },
         ],
       }
     ]

@@ -1083,22 +1083,13 @@ function PartnerBrandsSection() {
       {/* Marquee Container */}
       <div className="relative flex overflow-x-hidden group">
         <div className="py-4 animate-marquee whitespace-nowrap flex items-center">
-          {/* First set of logos */}
-          {logos.map((logo, idx) => (
+          {/* Duplicate multiple times to ensure enough width for seamless loop on large screens */}
+          {[...logos, ...logos, ...logos, ...logos].map((logo, idx) => (
             <img 
-              key={`logo-1-${idx}`}
+              key={`logo-${idx}`}
               src={logo} 
-              alt={`Partner Brand ${idx + 1}`} 
-              className="mx-8 h-12 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" 
-            />
-          ))}
-          {/* Duplicate set for seamless loop */}
-          {logos.map((logo, idx) => (
-            <img 
-              key={`logo-2-${idx}`}
-              src={logo} 
-              alt={`Partner Brand ${idx + 1} clone`} 
-              className="mx-8 h-12 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity" 
+              alt={`Partner Brand`} 
+              className="mx-8 md:mx-12 h-12 md:h-14 w-auto object-contain opacity-70 hover:opacity-100 transition-opacity shrink-0" 
             />
           ))}
         </div>

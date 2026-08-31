@@ -47,9 +47,23 @@ function Page() {
 
 import { useProjectsQuery, useProjectCategoriesQuery } from "@/lib/api";
 
+import { useLocation } from "@tanstack/react-router";
+import { useEffect } from "react";
+
 /* ============ GALLERY ============ */
 function Gallery() {
-  const [selectedCategory, setSelectedCategory] = useState("All");
+  const location = useLocation();
+  const searchString = (typeof location.search === 'object' ? '' : location.search) || (location.href.split('?')[1] || "");
+  const searchParams = new URLSearchParams(searchString);
+  const initialCategory = searchParams.get("category") || "All";
+  const [selectedCategory, setSelectedCategory] = useState(initialCategory);
+
+  useEffect(() => {
+    const sStr = (typeof location.search === 'object' ? '' : location.search) || (location.href.split('?')[1] || "");
+    const cat = new URLSearchParams(sStr).get("category");
+    if (cat) setSelectedCategory(cat);
+  }, [location.href]);
+
   const [selectedImage, setSelectedImage] = useState<any | null>(null);
 
   // Fetch categories
