@@ -57,6 +57,7 @@ import partnerG from "@/assets/g.jpeg";
 import partnerCo from "@/assets/coval-logo.png";
 import partnerChannel from "@/assets/channels4_profile.jpg";
 import nnImg from "@/assets/nn.png";
+import newNatureImg from "@/assets/new-nature.jpeg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -357,7 +358,7 @@ function InvestmentSection() {
 function ExpertiseSection() {
   const areas = [
     {
-      img: projectVilla,
+      img: newNatureImg,
       t: "Natural Stone\nRestoration",
       d: "Italian Marble, Indian Marble, Granite, Kota, Jaisalmer, Mosaic, Terrazzo & Engineered Stone. Floors, walls, façades, and table tops."
     },
