@@ -960,7 +960,7 @@ function ContactFooter() {
                   <div className="text-sm">
                     <strong className="block text-primary font-medium">Reg: off:</strong>
                     M5, Sudarsan Gardens,<br/>
-                    106, Velechery high road,<br/>
+                    106, Velachery High Road,<br/>
                     Guindy, Chennai 600032, India
                   </div>
                 </div>
@@ -969,7 +969,7 @@ function ContactFooter() {
                   <div className="text-sm">
                     <strong className="block text-primary font-medium">Studio</strong>
                     57, North Boag Road,<br/>
-                    Tnager, Chennai 600017. India
+                    T Nager, Chennai 600017. India
                   </div>
                 </div>
               </div>
@@ -985,7 +985,7 @@ function ContactFooter() {
                     <Mail className="h-5 w-5 text-gold shrink-0" /> dilip@nkefloors.com
                   </a>
                   <a href="mailto:Krish@nkefloors.com" className="flex items-center gap-3 text-muted-foreground hover:text-primary transition-colors">
-                    <Mail className="h-5 w-5 text-gold shrink-0" /> Krish@nkefloors.com
+                    <Mail className="h-5 w-5 text-gold shrink-0" /> krish@nkefloors.com
                   </a>
                 </div>
               </div>
@@ -995,11 +995,27 @@ function ContactFooter() {
           <div>
             <h3 className="font-semibold uppercase tracking-wider text-sm mb-6">Quick Links</h3>
             <ul className="space-y-3">
-              {['Home', 'Knowledge Hub', 'Gallery', 'Capability Statement', 'Shilpa Seva Foundation', 'About Us', 'Contact'].map(link => (
-                <li key={link}>
-                  <a href="#" className="text-muted-foreground hover:text-primary transition-colors text-sm">{link}</a>
-                </li>
-              ))}
+              <li>
+                <Link to="/" className="text-muted-foreground hover:text-primary transition-colors text-sm">Home</Link>
+              </li>
+              <li>
+                <Link to="/blog" className="text-muted-foreground hover:text-primary transition-colors text-sm">Knowledge Hub</Link>
+              </li>
+              <li>
+                <Link to="/gallery" className="text-muted-foreground hover:text-primary transition-colors text-sm">Gallery</Link>
+              </li>
+              <li>
+                <Link to="/projects" className="text-muted-foreground hover:text-primary transition-colors text-sm">Capability Statement</Link>
+              </li>
+              <li>
+                <Link to="/shilpa-seva-foundation" className="text-muted-foreground hover:text-primary transition-colors text-sm">Shilpa Seva Foundation</Link>
+              </li>
+              <li>
+                <Link to="/about" className="text-muted-foreground hover:text-primary transition-colors text-sm">About Us</Link>
+              </li>
+              <li>
+                <Link to="/contact" className="text-muted-foreground hover:text-primary transition-colors text-sm">Contact</Link>
+              </li>
             </ul>
           </div>
 

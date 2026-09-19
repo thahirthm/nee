@@ -154,7 +154,7 @@ function ContactMain() {
             <div className="mt-4 space-y-1 font-medium text-primary break-all">
               <a href="mailto:mails@nkefloors.com" className="block hover:text-gold transition-colors">mails@nkefloors.com</a>
               <a href="mailto:dilip@nkefloors.com" className="block hover:text-gold transition-colors">dilip@nkefloors.com</a>
-              <a href="mailto:Krish@nkefloors.com" className="block hover:text-gold transition-colors">Krish@nkefloors.com</a>
+              <a href="mailto:Krish@nkefloors.com" className="block hover:text-gold transition-colors">krish@nkefloors.com</a>
             </div>
            
           </div>
@@ -173,7 +173,7 @@ function ContactMain() {
                 <p className="font-medium text-primary text-sm">Reg: off:</p>
                 <p className="text-sm text-muted-foreground leading-relaxed">
                   M5, Sudarsan Gardens,<br />
-                  106, Velechery high road,<br />
+                  106, Velachery High Road,<br />
                   Guindy, Chennai 600032, India
                 </p>
               </div>
@@ -181,7 +181,7 @@ function ContactMain() {
                 <p className="font-medium text-primary text-sm">Studio</p>
                 <p className="text-sm text-muted-foreground leading-relaxed">
                   57, North Boag Road,<br />
-                  Tnager, Chennai 600017. India
+                  T Nager, Chennai 600017. India
                 </p>
               </div>
             </div>

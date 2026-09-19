@@ -47,7 +47,7 @@ function Page() {
     <main className="bg-background text-foreground">
       <Header />
       {/* HERO */}
-      <section className="relative min-h-[90vh] flex items-center bg-muted">
+      <section className="relative min-h-[100vh] flex items-center bg-muted">
         <div className="absolute inset-0 z-0">
           <img
             src={abtBanner}

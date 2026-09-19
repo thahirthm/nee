@@ -51,7 +51,7 @@ function ServicesHero() {
       <div className="mx-auto max-w-7xl px-6 lg:px-10 w-full pt-10">
         <div className="max-w-4xl">
           <h1 className="font-serif text-5xl md:text-7xl leading-[1.05] text-primary">
-            Our services
+            Our Services
           </h1>
           <p className="mt-6 text-lg md:text-xl text-muted-foreground leading-relaxed max-w-3xl">
             Surface restoration and flooring specialists — natural stone, concrete, and industrial floors. Four specialisms, one standard of craft.
@@ -82,7 +82,7 @@ const ACCORDION_DATA = [
     id: "natural-stone",
     num: "01",
     audience: "Hotels, residences, and commercial properties",
-    title: "Natural stone restoration",
+    title: "Natural Stone Restoration",
     tagline: "Marble, granite, terrazzo and mosaic — restored, not replaced",
     body1: "Natural stone floors are a long-term architectural investment. Daily wear, foot traffic, spills, and improper cleaning dull their finish over time — but in most cases, restoration fully recovers the original beauty and performance without the cost or disruption of replacement.",
     body2: "NKE uses modern machinery, abrasives, and consumables to achieve mechanical gloss, a polishing powder to fix that gloss, and a protective sealer to preserve the finish. We have restored natural stone surfaces in luxury hotels and commercial properties for over 25 years.",
@@ -107,7 +107,7 @@ const ACCORDION_DATA = [
     id: "industrial-concrete",
     num: "02",
     audience: "Plant and facility managers (restoration) · Architects and consultants (new builds)",
-    title: "Industrial concrete flooring and restoration",
+    title: "Industrial Concrete Flooring And Restoration",
     tagline: "New installations and large-scale restoration — operations continue throughout",
     body1: "Polished and densified concrete is the flooring system of choice for warehouses, manufacturing plants, IT parks, and large commercial facilities. NKE specifies, installs, Repairs and restores concrete floor systems engineered for durability, low maintenance, and high light reflectance.",
     body2: "For restoration projects, all work is executed in phases — zone by zone — so operations are never fully shut down. Night-shift and off-hours scheduling is available. Defect mapping is completed before any work begins.",
@@ -131,7 +131,7 @@ const ACCORDION_DATA = [
     id: "hotel-floorcare",
     num: "03",
     audience: "General Managers, Executive Housekeepers, and Corporate Housekeepers",
-    title: "Hotel floorcare programs",
+    title: "Hotel Floorcare Programs",
     tagline: "AMC and restoration keeping public areas guest-ready, year-round",
     body1: "First impressions are made on the floor. NKE's Hotel Floorcare Programs combine periodic restoration with scheduled Annual Maintenance Contracts to keep lobbies, banquet halls, corridors, and pool decks consistently guest-ready.",
     body2: "Each programme is structured around the specific footfall and wear patterns of your property — with zone-specific care plans, defined gloss-level guarantees, written condition reports after every visit, and emergency call-out provision for VIP events and unexpected situations.",
@@ -155,7 +155,7 @@ const ACCORDION_DATA = [
     id: "decorative-concrete",
     num: "04",
     audience: "Architects, interior designers, and high-end residences",
-    title: "Decorative concrete Flooring and Walls.",
+    title: "Decorative Concrete Flooring and Walls.",
     tagline: "Terrazzo and cementitious floors — plain minimalistic or coloured.",
     body1: "Once associated only with industrial spaces, polished and decorative concrete has become one of the most sought-after architectural finishes — in high-end homes, offices, retail spaces, and feature areas.",
     body2: "NKE specialises in terrazzo and fast-setting cementitious floors that are custom designed. Available in plain minimalist finishes or a range of integral colours. We work alongside architects and homeowners from specification stage — including aggregate selection, sample review, and prototype approval before the floor is cast.",
@@ -371,7 +371,7 @@ const COMPLEMENTARY = [
     link: "/services/epoxy-floor-restoration"
   },
   {
-    title: "Deep cleaning and grout cleaning",
+    title: "Deep cleaning and grout restoration",
     badge: null,
     desc: "Professional deep cleaning of tiled floors and grout lines — removing ingrained dirt, staining, and biological growth.",
     link: "/services/grout-cleaning-chennai"
@@ -383,7 +383,7 @@ const COMPLEMENTARY = [
     link: "/services/slip-resistant-coatings"
   },
   {
-    title: "Exterior concrete tile enhancement",
+    title: "Exterior concrete pavement  enhancement",
     badge: null,
     desc: "Deep cleaning and colour enhancement of exterior concrete pavers, campus walkways, and hotel driveway areas.",
     link: "/services/exterior-concrete-enhancement"
@@ -395,7 +395,7 @@ function ComplementaryServices() {
     <section className="py-24 bg-card">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <h2 className="font-serif text-3xl sm:text-4xl text-primary mb-12">
-          Complementary services
+          Complementary Services
         </h2>
         <div className="grid md:grid-cols-2 gap-6">
           {COMPLEMENTARY.map((svc, idx) => (
