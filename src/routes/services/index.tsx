@@ -107,7 +107,7 @@ const ACCORDION_DATA = [
     id: "industrial-concrete",
     num: "02",
     audience: "Plant and facility managers (restoration) · Architects and consultants (new builds)",
-    title: "Industrial Concrete Flooring And Restoration",
+    title: "Industrial Concrete Flooring and Restoration",
     tagline: "New installations and large-scale restoration — operations continue throughout",
     body1: "Polished and densified concrete is the flooring system of choice for warehouses, manufacturing plants, IT parks, and large commercial facilities. NKE specifies, installs, Repairs and restores concrete floor systems engineered for durability, low maintenance, and high light reflectance.",
     body2: "For restoration projects, all work is executed in phases — zone by zone — so operations are never fully shut down. Night-shift and off-hours scheduling is available. Defect mapping is completed before any work begins.",
