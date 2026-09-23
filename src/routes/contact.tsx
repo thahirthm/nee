@@ -392,28 +392,7 @@ function ContactMain() {
             </div>
 
             {/* Social Media */}
-            <div className="border border-border bg-card rounded-sm p-8">
-              <h4 className="font-serif text-lg text-primary mb-6">
-                Follow Us
-              </h4>
-              <div className="flex gap-4">
-                {[
-                  { i: Facebook, label: "Facebook", url: "#" },
-                  { i: Instagram, label: "Instagram", url: "#" },
-                  { i: Linkedin, label: "LinkedIn", url: "#" },
-                  { i: Twitter, label: "Twitter", url: "#" },
-                ].map((s) => (
-                  <a
-                    key={s.label}
-                    href={s.url}
-                    aria-label={`Follow on ${s.label}`}
-                    className="h-10 w-10 rounded-sm border border-border flex items-center justify-center hover:border-gold hover:bg-gold/5 transition-colors"
-                  >
-                    <s.i className="h-4 w-4 text-gold" />
-                  </a>
-                ))}
-              </div>
-            </div>
+            
           </div>
         </div>
       </div>

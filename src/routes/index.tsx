@@ -56,8 +56,8 @@ import partnerImg from "@/assets/img.jpeg";
 import partnerG from "@/assets/g.jpeg";
 import partnerCo from "@/assets/coval-logo.png";
 import partnerChannel from "@/assets/channels4_profile.jpg";
-import nnImg from "@/assets/nn.png";
-import newNatureImg from "@/assets/new-nature.jpeg";
+import nnImg from "@/assets/new-dc.png";
+import newNatureImg from "@/assets/new-ns.png";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
@@ -234,23 +234,23 @@ const SHOWCASE_CONTENT = [
   {
     title: "Italian Marble Restoration",
     description: "See the transformation of worn Italian marble into a flawless, mirror-like masterpiece.",
-    problem: "Dull, scratched, and stained Italian marble surface.",
-    solution: "Heavy-duty concrete grinding and application of dust-proof densifiers.",
-    result: "Experience the remarkable transformation of Italian marble with our premium restoration process."
+    problem: "Italian marble heavily stained with post-construction cement and grime.",
+    solution: "Construction stains removed, resurfaced, and polished to mirror finish.",
+    result: "Bright, gleaming Italian marble restored to its original elegance."
   },
   {
     title: "Granite Restoration",
     description: "Move the slider to see how we tackle tough floor damage and bring out the original beauty.",
-    problem: "Deep scratches, dull finish, and lost shine due to heavy foot traffic.",
-    solution: "A disciplined grinding, honing, and mirror-grade polishing process.",
-    result: "A flawlessly restored surface that looks brand new and is built to last."
+    problem: "New granite floor with heavy lippage and grinding marks.",
+    solution: "Full regrind, lippage removal, and repolished to factory finish.",
+    result: "Flawlessly level granite surface with a factory-fresh shine."
   },
   {
     title: "Indian Marble Restoration",
     description: "This is an sit out with white and green marble heavily worn out and stained with use. We cleaned the floor with suitable deep cleaner and resurfaced and polished.",
-    problem: "A modern kitchen floor, deteriorated with time and contamination of oil vapor from cooking.",
-    solution: "Deep cleaning with degreaser, resurfacing, polishing and application of water and oil resistant sealer.",
-    result: "A stunning floor a Owner's pride."
+    problem: "Residence sit-out marble stained and discoloured by sun and rain.",
+    solution: "Deep cleaned, resurfaced, polished, and UV-sealed for protection.",
+    result: "A stunning floor — the Owner's pride."
   }
 ];
 
@@ -415,7 +415,7 @@ function CredibilityStrip() {
           <span className="hidden sm:inline text-gold">•</span>
           <span>Trusted by Leading Hospitality Brands</span>
           <span className="hidden sm:inline text-gold">•</span>
-          <span>International Certifications: HTC Sweden, Klindex Italy, Korodur Germany, Hypergrinder USA, Guard France, Coval Technologies</span>
+          <span>International Certifications: HTC Sweden, Klindex Italy, Korodur Germany, Hypergrinder Italy, Guard France, Coval Technologies USA</span>
           <span className="hidden sm:inline text-gold">•</span>
           {/* <span>25 year with AMC partnership with leading hospitality</span> */}
         </div>
@@ -503,9 +503,10 @@ function ComplementaryCallout() {
           <ul className="mt-8 space-y-4">
             {[
               "Ceramic & Vitrified Floor Restoration",
-              "Deep Cleaning & Grout Cleaning",
-              "Exterior Concrete Tile Enhancement",
-              "Guard France Slip-Resistant Coatings",
+              "Deep Cleaning & Re-grouting",
+              "Exterior Concrete Floor Restoration",
+              "Slip-Resistant Coatings",
+              "Coval Nano-coating — Certified Application Specialist",
             ].map((item, idx) => (
               <li key={idx} className="flex gap-3 text-muted-foreground">
                 <Check className="h-5 w-5 text-gold shrink-0" />

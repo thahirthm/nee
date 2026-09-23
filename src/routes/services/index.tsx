@@ -3,6 +3,7 @@ import { createFileRoute, useLocation } from "@tanstack/react-router";
 import { ArrowRight, ChevronDown, ChevronUp, ShieldCheck } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import heroImg from "@/assets/hero.jpg";
+import serviceBg from "@/assets/service-bg.png";
 
 export const Route = createFileRoute("/services/")({
   head: () => ({
@@ -42,32 +43,39 @@ function Page() {
 /* ============ 1. PAGE HERO ============ */
 function ServicesHero() {
   return (
-    <section className="relative flex flex-col justify-center pt-32 pb-0">
-      <div className="absolute inset-0 -z-10 bg-muted/30">
-         {/* Using a solid muted background if heroImg isn't ideal, but keeping heroImg structure just in case */}
-         <div className="absolute inset-0 bg-gradient-to-r from-background via-background/90 to-background/40" />
-      </div>
-      
-      <div className="mx-auto max-w-7xl px-6 lg:px-10 w-full pt-10">
-        <div className="max-w-4xl">
-          <h1 className="font-serif text-5xl md:text-7xl leading-[1.05] text-primary">
-            Our Services
-          </h1>
-          <p className="mt-6 text-lg md:text-xl text-muted-foreground leading-relaxed max-w-3xl">
-            Surface restoration and flooring specialists — natural stone, concrete, and industrial floors. Four specialisms, one standard of craft.
-          </p>
-        </div>
+    <section className="relative min-h-[100vh] flex items-center bg-muted">
+      {/* Background image */}
+      <div className="absolute inset-0 z-0">
+        <img
+          src={serviceBg}
+          alt="NKE Floorcare Services"
+          className="h-full w-full object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-black/60 md:bg-black/50" />
       </div>
 
-      <div className="w-full border-t border-border mt-16 py-6">
-        <div className="mx-auto max-w-7xl px-6 lg:px-10">
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-3 text-sm font-medium tracking-wide text-muted-foreground">
-            <span>30+ years of experience</span>
-            <span className="hidden sm:inline text-gold">•</span>
+      {/* Content */}
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 pt-32 pb-16">
+        <div className="max-w-3xl">
+          <div className="inline-block bg-white/10 backdrop-blur-md px-3 sm:px-4 py-2 mb-6 rounded-sm shadow-sm border border-white/20">
+            <span className="text-[10px] sm:text-xs font-semibold tracking-wider sm:tracking-widest text-white uppercase">
+              30+ Years of Specialist Experience
+            </span>
+          </div>
+
+          <h1 className="font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.1] text-white mb-6">
+            Our Services
+          </h1>
+
+          <p className="text-lg md:text-xl text-white/90 max-w-2xl leading-relaxed mb-10">
+            Surface restoration and flooring specialists — natural stone, concrete, and industrial floors. Four specialisms, one standard of craft.
+          </p>
+
+          <div className="flex flex-wrap gap-x-6 gap-y-3 text-sm font-medium text-white/70">
             <span>International certifications</span>
-            <span className="hidden sm:inline text-gold">•</span>
+            <span className="text-gold">•</span>
             <span>Hospitality and industrial specialists</span>
-            <span className="hidden sm:inline text-gold">•</span>
+            <span className="text-gold">•</span>
             <span>Chennai and Bengaluru</span>
           </div>
         </div>
@@ -108,7 +116,7 @@ const ACCORDION_DATA = [
     num: "02",
     audience: "Plant and facility managers (restoration) · Architects and consultants (new builds)",
     title: "Industrial Concrete Flooring and Restoration",
-    tagline: "New installations and large-scale restoration — operations continue throughout",
+    tagline: "New installations and large-scale restoration of old industrial floors to durable, dust-proof, high-performance floors — executed with minimal disruption to operations.",
     body1: "Polished and densified concrete is the flooring system of choice for warehouses, manufacturing plants, IT parks, and large commercial facilities. NKE specifies, installs, Repairs and restores concrete floor systems engineered for durability, low maintenance, and high light reflectance.",
     body2: "For restoration projects, all work is executed in phases — zone by zone — so operations are never fully shut down. Night-shift and off-hours scheduling is available. Defect mapping is completed before any work begins.",
     body3: "For new-build projects, NKE works alongside the architect and structural engineer from the specification stage — not after the slab is cast.",
@@ -359,34 +367,34 @@ function CovalBand() {
 /* ============ 4. COMPLEMENTARY SERVICES ============ */
 const COMPLEMENTARY = [
   {
-    title: "Ceramic, vitrified and mosaic floor restoration",
+    title: "Ceramic & Vitrified Floor Restoration",
     badge: "Coval",
     desc: "Polish, colour change, and Coval protective coating — producing an easy-to-clean floor that can be buffed to restore gloss. Note: this is not retiling.",
     link: "/services/ceramic-floor-restoration"
   },
   {
-    title: "Epoxy and vinyl floor restoration",
-    badge: "Coval",
-    desc: "Restores shine on dull or scratched epoxy/vinyl floors, then applies Coval coating for scratch resistance.",
-    link: "/services/epoxy-floor-restoration"
-  },
-  {
-    title: "Deep cleaning and grout restoration",
+    title: "Deep Cleaning & Re-grouting",
     badge: null,
     desc: "Professional deep cleaning of tiled floors and grout lines — removing ingrained dirt, staining, and biological growth.",
     link: "/services/grout-cleaning-chennai"
   },
   {
-    title: "Slip-resistant coatings",
+    title: "Exterior Concrete Floor Restoration",
+    badge: null,
+    desc: "Deep cleaning and colour enhancement of exterior concrete pavers, campus walkways, and hotel driveway areas.",
+    link: "/services/exterior-concrete-enhancement"
+  },
+  {
+    title: "Slip-Resistant Coatings",
     badge: "Guard France",
     desc: "Professional-grade, Guard France certified slip-resistant coatings for washrooms, wet areas, pool decks, and ramps.",
     link: "/services/slip-resistant-coatings"
   },
   {
-    title: "Exterior concrete pavement  enhancement",
-    badge: null,
-    desc: "Deep cleaning and colour enhancement of exterior concrete pavers, campus walkways, and hotel driveway areas.",
-    link: "/services/exterior-concrete-enhancement"
+    title: "Coval Nano-coating — Certified Application Specialist",
+    badge: "Coval",
+    desc: "A professional-grade nano-coating applied across concrete, stone, metal, epoxy, vinyl, and specialist surfaces. Scratch-resistant, easy to clean, and buffable to restore gloss.",
+    link: "/services/coval-nano-coating"
   }
 ];
 

@@ -59,6 +59,7 @@ export interface Project {
   short_description: string;
   sequence?: number;
   created_at?: string;
+  additional_images?: { id: number; image: string; sequence: number }[];
 }
 
 export interface ContactPayload {

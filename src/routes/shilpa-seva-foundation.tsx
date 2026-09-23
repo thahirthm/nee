@@ -2,8 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { ArrowRight, BookOpen, HandHeart, Users, GraduationCap, CheckCircle2, Eye, Target, Shield } from "lucide-react";
 import heroImage from "@/assets/shilpa-seva.png"; 
-import sevaBanner from "@/assets/seva-banner.png";
+import sevaBanner from "@/assets/shilpa-seva-banner.png";
 import projectImage from "@/assets/m-3.jpg";
+import shilpaFam from "@/assets/shilpa-seva-fam.png";
 import aboutImage from "@/assets/about.jpg";
 
 export const Route = createFileRoute("/shilpa-seva-foundation")({
@@ -23,7 +24,7 @@ function ShilpaSevaPage() {
       <main className="flex-grow pt-0">
         
         {/* HERO */}
-        <section className="relative min-h-[70vh] flex items-center bg-muted">
+        <section className="relative min-h-[100vh] flex items-center bg-muted">
           <div className="absolute inset-0 z-0">
             <img
               src={sevaBanner}
@@ -74,7 +75,7 @@ function ShilpaSevaPage() {
               </div>
             </div>
             <div className="relative h-[400px] lg:h-[500px] w-full rounded-sm overflow-hidden shadow-elevated">
-              <img src={heroImage} alt="Shilpa Seva" className="absolute inset-0 w-full h-full object-cover object-[center_10%] md:object-top" />
+              <img src={shilpaFam} alt="Shilpa Seva Family" className="absolute inset-0 w-full h-full object-cover object-center" />
             </div>
           </div>
         </section>
