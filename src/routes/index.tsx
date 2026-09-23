@@ -365,7 +365,7 @@ function ExpertiseSection() {
     {
       img: industrialImg,
       t: "Industrial Concrete\nFlooring & Restoration",
-      d: "New installations and large-scale restoration of durable, dust-proof, high-performance floors — executed with minimal disruption to operations."
+      d: "New installations and large-scale restoration of old industrial floors to durable, dust-proof, high-performance floors — executed with minimal disruption to operations."
     },
     {
       img: hoteImg,
@@ -970,7 +970,7 @@ function ContactFooter() {
                   <div className="text-sm">
                     <strong className="block text-primary font-medium">Studio</strong>
                     57, North Boag Road,<br/>
-                    T Nager, Chennai 600017. India
+                    T Nagar, Chennai 600017. India
                   </div>
                 </div>
               </div>

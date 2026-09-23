@@ -245,6 +245,11 @@ function Lightbox({
   ];
 
   const [activeSlide, setActiveSlide] = useState(0);
+
+  // Reset to first slide whenever the project changes
+  useEffect(() => {
+    setActiveSlide(0);
+  }, [image.id]);
   const stripRef = useRef<HTMLDivElement>(null);
 
   const scrollStrip = (dir: "prev" | "next") => {

@@ -367,19 +367,19 @@ function CovalBand() {
 /* ============ 4. COMPLEMENTARY SERVICES ============ */
 const COMPLEMENTARY = [
   {
-    title: "Ceramic & Vitrified Floor Restoration",
+    title: "Ceramic & vitrified and mosaic floor restoration",
     badge: "Coval",
     desc: "Polish, colour change, and Coval protective coating — producing an easy-to-clean floor that can be buffed to restore gloss. Note: this is not retiling.",
     link: "/services/ceramic-floor-restoration"
   },
   {
-    title: "Deep Cleaning & Re-grouting",
+    title: "Deep cleaning and grout restoration",
     badge: null,
     desc: "Professional deep cleaning of tiled floors and grout lines — removing ingrained dirt, staining, and biological growth.",
     link: "/services/grout-cleaning-chennai"
   },
   {
-    title: "Exterior Concrete Floor Restoration",
+    title: "Exterior concrete pavement enhancement",
     badge: null,
     desc: "Deep cleaning and colour enhancement of exterior concrete pavers, campus walkways, and hotel driveway areas.",
     link: "/services/exterior-concrete-enhancement"
@@ -391,9 +391,9 @@ const COMPLEMENTARY = [
     link: "/services/slip-resistant-coatings"
   },
   {
-    title: "Coval Nano-coating — Certified Application Specialist",
+    title: "Epoxy and vinyl floor restoration",
     badge: "Coval",
-    desc: "A professional-grade nano-coating applied across concrete, stone, metal, epoxy, vinyl, and specialist surfaces. Scratch-resistant, easy to clean, and buffable to restore gloss.",
+    desc: "Restores shine on dull or scratched epoxy/vinyl floors, then applies Coval coating for scratch resistance",
     link: "/services/coval-nano-coating"
   }
 ];

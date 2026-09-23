@@ -1,6 +1,6 @@
 import { useRef, useState, useCallback } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import beforeImg1 from "@/assets/before1.png";
+import beforeImg1 from "@/assets/111.jpeg";
 import afterImg1 from "@/assets/after1.png";
 import beforeImg2 from "@/assets/before2.png";
 import afterImg2 from "@/assets/after2.png";

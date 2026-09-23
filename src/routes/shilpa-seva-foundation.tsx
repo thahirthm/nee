@@ -74,8 +74,13 @@ function ShilpaSevaPage() {
                 </p>
               </div>
             </div>
-            <div className="relative h-[400px] lg:h-[500px] w-full rounded-sm overflow-hidden shadow-elevated">
-              <img src={shilpaFam} alt="Shilpa Seva Family" className="absolute inset-0 w-full h-full object-cover object-center" />
+            <div className="flex flex-col gap-4">
+              <div className="relative h-[400px] lg:h-[500px] w-full rounded-sm overflow-hidden shadow-elevated">
+                <img src={shilpaFam} alt="Shilpa Seva Family" className="absolute inset-0 w-full h-full object-cover object-center" />
+              </div>
+              <p className="text-sm text-muted-foreground italic text-center leading-relaxed px-2">
+                Together in purpose, across generations—carrying the spirit of Shilpa Seva forward.
+              </p>
             </div>
           </div>
         </section>

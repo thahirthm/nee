@@ -181,7 +181,7 @@ function ContactMain() {
                 <p className="font-medium text-primary text-sm">Studio</p>
                 <p className="text-sm text-muted-foreground leading-relaxed">
                   57, North Boag Road,<br />
-                  T Nager, Chennai 600017. India
+                  T Nagar, Chennai 600017. India
                 </p>
               </div>
             </div>

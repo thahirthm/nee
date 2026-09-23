@@ -373,7 +373,7 @@ function Testimonials() {
     id: t.id,
     n: t.name,
     r: t.designation || "Valued Client",
-    title: t.name,
+    title: t.title || t.name,
     q: t.q || t.text,
     image: t.image,
   }));
@@ -401,14 +401,16 @@ function Testimonials() {
               <div className="flex-1 p-8 sm:p-10 flex flex-col justify-between">
                 <div>
                   <Quote className="h-8 w-8 text-[#1F5C2E]" />
-                  {idx === 0 ? (
-                    <h2 className="mt-5 font-serif text-2xl sm:text-3xl text-primary leading-snug">
-                      {t.title}
-                    </h2>
-                  ) : (
-                    <h3 className="mt-5 font-serif text-xl text-primary">
-                      {t.title}
-                    </h3>
+                  {t.title && (
+                    idx === 0 ? (
+                      <h2 className="mt-3 font-serif text-xl sm:text-2xl text-gold leading-snug">
+                        {t.title}
+                      </h2>
+                    ) : (
+                      <h3 className="mt-3 font-serif text-lg text-gold">
+                        {t.title}
+                      </h3>
+                    )
                   )}
                   <div
                     className="mt-5 text-base text-muted-foreground leading-relaxed prose prose-sm max-w-none [&>p]:mb-0"
@@ -418,21 +420,6 @@ function Testimonials() {
 
                 {/* Client info */}
                 <div className="mt-10 flex items-center gap-4 pt-6 border-t border-border">
-                  {t.image ? (
-                    <img
-                      src={t.image}
-                      alt={t.n}
-                      className="h-12 w-12 rounded-full object-cover border border-gold/40 shrink-0"
-                    />
-                  ) : (
-                    <div className="h-12 w-12 rounded-full bg-primary text-primary-foreground flex items-center justify-center font-serif text-lg shrink-0">
-                      {t.n
-                        .split(" ")
-                        .slice(0, 2)
-                        .map((x) => x[0]?.toUpperCase())
-                        .join("")}
-                    </div>
-                  )}
                   <figcaption>
                     <div className="font-semibold text-primary">{t.n}</div>
                     <div className="text-xs uppercase tracking-widest text-muted-foreground mt-0.5">
@@ -442,15 +429,17 @@ function Testimonials() {
                 </div>
               </div>
 
-              {/* Right: large image */}
-              <div className="lg:w-[42%] shrink-0 min-h-[260px] lg:min-h-0 bg-muted overflow-hidden">
-                <img
-                  src={t.image || "https://images.unsplash.com/photo-1631679706909-1844bbd07221?w=800&q=80"}
-                  alt={`${t.n} — ${t.r}`}
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
-              </div>
+              {/* Right: large image — only shown when image exists */}
+              {t.image && (
+                <div className="lg:w-[42%] shrink-0 min-h-[260px] lg:min-h-0 bg-muted overflow-hidden">
+                  <img
+                    src={t.image}
+                    alt={`${t.n} — ${t.r}`}
+                    className="w-full h-full object-cover"
+                    loading="lazy"
+                  />
+                </div>
+              )}
             </figure>
           ))}
         </div>
