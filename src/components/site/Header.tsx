@@ -148,10 +148,10 @@ export function Header() {
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-all duration-300 ${
+      className={`fixed inset-x-0 top-0 z-50 transition-all duration-500 ${
         isTransparentState
           ? "bg-transparent"
-          : "bg-background/95 backdrop-blur-md border-b border-border shadow-soft"
+          : "bg-white/70 backdrop-blur-xl border-b border-white/20 shadow-[0_4px_24px_rgba(0,0,0,0.06)]"
       } ${!isVisible && !open ? "-translate-y-full" : "translate-y-0"}`}
     >
       <div
