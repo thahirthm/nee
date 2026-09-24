@@ -373,7 +373,7 @@ function Testimonials() {
     id: t.id,
     n: t.name,
     r: t.designation || "Valued Client",
-    title: t.title || t.name,
+    title: t.title || null,
     q: t.q || t.text,
     image: t.image,
   }));
