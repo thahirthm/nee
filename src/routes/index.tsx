@@ -359,21 +359,25 @@ function ExpertiseSection() {
   const areas = [
     {
       img: newNatureImg,
+      id: "natural-stone",
       t: "Natural Stone\nRestoration",
       d: "Italian Marble, Indian Marble, Granite, Kota, Jaisalmer, Mosaic, Terrazzo & Engineered Stone. Floors, walls, façades, and table tops."
     },
     {
       img: industrialImg,
+      id: "industrial-concrete",
       t: "Industrial Concrete\nFlooring & Restoration",
       d: "New installations and large-scale restoration of old industrial floors to durable, dust-proof, high-performance floors \u2014 executed with minimal disruption to operations."
     },
     {
       img: hoteImg,
+      id: "hotel-floorcare",
       t: "Hotel Floorcare\nPrograms (AMC)",
       d: "Keeping public areas guest-ready every day. Periodic restoration combined with scheduled Annual Maintenance Contracts for 5-star hotels."
     },
     {
       img: nnImg,
+      id: "decorative-concrete",
       t: "Decorative Concrete\nSystems",
       d: "Polished, burnished, and coloured concrete — the architectural flooring choice for homes, offices, and feature spaces."
     }
@@ -382,22 +386,30 @@ function ExpertiseSection() {
   return (
     <section className="py-16 lg:py-24 bg-background border-t border-border">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
-        <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-primary">
-          Our Areas of Expertise
-        </h2>
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+          <h2 className="font-serif text-3xl sm:text-4xl md:text-5xl text-primary">
+            Our Areas of Expertise
+          </h2>
+          <Link
+            to="/gallery"
+            className="inline-flex items-center gap-2 self-start sm:self-auto shrink-0 border border-[#1F5C2E] text-[#1F5C2E] px-6 py-3 rounded-sm text-sm font-medium hover:bg-[#1F5C2E] hover:text-white transition-colors"
+          >
+            View Our Work Gallery <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
         <p className="mt-6 text-lg text-muted-foreground max-w-3xl leading-relaxed">
           With over 25 years of experience, NKE Floorcare serves natural stone, concrete, and industrial floors across four specialisms — working across residential, commercial, hospitality, and industrial properties.
         </p>
         
         <div className="mt-10 lg:mt-16 flex overflow-x-auto snap-x snap-mandatory sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 pb-6 -mx-6 px-6 lg:mx-0 lg:px-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
           {areas.map((a, idx) => (
-            <div key={idx} className="flex flex-col w-[85vw] sm:w-auto shrink-0 snap-center sm:snap-align-none">
+            <Link key={idx} to="/services" hash={a.id} className="group flex flex-col w-[85vw] sm:w-auto shrink-0 snap-center sm:snap-align-none cursor-pointer">
               <div className="aspect-[4/3] rounded-sm overflow-hidden mb-6">
-                <img src={a.img} alt={a.t} className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+                <img src={a.img} alt={a.t} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
               </div>
-              <h3 className="font-serif text-2xl text-primary whitespace-pre-line mb-4">{a.t}</h3>
+              <h3 className="font-serif text-2xl text-primary whitespace-pre-line mb-4 group-hover:text-[#1F5C2E] transition-colors">{a.t}</h3>
               <p className="text-sm text-muted-foreground leading-relaxed">{a.d}</p>
-            </div>
+            </Link>
           ))}
         </div>
       </div>

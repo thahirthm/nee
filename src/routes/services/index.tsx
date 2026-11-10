@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { createFileRoute, useLocation } from "@tanstack/react-router";
+import { createFileRoute, Link, useLocation } from "@tanstack/react-router";
 import { ArrowRight, ChevronDown, ChevronUp, ShieldCheck } from "lucide-react";
 import { Header } from "@/components/site/Header";
 import heroImg from "@/assets/hero.jpg";
@@ -283,6 +283,9 @@ function ServicesAccordion() {
                       <a href={item.primaryCta.href} className="inline-flex items-center gap-2 bg-[#1F5C2E] text-white px-7 py-3.5 rounded-sm text-sm font-medium hover:bg-[#1F5C2E]/90 transition-colors shadow-sm">
                         {item.primaryCta.text}
                       </a>
+                      <Link to="/blog" className="inline-flex items-center gap-2 border border-[#1F5C2E] text-[#1F5C2E] px-7 py-3.5 rounded-sm text-sm font-medium hover:bg-[#1F5C2E] hover:text-white transition-colors">
+                        See our blogs <ArrowRight className="h-4 w-4" />
+                      </Link>
                     </div>
                   </div>
 

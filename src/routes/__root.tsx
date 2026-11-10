@@ -5,6 +5,7 @@ import {
   createRootRouteWithContext,
   useRouter,
 } from "@tanstack/react-router";
+import { FloatingCallButton } from "@/components/site/FloatingCallButton";
 
 function NotFoundComponent() {
   return (
@@ -81,6 +82,7 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
+      <FloatingCallButton />
     </QueryClientProvider>
   );
 }
